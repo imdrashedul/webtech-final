@@ -1,0 +1,197 @@
+/**
+ * @author MD. RASHEDUL ISLAM
+ * @package Bus Ticket Reservation System
+ * @version v2.0
+ * @see https://github.com/rashed370/webtech-final
+ */
+
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../font/Montserrat-Regular.eot');
+    src: url('../font/Montserrat-Regular.eot?#iefix') format('embedded-opentype'),
+    url('../font/Montserrat-Regular.woff2') format('woff2'),
+    url('../font/Montserrat-Regular.woff') format('woff'),
+    url('../font/Montserrat-Regular.ttf')  format('truetype'),
+    url('../font/Montserrat-Regular.svg#Montserrat') format('svg');
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 300;
+    src: url('../font/Montserrat-Light.eot');
+    src: url('../font/Montserrat-Light.eot?#iefix') format('embedded-opentype'),
+    url('../font/Montserrat-Light.woff2') format('woff2'),
+    url('../font/Montserrat-Light.woff') format('woff'),
+    url('../font/Montserrat-Light.ttf')  format('truetype'),
+    url('../font/Montserrat-Light.svg#Montserrat Light') format('svg');
+}
+
+@font-face {
+    font-family: 'Work Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../font/WorkSans-Regular.eot');
+    src: url('../font/WorkSans-Regular.eot?#iefix') format('embedded-opentype'),
+    url('../font/WorkSans-Regular.woff2') format('woff2'),
+    url('../font/WorkSans-Regular.woff') format('woff'),
+    url('../font/WorkSans-Regular.ttf')  format('truetype'),
+    url('../font/WorkSans-Regular.svg#Work Sans') format('svg');
+}
+
+@font-face {
+    font-family: 'Work Sans';
+    font-style: normal;
+    font-weight: 300;
+    src: url('../font/WorkSans-Light.eot');
+    src: url('../font/WorkSans-Light.eot?#iefix') format('embedded-opentype'),
+    url('../font/WorkSans-Light.woff2') format('woff2'),
+    url('../font/WorkSans-Light.woff') format('woff'),
+    url('../font/WorkSans-Light.ttf')  format('truetype'),
+    url('../font/WorkSans-Light.svg#Work Sans Light') format('svg');
+}
+
+body{
+    padding: 0px;
+    margin: auto;
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 300;
+    background: #F3F7F9;
+}
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing:border-box
+}
+
+:after, :before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing:border-box
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+}
+
+h2.logtitle {
+    font-weight: 400;
+}
+
+a {
+    text-decoration: none;
+    color: #0366d6;
+}
+
+.text-red {
+    color: #ff0000;
+}
+.logreg {
+    max-width: 400px;
+    margin: 10% auto auto;
+}
+.logreg .container {
+    background: #ffffff;
+    padding: 25px;
+    border-top: 7px solid #479F3D;
+    -moz-border-radius: 7px;
+    -webkit-border-radius: 7px;
+    border-radius: 7px;
+    box-shadow: 0 8px 14px 0 rgba(0,0,0,0.2), 0 6px 18px 0 rgba(0,0,0,0.19);
+}
+
+.logreg .container label {
+    font-weight: 600;
+    font-size: 11pt;
+    color: #45545f;
+}
+.inputset {
+    margin-bottom: 10px;
+}
+.logreg .container input[type='email'],
+.logreg .container input[type='text'],
+.logreg .container input[type='password'] {
+    width: 100%;
+    margin: 5px 0px;
+    font-family: 'Work Sans', sans-serif;
+    padding: 7px;
+    background: #ffffff;
+    border: 1px solid rgba(0,0,0,0.1);
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    box-shadow: 1px 2px 3px 0 rgba(0,0,0,0.1);
+    color: #7c7c7c;
+}
+
+.logreg .container input[type='email']:focus,
+.logreg .container input[type='email']:active,
+.logreg .container input[type='text']:focus,
+.logreg .container input[type='text']:active,
+.logreg .container input[type='password']:focus
+.logreg .container input[type='password']:active {
+    color: #000;
+}
+
+.logreg .container input[type='submit'] {
+    background: #479F3D;
+    color: #fff;
+    padding: 7px 15px;
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 400;
+    border: 1px solid rgba(0,0,0,0.1);
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.logreg .container input[type='submit']:hover,
+.logreg .container input[type='submit']:active,
+.logreg .container input[type='submit']:focus {
+    background: #4cb242;
+}
+
+.logreg .container .forgot-password {
+    float: right;
+    font-weight: 600;
+    font-size: 11pt;
+    margin-top: 7px;
+}
+
+.logreg .container .forgot-password:hover,
+.logreg .container .forgot-password:focus {
+    text-decoration: underline;
+}
+
+.inputset.error input[type='email'],
+.inputset.error input[type='text'],
+.inputset.error input[type='password'] {
+    border: 1px solid rgba(255,0,0,0.7);
+    box-shadow: 1px 2px 3px 0 rgba(255,0,0,0.3);
+}
+
+.field-error {
+    font-size: 10pt;
+    font-weight: 400;
+}
+
+.log-footer {
+    text-align: center;
+    margin-top: 15px;
+    font-weight: 400;
+    font-size: 11pt;
+}
+
+.log-footer a {
+    font-weight: 600;
+}
+
+.log-footer a:hover,
+.log-footer a:focus {
+    text-decoration: underline;
+}
