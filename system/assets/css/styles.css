@@ -90,31 +90,63 @@ a {
 .text-red {
     color: #ff0000;
 }
-.logreg {
+.login {
     max-width: 400px;
     margin: 10% auto auto;
 }
-.logreg .container {
-    background: #ffffff;
+
+.register {
+    max-width: 680px;
+    margin: 50px auto auto;
+}
+
+/* background: bg-color bg-image position/bg-size bg-repeat bg-origin bg-clip bg-attachment initial|inherit; */
+
+.register .header {
+    background: url('../img/register-banner.jpg') center center/cover no-repeat;
+    padding-top: 210px;
+    -webkit-border-top-left-radius: 7px;
+    -webkit-border-top-right-radius: 7px;
+    -moz-border-radius-topright: 7px;
+    -moz-border-radius-topleft: 7px;
+    border-top-right-radius: 7px;
+    border-top-left-radius: 7px;
+}
+
+.register .container .body {
+    padding: 20px;
+}
+
+.login .container {
     padding: 25px;
     border-top: 7px solid #479F3D;
+}
+
+.login .container,
+.register .container {
+    background: #ffffff;
     -moz-border-radius: 7px;
     -webkit-border-radius: 7px;
     border-radius: 7px;
     box-shadow: 0 8px 14px 0 rgba(0,0,0,0.2), 0 6px 18px 0 rgba(0,0,0,0.19);
 }
 
-.logreg .container label {
+.login .container label,
+.register .container label {
     font-weight: 600;
     font-size: 11pt;
     color: #45545f;
 }
-.inputset {
-    margin-bottom: 10px;
-}
-.logreg .container input[type='email'],
-.logreg .container input[type='text'],
-.logreg .container input[type='password'] {
+
+/* Input Set */
+
+.login .container input[type='email'],
+.login .container input[type='text'],
+.login .container input[type='password'],
+.register .container input[type='email'],
+.register .container input[type='text'],
+.register .container input[type='password'],
+.inputset select {
     width: 100%;
     margin: 5px 0px;
     font-family: 'Work Sans', sans-serif;
@@ -126,18 +158,28 @@ a {
     border-radius: 3px;
     box-shadow: 1px 2px 3px 0 rgba(0,0,0,0.1);
     color: #7c7c7c;
+    font-size: 10pt;
 }
 
-.logreg .container input[type='email']:focus,
-.logreg .container input[type='email']:active,
-.logreg .container input[type='text']:focus,
-.logreg .container input[type='text']:active,
-.logreg .container input[type='password']:focus
-.logreg .container input[type='password']:active {
+.login .container input[type='email']:focus,
+.login .container input[type='email']:active,
+.login .container input[type='text']:focus,
+.login .container input[type='text']:active,
+.login .container input[type='password']:focus,
+.login .container input[type='password']:active,
+.register .container input[type='email']:focus,
+.register .container input[type='email']:active,
+.register .container input[type='text']:focus,
+.register .container input[type='text']:active,
+.register .container input[type='password']:focus,
+.register .container input[type='password']:active,
+.inputset select:focus,
+.inputset select:active {
     color: #000;
 }
 
-.logreg .container input[type='submit'] {
+.login .container input[type='submit'],
+.register .container input[type='submit'] {
     background: #479F3D;
     color: #fff;
     padding: 7px 15px;
@@ -148,31 +190,207 @@ a {
     -moz-border-radius: 3px;
     border-radius: 3px;
     cursor: pointer;
+    font-size: 10pt;
 }
 
-.logreg .container input[type='submit']:hover,
-.logreg .container input[type='submit']:active,
-.logreg .container input[type='submit']:focus {
+.login .container input[type='submit']:hover,
+.login .container input[type='submit']:active,
+.login .container input[type='submit']:focus,
+.register .container input[type='submit']:hover,
+.register .container input[type='submit']:active,
+.register .container input[type='submit']:focus{
     background: #4cb242;
 }
 
-.logreg .container .forgot-password {
+.login .container .forgot-password {
     float: right;
     font-weight: 600;
     font-size: 11pt;
     margin-top: 7px;
 }
 
-.logreg .container .forgot-password:hover,
-.logreg .container .forgot-password:focus {
+.login .container .forgot-password:hover,
+.login .container .forgot-password:focus {
     text-decoration: underline;
+}
+
+.inputset {
+    margin-bottom: 10px;
 }
 
 .inputset.error input[type='email'],
 .inputset.error input[type='text'],
-.inputset.error input[type='password'] {
+.inputset.error input[type='password'],
+.inputset.error select {
     border: 1px solid rgba(255,0,0,0.7);
     box-shadow: 1px 2px 3px 0 rgba(255,0,0,0.3);
+}
+
+.inputset .radio {
+    margin: 14px 0;
+    display: inline-block;
+    position: relative;
+    padding-left: 30px;
+    cursor: pointer;
+    font-size: 16px;
+    color: #666;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.inputset label.radio {
+    font-weight: 400;
+}
+
+.inputset .radio input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+
+.inputset .radio input:checked~.check {
+    background-color: #dedede;
+}
+
+.inputset .radio input:checked~.check:after {
+    display: block;
+}
+
+.inputset .radio .check:after {
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%,-50%);
+    -moz-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    -o-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    width: 10px;
+    height: 10px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    background: #4cb242;
+}
+
+.inputset .radio .check {
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+    left: 0;
+    height: 16px;
+    width: 16px;
+    background-color: #dedede;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    -webkit-box-shadow: inset 0 1px 3px 0 rgba(0,0,0,.08);
+    -moz-box-shadow: inset 0 1px 3px 0 rgba(0,0,0,.08);
+    box-shadow: inset 0 1px 3px 0 rgba(0,0,0,.08);
+}
+
+.inputset .radio .check:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.login .inputset input:read-only,
+.register .inputset input:read-only,
+.inputset input:read-only {
+    background-color: #f3f3f3;
+}
+
+.register .inputset .file-input,
+.inputset .file-input {
+    display: inline-block;
+    color: #fff;
+    border: 1px solid rgba(0,0,0,0.1);
+    background: #0D6AD1;
+    padding: 7px 15px;
+    text-align: center;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 10pt;
+    cursor: pointer;
+}
+
+.register .inputset .file-input:hover,
+.register .inputset .file-input:hover,
+.register .inputset .file-input:focus,
+.register .inputset .file-input:focus,
+.register .inputset .file-input:active,
+.register .inputset .file-input:active {
+    background: #0d79e2;
+}
+
+.register .inputset .file-input {
+    width: 100%;
+    margin-top: 5px;
+}
+
+.register .inputset .file-clear {
+    display: none;
+    width: 38%;
+    border: 1px solid rgba(0,0,0,0.1);
+    color: #fff;
+    background: #CA2A39;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    padding: 7px 5px;
+    text-align: center;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 10pt;
+    cursor: pointer;
+}
+
+.register .inputset .file-clear:hover,
+.register .inputset .file-clear:hover,
+.register .inputset .file-clear:focus,
+.register .inputset .file-clear:focus,
+.register .inputset .file-clear:active,
+.register .inputset .file-clear:active {
+    background: #db2e3e;
+}
+
+.register .inputset .file-clear svg {
+    vertical-align: middle;
+    fill: currentColor;
+    width: 10px;
+    height: 10px;
+}
+
+.register .container label.file-input {
+    font-weight: 400;
+}
+
+.inputset .file-input svg {
+    vertical-align: middle;
+    fill: currentColor;
+    width: 15px;
+    height: 15px;
+}
+
+.inputset .file-input input[type='file']{
+    display: none;
+}
+
+.inputset .upload-preview {
+    margin: 5px 0px;
+    border: 1px solid rgba(0,0,0,0.2);
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
 .field-error {
@@ -183,6 +401,7 @@ a {
 .log-footer {
     text-align: center;
     margin-top: 15px;
+    margin-bottom: 50px;
     font-weight: 400;
     font-size: 11pt;
 }
@@ -195,3 +414,150 @@ a {
 .log-footer a:focus {
     text-decoration: underline;
 }
+
+/* Divider */
+
+.divider {
+    line-height: 0;
+    margin: 10px 0 20px;
+ }
+
+.divider.center {
+    text-align: center;
+}
+
+.divider.left {
+    text-align: left;
+}
+
+.divider.right {
+    text-align: right;
+}
+
+.divider span {
+    background-color: #fff;
+    padding: 0 16px 16px;
+}
+
+.divider.center span{
+
+}
+
+.divider.left span{
+    padding: 0 16px 16px 0;
+}
+
+.divider.right span{
+    padding: 0 0 16px 16px;
+}
+
+.divider.gray span {
+    background-color: #f5f5f5;
+}
+
+.divider:before{
+    content: " ";
+    display: block;
+    border-top: 1px solid #e3e3e3;
+    border-bottom: 1px solid #f7f7f7;
+}
+
+.register h4.divider {
+    font-size: 11pt;
+}
+
+.register h4.divider.left span {
+    padding-right: 10px;
+}
+
+.grid {
+    width: 100%;
+    display: table;
+    border-collapse: collapse;
+}
+
+.grid>.row {
+    width: auto;
+    display: table-row;
+}
+
+.grid>.row>.column {
+    width: auto;
+    display: table-cell;
+}
+
+.grid>.row>.column-1, .grid>.row>.column-2, .grid>.row>.column-3,
+.grid>.row>.column-4, .grid>.row>.column-5, .grid>.row>.column-6,
+.grid>.row>.column-7, .grid>.row>.column-8, .grid>.row>.column-9,
+.grid>.row>.column-10, .grid>.row>.column-11, .grid>.row>.column-12 {
+    display: table-cell;
+    padding: 0 10px;
+    vertical-align: middle;
+}
+.grid>.row>.column-1:first-child, .grid>.row>.column-2:first-child, .grid>.row>.column-3:first-child,
+.grid>.row>.column-4:first-child, .grid>.row>.column-5:first-child, .grid>.row>.column-6:first-child,
+.grid>.row>.column-7:first-child, .grid>.row>.column-8:first-child, .grid>.row>.column-9:first-child,
+.grid>.row>.column-10:first-child, .grid>.row>.column-11:first-child, .grid>.row>.column-12:first-child {
+    padding-left: 0;
+}
+.grid>.row>.column-1:last-child, .grid>.row>.column-2:last-child, .grid>.row>.column-3:last-child,
+.grid>.row>.column-4:last-child, .grid>.row>.column-5:last-child, .grid>.row>.column-6:last-child,
+.grid>.row>.column-7:last-child, .grid>.row>.column-8:last-child, .grid>.row>.column-9:last-child,
+.grid>.row>.column-10:last-child, .grid>.row>.column-11:last-child, .grid>.row>.column-12:last-child {
+    padding-right: 0;
+}
+.grid>.row>.column-1 {
+    width: 8.33%;
+}
+.grid>.row>.column-2 {
+    width: 16.66%;
+}
+.grid>.row>.column-3 {
+    width: 24.99%;
+}
+.grid>.row>.column-4 {
+    width: 33.32%;
+}
+.grid>.row>.column-5 {
+    width: 41.65%;
+}
+.grid>.row>.column-6 {
+    width: 49.98%;
+}
+.grid>.row>.column-7 {
+    width: 58.31%;
+}
+.grid>.row>.column-8 {
+    width: 66.64%;
+}
+.grid>.row>.column-9 {
+    width: 83.30%;
+}
+.grid>.row>.column-10 {
+    width: 91.63%;
+}
+.grid>.row>.column-12 {
+    width: 99.96%;
+}
+
+/* MARGINS */
+.m-r-45 {
+    margin-right: 45px !important;
+}
+
+.m-t-5 {
+    margin-top: 5px !important;
+}
+
+.m-l-10 {
+    margin-left: 10px !important;
+}
+.m-l-5 {
+    margin-left: 5px !important;
+}
+
+
+
+
+
+

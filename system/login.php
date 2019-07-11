@@ -74,47 +74,35 @@ if(isset($_POST['submit']))
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Bus Ticket Reservation System - Login</title>
+	<title>BTRS - Login</title>
     <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
-<div class="logreg">
-    <h2 class="logtitle" align="center">Login to System</h2>
-    <div class="container">
-        <form method="POST">
-            <div class="inputset<?php __errors($errors, 'email', true) ?>">
-                <label for="email">Email</label><br>
-                <input type="email" name="email" id="email" placeholder="Enter your email addresss" value="<?= htmlspecialchars(isset($_POST['email']) ? $_POST['email'] : (!empty($regEmail) ? $regEmail : '')) ?>"> <br/><?php __errors($errors, 'email') ?>
-            </div>
-            <div class="inputset<?php __errors($errors, 'password', true) ?>">
-                <label for="password">Password</label><br>
-                <input type="password" name="password" id="password"> <br><?php __errors($errors, 'password') ?>
-            </div>
-            <input type="submit" name="submit" value="Login">
-            <a href="javascript:void(0)" class="forgot-password">Forgot Password?</a>
-        </form>
+    <div class="login">
+        <h2 class="logtitle" align="center">Login to System</h2>
+        <div class="container">
+            <?php if(!empty($regEmail)) : ?>
+                <img src="assets/img/ok.gif" alt="[+]"> <font color="darkgreen">You have Registred Successfully. Please Login Here</font>
+            <?php endif; ?>
+            <form method="POST">
+                <gr>
+                <div class="inputset<?php __errors($errors, 'email', true) ?>">
+                    <label for="email">Email</label><br>
+                    <input type="email" name="email" id="email" placeholder="Enter your email addresss" value="<?= htmlspecialchars(isset($_POST['email']) ? $_POST['email'] : (!empty($regEmail) ? $regEmail : '')) ?>"><br/>
+                    <?php __errors($errors, 'email') ?>
+                </div>
+                <div class="inputset<?php __errors($errors, 'password', true) ?>">
+                    <label for="password">Password</label><br>
+                    <input type="password" name="password" id="password"><br>
+                    <?php __errors($errors, 'password') ?>
+                </div>
+                <input type="submit" name="submit" value="Login">
+                <a href="javascript:void(0)" class="forgot-password">Forgot Password?</a>
+            </form>
+        </div>
+        <div class="log-footer">
+            Want to join as Company? <a href="register.php">Create an Account</a>
+        </div>
     </div>
-    <div class="log-footer">
-        Don't have an Account? <a href="register.php">Create an Account</a>
-    </div>
-</div>
-<!--	<table align="center" width="353" border="0" bgcolor="#C7CBD1">-->
-<!--		<tr>-->
-<!--			<td>-->
-<!--				<fieldset>-->
-<!--					<legend>-->
-<!--						<img src="assets/img/lock_color.png" width="16px" height="16px" alt="[+]"> <b>Login Here</b>-->
-<!--					</legend>-->
-<!--					-->
-<!--					<br>-->
-<!--					--><?php //if(!empty($regEmail)) : ?>
-<!--					<img src="assets/img/ok.gif" alt="[+]"> <font color="darkgreen">You have Registred Successfully. Please Login Here</font>-->
-<!--					--><?php //else: ?>
-<!--					Not Registered Yet? <img src="assets/img/point.gif" alt="[+]"> <a href="register.php">Register Now!!</a>-->
-<!--					--><?php //endif; ?>
-<!--				</fieldset>-->
-<!--			</td>-->
-<!--		</tr>-->
-<!--	</table>-->
 </body>
 </html>
