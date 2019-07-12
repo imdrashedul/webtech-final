@@ -263,8 +263,9 @@ $content = ob_get_clean();
 $usermail = getEmailBySession($sessionCookie);
 $user = getUser($usermail);
 __visualize(array(
-	'title' => 'BTRS - Add Bus Manager',
+	'title' => 'Add Bus Manager',
 	'area' => 'busmanager',
+    'navigate'=> array(array('busmanager.php', 'Bus Managers')),
 	'data' => $content,
 	'user' => $user ? $user['name'] : '',
 	'usermail' => $usermail

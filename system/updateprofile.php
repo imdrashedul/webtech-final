@@ -118,9 +118,10 @@ $content = ob_get_clean();
 $usermail = getEmailBySession($sessionCookie);
 $user = getUser($usermail);
 __visualize(array(
-	'title' => 'BTRS - Update Admin Profile',
+	'title' => 'Update Profile',
 	'area' => 'profile',
 	'data' => $content,
+	'navigate' => array(array('profile.php','Profile')),
 	'user' => $user ? $user['name'] : '',
 	'usermail' => $usermail
 ));

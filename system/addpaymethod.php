@@ -75,8 +75,9 @@ $content = ob_get_clean();
 $usermail = getEmailBySession($sessionCookie);
 $user = getUser($usermail);
 __visualize(array(
-	'title' => 'BTRS - Add Payment Method',
+	'title' => 'Add Payment Method',
 	'area' => 'paymethod',
+	'navigate' => array(array('paymethod.php', 'Payment Methods')),
 	'data' => $content,
 	'user' => $user ? $user['name'] : '',
 	'usermail' => $usermail

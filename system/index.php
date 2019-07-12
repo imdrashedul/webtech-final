@@ -36,7 +36,7 @@ $content = ob_get_clean();
 $usermail = getEmailBySession($sessionCookie);
 $user = getUser($usermail);
 __visualize(array(
-	'title' => 'BTRS - Dashboard',
+	'title' => 'Dashboard',
 	'area' => 'index',
 	'data' => $content,
 	'user' => $user ? $user['name'] : '',

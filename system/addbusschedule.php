@@ -129,8 +129,9 @@ $content = ob_get_clean();
 $usermail = getEmailBySession($sessionCookie);
 $user = getUser($usermail);
 __visualize(array(
-	'title' => 'BTRS - Add Bus Schedule',
+	'title' => 'Add Bus Schedule',
 	'area' => 'busschedule',
+    'navigate'=> array(array('busschedule.php', 'Bus Schedules')),
 	'data' => $content,
 	'user' => $user ? $user['name'] : '',
 	'usermail' => $usermail

@@ -129,6 +129,8 @@ if(isset($_POST['submit']))
 <head>
 	<title>BTRS - Register Company</title>
     <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="shortcut icon" href="assets/img/fav.png" type="image/png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
     <div class="register">
@@ -136,7 +138,7 @@ if(isset($_POST['submit']))
             <div class="header"></div>
             <div class="body">
                 <form method="POST">
-                    <h4 class="divider left"><span>Personal Information</span></h4>
+                    <h4 class="block divider left"><span>Personal Information</span></h4>
                     <div class="grid">
                         <div class="row">
                             <div class="column-6">
@@ -242,7 +244,7 @@ if(isset($_POST['submit']))
                             </div>
                         </div>
                     </div>
-                    <h4 class="divider left"><span>Contact Information</span></h4>
+                    <h4 class="block divider left"><span>Contact Information</span></h4>
                     <div class="grid">
                         <div class="row">
                             <div class="column-6">
@@ -289,7 +291,7 @@ if(isset($_POST['submit']))
                             </div>
                         </div>
                     </div>
-                    <h4 class="divider left"><span>Company Information</span></h4>
+                    <h4 class="block divider left"><span>Company Information</span></h4>
                     <div class="grid">
                         <div class="row">
                             <div class="column-6">
@@ -373,7 +375,7 @@ if(isset($_POST['submit']))
                             </div>
                         </div>
                     </div>
-                    <h4 class="divider left"><span>Login Information</span></h4>
+                    <h4 class="block divider left"><span>Login Information</span></h4>
                     <div class="grid">
                         <div class="row">
                             <div class="column-12">

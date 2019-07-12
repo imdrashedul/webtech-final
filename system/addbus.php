@@ -117,9 +117,10 @@ $content = ob_get_clean();
 $usermail = getEmailBySession($sessionCookie);
 $user = getUser($usermail);
 __visualize(array(
-	'title' => 'BTRS - Add New Bus',
+	'title' => 'Add New Bus',
 	'area' => 'managebus',
 	'data' => $content,
+    'navigate'=> array(array('managebus.php', 'Manage Bus')),
 	'user' => $user ? $user['name'] : '',
 	'usermail' => $usermail
 ));

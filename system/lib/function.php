@@ -40,14 +40,14 @@ function __errors(array $set, $hook, $label = false, $addon = ' field-error')
 }
 
 // Menu Visualizer
-function __renderMenu($fixed, $variable, $ref, $title)
+function __renderMenu($fixed, $variable, $ref, $title, $icon='assets/img/it.png')
 {
-	$c = '<img src="assets/img/it.png"> ';
-	$c .= $fixed!=$variable?'<a href="'.$ref.'">' : '';
-	$c .= $fixed==$variable?'<b>':'';
+    $c = '<li>';
+	$c .= '<a href="'.$ref.'"'.($fixed==$variable?' class="active"':'').'>';
+    $c .= '<img src="'.$icon.'"> ';
 	$c .= $title;
-	$c .= $fixed==$variable?'</b>':'';
-	$c .= $fixed!=$variable?'</a>':'';
+	$c .= '</a>';
+	$c .= '</li>';
 	return $c;
 }
 

@@ -206,7 +206,7 @@ $content = ob_get_clean();
 $usermail = getEmailBySession($sessionCookie);
 $user = getUser($usermail);
 __visualize(array(
-	'title' => 'BTRS - Manage Bus',
+	'title' => 'Manage Bus',
 	'area' => 'managebus',
 	'data' => $content,
 	'user' => $user ? $user['name'] : '',

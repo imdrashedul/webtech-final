@@ -205,7 +205,7 @@ $content = ob_get_clean();
 $usermail = getEmailBySession($sessionCookie);
 $user = getUser($usermail);
 __visualize(array(
-	'title' => 'BTRS - Promotional Discount',
+	'title' => 'Promotional Discount',
 	'area' => 'discount',
 	'data' => $content,
 	'user' => $user ? $user['name'] : '',

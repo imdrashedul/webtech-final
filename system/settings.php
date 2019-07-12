@@ -59,7 +59,7 @@ $content = ob_get_clean();
 $usermail = getEmailBySession($sessionCookie);
 $user = getUser($usermail);
 __visualize(array(
-	'title' => 'BTRS - General Settings',
+	'title' => 'General Settings',
 	'area' => 'settings',
 	'data' => $content,
 	'user' => $user ? $user['name'] : '',

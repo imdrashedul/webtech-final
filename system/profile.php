@@ -74,7 +74,7 @@ ob_start();
 <?php
 $content = ob_get_clean();
 __visualize(array(
-	'title' => 'BTRS - Admin Profile',
+	'title' => 'Profile',
 	'area' => 'profile',
 	'data' => $content,
 	'user' => $user ? $user['name'] : '',

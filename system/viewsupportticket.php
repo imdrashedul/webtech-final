@@ -92,8 +92,9 @@ $content = ob_get_clean();
 $usermail = getEmailBySession($sessionCookie);
 $user = getUser($usermail);
 __visualize(array(
-	'title' => 'BTRS - View Support Ticket',
-	'area' => '',
+	'title' => 'View Support Ticket',
+	'area' => 'supportticket',
+	'navigate' => array(array('supportticket.php', 'Support Ticket')),
 	'data' => $content,
 	'user' => $user ? $user['name'] : '',
 	'usermail' => $usermail

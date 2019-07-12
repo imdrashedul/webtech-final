@@ -139,7 +139,7 @@ $content = ob_get_clean();
 $usermail = getEmailBySession($sessionCookie);
 $user = getUser($usermail);
 __visualize(array(
-	'title' => 'BTRS - Manage Tickets',
+	'title' => 'Manage Tickets',
 	'area' => 'tickets',
 	'data' => $content,
 	'user' => $user ? $user['name'] : '',

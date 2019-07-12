@@ -204,7 +204,7 @@ $content = ob_get_clean();
 $usermail = getEmailBySession($sessionCookie);
 $user = getUser($usermail);
 __visualize(array(
-	'title' => 'BTRS - Counter Staffs',
+	'title' => 'Counter Staffs',
 	'area' => 'counterstaff',
 	'data' => $content,
 	'user' => $user ? $user['name'] : '',

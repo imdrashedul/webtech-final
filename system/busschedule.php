@@ -99,7 +99,7 @@ $content = ob_get_clean();
 $usermail = getEmailBySession($sessionCookie);
 $user = getUser($usermail);
 __visualize(array(
-	'title' => 'BTRS - Bus Schedules',
+	'title' => 'Bus Schedules',
 	'area' => 'busschedule',
 	'data' => $content,
 	'user' => $user ? $user['name'] : '',

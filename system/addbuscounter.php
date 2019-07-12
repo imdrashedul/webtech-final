@@ -105,9 +105,10 @@ $content = ob_get_clean();
 $usermail = getEmailBySession($sessionCookie);
 $user = getUser($usermail);
 __visualize(array(
-	'title' => 'BTRS - Add Bus Counter',
+	'title' => 'Bus Counter',
 	'area' => 'buscounter',
 	'data' => $content,
+    'navigate'=> array(array('buscounter.php', 'Bus Counters')),
 	'user' => $user ? $user['name'] : '',
 	'usermail' => $usermail
 ));

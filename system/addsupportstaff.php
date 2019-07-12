@@ -217,9 +217,10 @@ $content = ob_get_clean();
 $usermail = getEmailBySession($sessionCookie);
 $user = getUser($usermail);
 __visualize(array(
-	'title' => 'BTRS - Add Support Staff',
+	'title' => 'Add Support Staff',
 	'area' => 'supportstaff',
 	'data' => $content,
+	'navigate'=> array(array('supportstaff.php', 'Manage Support Staff')),
 	'user' => $user ? $user['name'] : '',
 	'usermail' => $usermail
 ));
