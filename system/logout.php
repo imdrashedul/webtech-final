@@ -7,12 +7,16 @@
  */
 require_once 'lib/function.php';
 
-$sessionCookie = false;
+$token = false;
 
-if(($sessionCookie = getSessionCookie()) && verifyLogin($sessionCookie, false))
+connectDatabase();
+
+if(($token = getSessionCookie()) && verifyLogin($token, false))
 {
-	popSession($sessionCookie);
+	popSession($token);
 	destroySessionCookie();
 }
+
+disconnectDatabase();
 
 header('location: login.php');

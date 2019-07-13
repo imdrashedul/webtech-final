@@ -8,13 +8,16 @@
 
 require_once 'lib/function.php';
 
+connectDatabase();
+
 // Check For Authorization Positive
 
-if(!($sessionCookie = getSessionCookie()) || !verifyLogin($sessionCookie, true))
+if(!($token = getSessionCookie()) || !verifyLogin($token, true))
 {
-	header('location: login.php');
+    header('location: login.php');
 	die();
 }
+
 ob_start();
 ?>
 
@@ -33,12 +36,14 @@ ob_start();
 
 <?php
 $content = ob_get_clean();
-$usermail = getEmailBySession($sessionCookie);
-$user = getUser($usermail);
+$user = getUserBySession($token);
+disconnectDatabase();
 __visualize(array(
 	'title' => 'Dashboard',
 	'area' => 'index',
 	'data' => $content,
-	'user' => $user ? $user['name'] : '',
-	'usermail' => $usermail
+	'fname' => '',
+	'lname' => '',
+	'email' => isset($user['email']) ? $user['email'] : '',
 ));
+

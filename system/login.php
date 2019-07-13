@@ -5,18 +5,19 @@
  * @version v2.0
  * @see https://github.com/rashed370/webtech-final
  */
+
 require_once 'lib/function.php';
 
 session_start();
-
+connectDatabase();
 $regEmail = '';
 
 $errors = array();
 
 // Check For Authorization Negative
-if($sessionCookie = getSessionCookie())
+if($token = getSessionCookie())
 {
-	if(verifyLogin($sessionCookie, false))
+	if(verifyLogin($token, false))
 	{
 		header('location: index.php');
 		die();
@@ -33,7 +34,7 @@ if(isset($_POST['submit']))
 {
 	$email = trim($_POST['email']);
 	$password = $_POST['password'];
-	$user = false;
+	$user = null;
 
 	//Validation Set Of 'Email'
 	if(empty($email))
@@ -44,7 +45,7 @@ if(isset($_POST['submit']))
 	{
 		$errors['email'] = 'Must be a valid email address (i.e anything@example.com)';
 	}
-	else if(($user = getUser($email))==false)
+	else if( !($user = getUserByEmail($email)) || !isset($user['id']) )
 	{
 		$errors['email'] = 'Email doesn\'t match' ;
 	}
@@ -54,22 +55,23 @@ if(isset($_POST['submit']))
 	{
 		$errors['password'] = 'Cannot be empty';
 	}
-	elseif ($user!=false && !verifyPassword($password, $user)) 
+	elseif (!$user || !verifyPassword($password, $user))
 	{
 		$errors['password'] = 'Password doesn\'t match';
 	}
 
 	if(empty($errors))
 	{
-		$session = getSessionKey();
-		if(pushSession($session, $email))
+		$token = getSessionToken();
+		if(pushSession($token, $user['id']))
 		{
-			setSessionCookie($session);
+			setSessionCookie($token);
 			header('location: index.php');
 			exit;
 		}
 	}
 }
+disconnectDatabase();
 ?>
 <!DOCTYPE html>
 <html>

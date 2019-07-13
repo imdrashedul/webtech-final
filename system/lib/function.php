@@ -233,19 +233,13 @@ function getAllUsers()
 	return (array) @json_decode(fileHandler($__userLib, 'read'), true);
 }
 
-// Fetch User By Email
-function getUser($email)
-{
-	$users = getAllUsers();
-	return isset($users[$email]) ? $users[$email] : false;
-}
 
 // Verify User Password
 function verifyPassword($password, array $user)
 {
 	if(isset($user['password']))
 	{
-		return $user['password']==$password;
+		return password_verify($password, $user['password']);
 	}
 
 	return false;
@@ -265,36 +259,9 @@ function getAllSession()
 	return (array) @json_decode(fileHandler($__sessionLib, 'read'), true);
 }
 
-// Fetch User Email By Session
-function getEmailBySession($session)
-{
-	$sessions = getAllSession();
-	return isset($sessions[$session]) ? $sessions[$session] : false;
-}
-
-// Add New Session Data
-function pushSession($session, $email)
-{
-	global $__sessionLib;
-	return fileHandler($__sessionLib, 'write', @json_encode(array_merge(getAllSession(), array($session => $email))));
-}
-
-// Remove Single Session Data
-function popSession($session)
-{
-	global $__sessionLib;
-
-	$sessions = getAllSession();
-	if(isset($sessions[$session]))
-	{
-		unset($sessions[$session]);
-		return fileHandler($__sessionLib, 'write', @json_encode($sessions));
-	}
-	return false;
-}
 
 // Generate New Session
-function getSessionKey()
+function getSessionToken()
 {
 	return md5(randString().time());
 }
@@ -303,7 +270,7 @@ function getSessionKey()
 function setSessionCookie($session)
 {
 	// Keep Alive For Next 6 Hours
-	setcookie(SESSION_COOKIE, $session, time()+21600);
+	setcookie(SESSION_COOKIE, $session, time()+BTRS_SESSION_ALIVE);
 }
 
 //Destroy SSID (Session Cookie)
@@ -312,44 +279,41 @@ function destroySessionCookie()
 	setcookie(SESSION_COOKIE, '', time()-300);
 }
 
-//
-function verifyEmailAssigned($email)
-{
-	$users = getAllUsers();
-	return isset($users[$email]);
-}
-
-//Verification Profider for Valid Authorization
-function verifyLogin($session, $flaq = true)
-{
-	$sessions = getAllSession();
-	if(!empty($session) && isset($sessions[$session]))
-	{
-
-		if(getUser($sessions[$session])!=false)
-		{
-			if($flaq)
-			{
-				setSessionCookie($session);
-			}
-			return true;
-		} 
-		else
-		{
-			popSession($session);
-		}
-	}
-
-	if($flaq)
-	{
-		destroySessionCookie();
-	}
-
-	return false;
-}
-
 //Fetch Session Cookie
 function getSessionCookie()
 {
+    cleanExpiredSession();
 	return isset($_COOKIE[SESSION_COOKIE]) ? $_COOKIE[SESSION_COOKIE] : false;
+}
+
+// Fetch User Email By Session
+function getUserBySession($token)
+{
+    return ($session = getSession($token)) && $session['userid'] ? getUserById($session['userid']) : null;
+}
+
+//Verification Profider for Valid Authorization
+function verifyLogin($token, $flaq = true)
+{
+
+    if(getUserBySession($token))
+    {
+        if($flaq)
+        {
+            modifySessionValidity($token);
+            setSessionCookie($token);
+        }
+        return true;
+    }
+    else
+    {
+        popSession($token);
+    }
+
+    if($flaq)
+    {
+        destroySessionCookie();
+    }
+
+    return false;
 }

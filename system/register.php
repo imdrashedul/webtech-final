@@ -10,12 +10,14 @@ require_once 'lib/function.php';
 
 session_start();
 
+connectDatabase();
+
 $errors = array();
 
 // Check For Authorization Negative
-if($sessionCookie = getSessionCookie())
+if($token = getSessionCookie())
 {
-	if(verifyLogin($sessionCookie, false))
+	if(verifyLogin($token, false))
 	{
 		header('location: index.php');
 		die();
@@ -122,7 +124,7 @@ if(isset($_POST['submit']))
 	}
 
 }
-
+disconnectDatabase();
 ?>
 <!DOCTYPE html>
 <html>

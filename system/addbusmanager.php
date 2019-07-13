@@ -8,12 +8,14 @@
 
 require_once 'lib/function.php';
 
+connectDatabase();
+
 // Check For Authorization Positive
 
-if(!($sessionCookie = getSessionCookie()) || !verifyLogin($sessionCookie, true))
+if(!($token = getSessionCookie()) || !verifyLogin($token, true))
 {
-	header('location: login.php');
-	die();
+    header('location: login.php');
+    die();
 }
 
 $errors = array();
@@ -260,13 +262,14 @@ ob_start();
 
 <?php
 $content = ob_get_clean();
-$usermail = getEmailBySession($sessionCookie);
-$user = getUser($usermail);
+$user = getUserBySession($token);
+disconnectDatabase();
 __visualize(array(
 	'title' => 'Add Bus Manager',
 	'area' => 'busmanager',
     'navigate'=> array(array('busmanager.php', 'Bus Managers')),
 	'data' => $content,
-	'user' => $user ? $user['name'] : '',
-	'usermail' => $usermail
+    'fname' => '',
+    'lname' => '',
+    'email' => isset($user['email']) ? $user['email'] : '',
 ));
