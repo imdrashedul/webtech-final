@@ -32,42 +32,42 @@ ob_start();
 
 <div class="block">
     <div class="header">
-        <b>Bus Managers List</b>
+        <b>Payment Methods List</b>
         <a href="addpaymethod.php" class="btn target blue" title="Add New Method"><span>Add New</span></a>
     </div>
     <div class="body">
-        <table width="100%" border="1" cellpadding="5" cellspacing="0">
+        <table class="datatable">
             <thead>
-            <tr bgcolor="#A7BFDE">
-                <th><font face="Arial" size="2">Method</font></th>
-                <th><font face="Arial" size="2">Gateway</font></th>
-                <th><font face="Arial" size="2">Status</font></th>
-                <th><font face="Arial" size="2">Action</font></th>
+            <tr>
+                <th>Method</th>
+                <th>Gateway</th>
+                <th>Status</th>
+                <th>Action</th>
             </tr>
             </thead>
             <tbody>
-            <tr bgcolor="#D3DFEE">
-                <td><font face="Arial" size="2">bKash</font></td>
-                <td><font face="Arial" size="2">https://www.bkash.com</font></td>
-                <td><font face="Arial" size="2">Active</font></td>
+            <tr>
+                <td>bKash</td>
+                <td>https://www.bkash.com</td>
+                <td>Active</td>
                 <td align="center">
                     <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
                     <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
                 </td>
             </tr>
             <tr bgcolor="#B7C5D6">
-                <td><font face="Arial" size="2">Rocket</font></td>
-                <td><font face="Arial" size="2">https://www.dutchbanglabank.com/rocket</font></td>
-                <td><font face="Arial" size="2">Active</font></td>
+                <td>Rocket</td>
+                <td>https://www.dutchbanglabank.com/rocket</td>
+                <td>Active</td>
                 <td align="center">
                     <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
                     <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
                 </td>
             </tr>
-            <tr bgcolor="#D3DFEE">
-                <td><font face="Arial" size="2">Bank Transfer</font></td>
-                <td><font face="Arial" size="2">N/A</font></td>
-                <td><font face="Arial" size="2">Suspend</font></td>
+            <tr>
+                <td>Bank Transfer</td>
+                <td>N/A</td>
+                <td>Suspend</td>
                 <td align="center">
                     <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
                     <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
@@ -75,6 +75,27 @@ ob_start();
             </tr>
             </tbody>
         </table>
+        <div class="grid">
+            <div class="row">
+                <div class="column-4 ">
+                    <span class="pagination">
+                        Showing 1 to 10 of 100 entries
+                    </span>
+                </div>
+                <div class="column-8 text-right">
+                    <div class="pagination">
+                        <a href="#">Previous</a>
+                        <a href="#">1</a>
+                        <a class="active" href="#">2</a>
+                        <a href="#">3</a>
+                        <a href="#">4</a>
+                        <a href="#">5</a>
+                        <a href="#">6</a>
+                        <a href="javascript:void(0)" class="disabled">Next</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 

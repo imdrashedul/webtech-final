@@ -1078,12 +1078,13 @@ div.pagination {
     margin-top: 10px;
 }
 div.pagination a {
+    font-size: 10.5pt;
     color: #035dbb;
     margin-left: -1px;
     float: left;
     display: inline-block;
-    border: 1px solid rgba(0,0,0,0.1);
-    padding: 4px 8px;
+    border: 1px solid rgba(0,0,0,0.17);
+    padding: 5px 10px;
     text-decoration: none;
     transition: background-color .2s;
 }
@@ -1105,8 +1106,9 @@ div.pagination a:hover:not(.active):not(.disabled) {
 
 span.pagination {
     display: block;
+    font-size: 10.5pt;
     margin-top: 10px;
-    padding: 4px 0px;
+    padding: 5px 0;
     vertical-align: middle;
 }
 

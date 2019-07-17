@@ -220,7 +220,7 @@ ob_start();
                         <a href="#">4</a>
                         <a href="#">5</a>
                         <a href="#">6</a>
-                        <a href="#" class="disabled">Next</a>
+                        <a href="javascript:void(0)" class="disabled">Next</a>
                     </div>
                 </div>
             </div>

@@ -35,167 +35,167 @@ ob_start();
         <a href="addcounterstaff.php" class="btn target blue" title="Add New Counter Staff"><span>Add New</span></a>
     </div>
     <div class="body">
-        <table width="100%" border="1" cellpadding="5" cellspacing="0">
+        <table class="datatable">
             <thead>
-            <tr bgcolor="#A7BFDE">
-                <th><font face="Arial" size="2">Name</font></th>
-                <th><font face="Arial" size="2">Email</font></th>
-                <th><font face="Arial" size="2">Hire Date</font></th>
-                <th><font face="Arial" size="2">Company</font></th>
-                <th><font face="Arial" size="2">Counter</font></th>
-                <th><font face="Arial" size="2">Action</font></th>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Hire Date</th>
+                <th>Company</th>
+                <th>Counter</th>
+                <th>Action</th>
             </tr>
             </thead>
             <tbody>
-            <tr bgcolor="#D3DFEE">
-                <td><font face="Arial" size="2">Thane Hooper</font></td>
-                <td><font face="Arial" size="2">lacus.Etiam.bibendum@sodales.org</font></td>
-                <td align="center"><font face="Arial" size="2">4 Mar 2019</font></td>
-                <td><font face="Arial" size="2">S.R Travels (Pvt) Ltd</font></td>
-                <td><font face="Arial" size="2">Kallayanpur Counter</font></td>
+            <tr>
+                <td>Thane Hooper</td>
+                <td>lacus.Etiam.bibendum@sodales.org</td>
+                <td align="center">4 Mar 2019</td>
+                <td>S.R Travels (Pvt) Ltd</td>
+                <td>Kallayanpur Counter</td>
                 <td align="center">
                     <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
                     <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
                 </td>
             </tr>
-            <tr bgcolor="#B7C5D6">
-                <td><font face="Arial" size="2">Alvin Vang</font></td>
-                <td><font face="Arial" size="2">et@cubiliaCuraeDonec.com</font></td>
-                <td align="center"><font face="Arial" size="2">26 Jul 2019</font></td>
-                <td><font face="Arial" size="2">S.R Travels (Pvt) Ltd</font></td>
-                <td><font face="Arial" size="2">Gabtoli Counter</font></td>
+            <tr>
+                <td>Alvin Vang</td>
+                <td>et@cubiliaCuraeDonec.com</td>
+                <td align="center">26 Jul 2019</td>
+                <td>S.R Travels (Pvt) Ltd</td>
+                <td>Gabtoli Counter</td>
                 <td align="center">
                     <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
                     <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
                 </td>
             </tr>
-            <tr bgcolor="#D3DFEE">
-                <td><font face="Arial" size="2">Erich Stevens</font></td>
-                <td><font face="Arial" size="2">Pellentesque@libero.com</font></td>
-                <td align="center"><font face="Arial" size="2">21 Oct 2018</font></td>
-                <td><font face="Arial" size="2">S.R Travels (Pvt) Ltd</font></td>
-                <td><font face="Arial" size="2">Mohakhali Counter</font></td>
+            <tr>
+                <td>Erich Stevens</td>
+                <td>Pellentesque@libero.com</td>
+                <td align="center">21 Oct 2018</td>
+                <td>S.R Travels (Pvt) Ltd</td>
+                <td>Mohakhali Counter</td>
                 <td align="center">
                     <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
                     <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
                 </td>
             </tr>
-            <tr bgcolor="#B7C5D6">
-                <td><font face="Arial" size="2">Brent Mathis</font></td>
-                <td><font face="Arial" size="2">eu@Sedauctor.org</font></td>
-                <td align="center"><font face="Arial" size="2">28 Oct 2018</font></td>
-                <td><font face="Arial" size="2">S.R Travels (Pvt) Ltd</font></td>
-                <td><font face="Arial" size="2">Technical More Counter</font></td>
+            <tr>
+                <td>Brent Mathis</td>
+                <td>eu@Sedauctor.org</td>
+                <td align="center">28 Oct 2018</td>
+                <td>S.R Travels (Pvt) Ltd</td>
+                <td>Technical More Counter</td>
                 <td align="center">
                     <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
                     <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
                 </td>
             </tr>
-            <tr bgcolor="#D3DFEE">
-                <td><font face="Arial" size="2">Ferdinand Woods</font></td>
-                <td><font face="Arial" size="2">Quisque@tempusmauriserat.ca</font></td>
-                <td align="center"><font face="Arial" size="2">9 Aug 2018</font></td>
-                <td><font face="Arial" size="2">S.R Travels (Pvt) Ltd</font></td>
-                <td><font face="Arial" size="2">Gazipur Counter</font></td>
+            <tr>
+                <td>Ferdinand Woods</td>
+                <td>Quisque@tempusmauriserat.ca</td>
+                <td align="center">9 Aug 2018</td>
+                <td>S.R Travels (Pvt) Ltd</td>
+                <td>Gazipur Counter</td>
                 <td align="center">
                     <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
                     <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
                 </td>
             </tr>
-            <tr bgcolor="#B7C5D6">
-                <td><font face="Arial" size="2">Gavin Ferrell</font></td>
-                <td><font face="Arial" size="2">ut.nulla.Cras@et.org</font></td>
-                <td align="center"><font face="Arial" size="2">16 Feb 2019</font></td>
-                <td><font face="Arial" size="2">S.R Travels (Pvt) Ltd</font></td>
-                <td><font face="Arial" size="2">Savar Counter</font></td>
+            <tr>
+                <td>Gavin Ferrell</td>
+                <td>ut.nulla.Cras@et.org</td>
+                <td align="center">16 Feb 2019</td>
+                <td>S.R Travels (Pvt) Ltd</td>
+                <td>Savar Counter</td>
                 <td align="center">
                     <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
                     <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
                 </td>
             </tr>
-            <tr bgcolor="#D3DFEE">
-                <td><font face="Arial" size="2">Joshua Raymond</font></td>
-                <td><font face="Arial" size="2">Proin@eget.net</font></td>
-                <td align="center"><font face="Arial" size="2">4 Aug 2019</font></td>
-                <td><font face="Arial" size="2">Manik Express</font></td>
-                <td><font face="Arial" size="2">Kallayanpur Counter</font></td>
+            <tr>
+                <td>Joshua Raymond</td>
+                <td>Proin@eget.net</td>
+                <td align="center">4 Aug 2019</td>
+                <td>Manik Express</td>
+                <td>Kallayanpur Counter</td>
                 <td align="center">
                     <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
                     <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
                 </td>
             </tr>
-            <tr bgcolor="#B7C5D6">
-                <td><font face="Arial" size="2">Zachary Crosby</font></td>
-                <td><font face="Arial" size="2">In.at.pede@nullaDonec.co.uk</font></td>
-                <td align="center"><font face="Arial" size="2">24 Aug 2019</font></td>
-                <td><font face="Arial" size="2">Manik Express</font></td>
-                <td><font face="Arial" size="2">Gabtoli Counter</font></td>
+            <tr>
+                <td>Zachary Crosby</td>
+                <td>In.at.pede@nullaDonec.co.uk</td>
+                <td align="center">24 Aug 2019</td>
+                <td>Manik Express</td>
+                <td>Gabtoli Counter</td>
                 <td align="center">
                     <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
                     <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
                 </td>
             </tr>
-            <tr bgcolor="#D3DFEE">
-                <td><font face="Arial" size="2">Samuel Alston</font></td>
-                <td><font face="Arial" size="2">consectetuer@apurus.net</font></td>
-                <td align="center"><font face="Arial" size="2">16 Aug 2018</font></td>
-                <td><font face="Arial" size="2">Manik Express</font></td>
-                <td><font face="Arial" size="2">Mohakhali Counter</font></td>
+            <tr>
+                <td>Samuel Alston</td>
+                <td>consectetuer@apurus.net</td>
+                <td align="center">16 Aug 2018</td>
+                <td>Manik Express</td>
+                <td>Mohakhali Counter</td>
                 <td align="center">
                     <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
                     <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
                 </td>
             </tr>
-            <tr bgcolor="#B7C5D6">
-                <td><font face="Arial" size="2">Basil Noble</font></td>
-                <td><font face="Arial" size="2">elit.erat@accumsanneque.net</font></td>
-                <td align="center"><font face="Arial" size="2">9 Aug 2018</font></td>
-                <td><font face="Arial" size="2">Manik Express</font></td>
-                <td><font face="Arial" size="2">Gazipur Counter</font></td>
+            <tr>
+                <td>Basil Noble</td>
+                <td>elit.erat@accumsanneque.net</td>
+                <td align="center">9 Aug 2018</td>
+                <td>Manik Express</td>
+                <td>Gazipur Counter</td>
                 <td align="center">
                     <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
                     <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
                 </td>
             </tr>
-            <tr bgcolor="#D3DFEE">
-                <td><font face="Arial" size="2">Odysseus Macdonald</font></td>
-                <td><font face="Arial" size="2">arcu@erosnectellus.net</font></td>
-                <td align="center"><font face="Arial" size="2">8 Sep 2018</font></td>
-                <td><font face="Arial" size="2">Manik Express</font></td>
-                <td><font face="Arial" size="2">Technical More Counter</font></td>
+            <tr>
+                <td>Odysseus Macdonald</td>
+                <td>arcu@erosnectellus.net</td>
+                <td align="center">8 Sep 2018</td>
+                <td>Manik Express</td>
+                <td>Technical More Counter</td>
                 <td align="center">
                     <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
                     <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
                 </td>
             </tr>
-            <tr bgcolor="#B7C5D6">
-                <td><font face="Arial" size="2">Zeus Tyson</font></td>
-                <td><font face="Arial" size="2">Sed.malesuada@nisiCum.com</font></td>
-                <td align="center"><font face="Arial" size="2">9 Feb 2019</font></td>
-                <td><font face="Arial" size="2">Manik Express</font></td>
-                <td><font face="Arial" size="2">Savar Counter</font></td>
+            <tr>
+                <td>Zeus Tyson</td>
+                <td>Sed.malesuada@nisiCum.com</td>
+                <td align="center">9 Feb 2019</td>
+                <td>Manik Express</td>
+                <td>Savar Counter</td>
                 <td align="center">
                     <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
                     <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
                 </td>
             </tr>
-            <tr bgcolor="#D3DFEE">
-                <td><font face="Arial" size="2">Jerry Vaughn</font></td>
-                <td><font face="Arial" size="2">nulla@massaMauris.net</font></td>
-                <td align="center"><font face="Arial" size="2">20 Sep 2018</font></td>
-                <td><font face="Arial" size="2">Hanif Enterprise</font></td>
-                <td><font face="Arial" size="2">Kallayanpur Counter</font></td>
+            <tr>
+                <td>Jerry Vaughn</td>
+                <td>nulla@massaMauris.net</td>
+                <td align="center">20 Sep 2018</td>
+                <td>Hanif Enterprise</td>
+                <td>Kallayanpur Counter</td>
                 <td align="center">
                     <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
                     <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
                 </td>
             </tr>
-            <tr bgcolor="#B7C5D6">
-                <td><font face="Arial" size="2">Declan Walter</font></td>
-                <td><font face="Arial" size="2">tellus@sem.ca</font></td>
-                <td align="center"><font face="Arial" size="2">30 Oct 2019</font></td>
-                <td><font face="Arial" size="2">Hanif Enterprise</font></td>
-                <td><font face="Arial" size="2">Gabtoli Counter</font></td>
+            <tr>
+                <td>Declan Walter</td>
+                <td>tellus@sem.ca</td>
+                <td align="center">30 Oct 2019</td>
+                <td>Hanif Enterprise</td>
+                <td>Gabtoli Counter</td>
                 <td align="center">
                     <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
                     <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
@@ -203,6 +203,27 @@ ob_start();
             </tr>
             </tbody>
         </table>
+        <div class="grid">
+            <div class="row">
+                <div class="column-4 ">
+                    <span class="pagination">
+                        Showing 1 to 10 of 100 entries
+                    </span>
+                </div>
+                <div class="column-8 text-right">
+                    <div class="pagination">
+                        <a href="#">Previous</a>
+                        <a href="#">1</a>
+                        <a class="active" href="#">2</a>
+                        <a href="#">3</a>
+                        <a href="#">4</a>
+                        <a href="#">5</a>
+                        <a href="#">6</a>
+                        <a href="javascript:void(0)" class="disabled">Next</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <?php

@@ -35,152 +35,152 @@ ob_start();
         <a href="addbuscounter.php" class="btn target blue" title="Add New Bus Manager"><span>Add New</span></a>
     </div>
     <div class="body">
-        <table width="100%" border="1" cellpadding="5" cellspacing="0">
+        <table class="datatable">
             <thead>
-            <tr bgcolor="#A7BFDE">
-                <th><font face="Arial" size="2">Name</font></th>
-                <th><font face="Arial" size="2">Location</font></th>
-                <th><font face="Arial" size="2">Company</font></th>
-                <th><font face="Arial" size="2">Type</font></th>
-                <th><font face="Arial" size="2">Action</font></th>
+            <tr >
+                <th>Name</th>
+                <th>Location</th>
+                <th>Company</th>
+                <th>Type</th>
+                <th>Action</th>
             </tr>
             </thead>
             <tbody>
-            <tr bgcolor="#D3DFEE">
-                <td><font face="Arial" size="2">Kallayanpur Counter</font></td>
-                <td><font face="Arial" size="2">Kallyanpur Foot Over Bridge, Dhaka</font></td>
-                <td><font face="Arial" size="2">S.R Travels (Pvt) Ltd</font></td>
-                <td align="center"><font face="Arial" size="2">Plus Counter</font></td>
+            <tr >
+                <td>Kallayanpur Counter</td>
+                <td>Kallyanpur Foot Over Bridge, Dhaka</td>
+                <td>S.R Travels (Pvt) Ltd</td>
+                <td align="center">Plus Counter</td>
                 <td align="center">
                     <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
                     <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
                 </td>
             </tr>
-            <tr bgcolor="#B7C5D6">
-                <td><font face="Arial" size="2">Gabtoli Counter</font></td>
-                <td><font face="Arial" size="2">Gabtali Bus Terminal</font></td>
-                <td><font face="Arial" size="2">S.R Travels (Pvt) Ltd</font></td>
-                <td align="center"><font face="Arial" size="2">Common Counter</font></td>
+            <tr>
+                <td>Gabtoli Counter</td>
+                <td>Gabtali Bus Terminal</td>
+                <td>S.R Travels (Pvt) Ltd</td>
+                <td align="center">Common Counter</td>
                 <td align="center">
                     <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
                     <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
                 </td>
             </tr>
-            <tr bgcolor="#D3DFEE">
-                <td><font face="Arial" size="2">Mohakhali Counter</font></td>
-                <td><font face="Arial" size="2">Mohakhali Bus Terminal</font></td>
-                <td><font face="Arial" size="2">S.R Travels (Pvt) Ltd</font></td>
-                <td align="center"><font face="Arial" size="2">Common Counter</font></td>
+            <tr >
+                <td>Mohakhali Counter</td>
+                <td>Mohakhali Bus Terminal</td>
+                <td>S.R Travels (Pvt) Ltd</td>
+                <td align="center">Common Counter</td>
                 <td align="center">
                     <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
                     <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
                 </td>
             </tr>
-            <tr bgcolor="#B7C5D6">
-                <td><font face="Arial" size="2">Gazipur Counter</font></td>
-                <td><font face="Arial" size="2">Gazipur Bypass (Delwar Hossain Market)</font></td>
-                <td><font face="Arial" size="2">S.R Travels (Pvt) Ltd</font></td>
-                <td align="center"><font face="Arial" size="2">Sub Counter</font></td>
+            <tr >
+                <td>Gazipur Counter</td>
+                <td>Gazipur Bypass (Delwar Hossain Market)</td>
+                <td>S.R Travels (Pvt) Ltd</td>
+                <td align="center">Sub Counter</td>
                 <td align="center">
                     <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
                     <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
                 </td>
             </tr>
-            <tr bgcolor="#D3DFEE">
-                <td><font face="Arial" size="2">Technical More Counter</font></td>
-                <td><font face="Arial" size="2">Shahnaz CNG Filling Station (west of technical curve)</font></td>
-                <td><font face="Arial" size="2">S.R Travels (Pvt) Ltd</font></td>
-                <td align="center"><font face="Arial" size="2">Sub Counter</font></td>
+            <tr >
+                <td>Technical More Counter</td>
+                <td>Shahnaz CNG Filling Station (west of technical curve)</td>
+                <td>S.R Travels (Pvt) Ltd</td>
+                <td align="center">Sub Counter</td>
                 <td align="center">
                     <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
                     <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
                 </td>
             </tr>
-            <tr bgcolor="#B7C5D6">
-                <td><font face="Arial" size="2">Savar Counter</font></td>
-                <td><font face="Arial" size="2">Savar Kacha Bazar</font></td>
-                <td><font face="Arial" size="2">S.R Travels (Pvt) Ltd</font></td>
-                <td align="center"><font face="Arial" size="2">Sub Counter</font></td>
+            <tr >
+                <td>Savar Counter</td>
+                <td>Savar Kacha Bazar</td>
+                <td>S.R Travels (Pvt) Ltd</td>
+                <td align="center">Sub Counter</td>
                 <td align="center">
                     <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
                     <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
                 </td>
             </tr>
-            <tr bgcolor="#D3DFEE">
-                <td><font face="Arial" size="2">Kallayanpur Counter</font></td>
-                <td><font face="Arial" size="2">Kallyanpur Foot Over Bridge, Dhaka</font></td>
-                <td><font face="Arial" size="2">Manik Express</font></td>
-                <td align="center"><font face="Arial" size="2">Plus Counter</font></td>
+            <tr >
+                <td>Kallayanpur Counter</td>
+                <td>Kallyanpur Foot Over Bridge, Dhaka</td>
+                <td>Manik Express</td>
+                <td align="center">Plus Counter</td>
                 <td align="center">
                     <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
                     <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
                 </td>
             </tr>
-            <tr bgcolor="#B7C5D6">
-                <td><font face="Arial" size="2">Gabtoli Counter</font></td>
-                <td><font face="Arial" size="2">Gabtali Bus Terminal</font></td>
-                <td><font face="Arial" size="2">Manik Express</font></td>
-                <td align="center"><font face="Arial" size="2">Common Counter</font></td>
+            <tr >
+                <td>Gabtoli Counter</td>
+                <td>Gabtali Bus Terminal</td>
+                <td>Manik Express</td>
+                <td align="center">Common Counter</td>
                 <td align="center">
                     <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
                     <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
                 </td>
             </tr>
-            <tr bgcolor="#D3DFEE">
-                <td><font face="Arial" size="2">Mohakhali Counter</font></td>
-                <td><font face="Arial" size="2">Mohakhali Bus Terminal</font></td>
-                <td><font face="Arial" size="2">Manik Express</font></td>
-                <td align="center"><font face="Arial" size="2">Common Counter</font></td>
+            <tr >
+                <td>Mohakhali Counter</td>
+                <td>Mohakhali Bus Terminal</td>
+                <td>Manik Express</td>
+                <td align="center">Common Counter</td>
                 <td align="center">
                     <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
                     <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
                 </td>
             </tr>
-            <tr bgcolor="#B7C5D6">
-                <td><font face="Arial" size="2">Gazipur Counter</font></td>
-                <td><font face="Arial" size="2">Gazipur Bypass (Delwar Hossain Market)</font></td>
-                <td><font face="Arial" size="2">Manik Express</font></td>
-                <td align="center"><font face="Arial" size="2">Sub Counter</font></td>
+            <tr >
+                <td>Gazipur Counter</td>
+                <td>Gazipur Bypass (Delwar Hossain Market)</td>
+                <td>Manik Express</td>
+                <td align="center">Sub Counter</td>
                 <td align="center">
                     <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
                     <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
                 </td>
             </tr>
-            <tr bgcolor="#D3DFEE">
-                <td><font face="Arial" size="2">Technical More Counter</font></td>
-                <td><font face="Arial" size="2">Shahnaz CNG Filling Station (west of technical curve)</font></td>
-                <td><font face="Arial" size="2">Manik Express</font></td>
-                <td align="center"><font face="Arial" size="2">Sub Counter</font></td>
+            <tr >
+                <td>Technical More Counter</td>
+                <td>Shahnaz CNG Filling Station (west of technical curve)</td>
+                <td>Manik Express</td>
+                <td align="center">Sub Counter</td>
                 <td align="center">
                     <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
                     <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
                 </td>
             </tr>
-            <tr bgcolor="#B7C5D6">
-                <td><font face="Arial" size="2">Savar Counter</font></td>
-                <td><font face="Arial" size="2">Savar Kacha Bazar</font></td>
-                <td><font face="Arial" size="2">Manik Express</font></td>
-                <td align="center"><font face="Arial" size="2">Sub Counter</font></td>
+            <tr >
+                <td>Savar Counter</td>
+                <td>Savar Kacha Bazar</td>
+                <td>Manik Express</td>
+                <td align="center">Sub Counter</td>
                 <td align="center">
                     <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
                     <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
                 </td>
             </tr>
-            <tr bgcolor="#D3DFEE">
-                <td><font face="Arial" size="2">Kallayanpur Counter</font></td>
-                <td><font face="Arial" size="2">Kallyanpur Foot Over Bridge, Dhaka</font></td>
-                <td><font face="Arial" size="2">Hanif Enterprise</font></td>
-                <td align="center"><font face="Arial" size="2">Plus Counter</font></td>
+            <tr >
+                <td>Kallayanpur Counter</td>
+                <td>Kallyanpur Foot Over Bridge, Dhaka</td>
+                <td>Hanif Enterprise</td>
+                <td align="center">Plus Counter</td>
                 <td align="center">
                     <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
                     <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
                 </td>
             </tr>
-            <tr bgcolor="#B7C5D6">
-                <td><font face="Arial" size="2">Gabtoli Counter</font></td>
-                <td><font face="Arial" size="2">Gabtali Bus Terminal</font></td>
-                <td><font face="Arial" size="2">Hanif Enterprise</font></td>
-                <td align="center"><font face="Arial" size="2">Common Counter</font></td>
+            <tr >
+                <td>Gabtoli Counter</td>
+                <td>Gabtali Bus Terminal</td>
+                <td>Hanif Enterprise</td>
+                <td align="center">Common Counter</td>
                 <td align="center">
                     <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
                     <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
@@ -188,6 +188,27 @@ ob_start();
             </tr>
             </tbody>
         </table>
+        <div class="grid">
+            <div class="row">
+                <div class="column-4 ">
+                    <span class="pagination">
+                        Showing 1 to 10 of 100 entries
+                    </span>
+                </div>
+                <div class="column-8 text-right">
+                    <div class="pagination">
+                        <a href="#">Previous</a>
+                        <a href="#">1</a>
+                        <a class="active" href="#">2</a>
+                        <a href="#">3</a>
+                        <a href="#">4</a>
+                        <a href="#">5</a>
+                        <a href="#">6</a>
+                        <a href="javascript:void(0)" class="disabled">Next</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <?php

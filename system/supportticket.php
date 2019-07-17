@@ -35,100 +35,121 @@ ob_start();
         <b>Support Tickets</b>
     </div>
     <div class="body">
-        <table width="100%" border="1" cellpadding="5" cellspacing="0">
+        <table class="datatable">
             <thead>
-            <tr bgcolor="#A7BFDE">
-                <th><font face="Arial" size="2">Name</font></th>
-                <th><font face="Arial" size="2">Email</font></th>
-                <th><font face="Arial" size="2">Subject</font></th>
-                <th><font face="Arial" size="2">Created</font></th>
-                <th><font face="Arial" size="2">Status</font></th>
-                <th><font face="Arial" size="2">Action</font></th>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Subject</th>
+                <th>Created</th>
+                <th>Status</th>
+                <th>Action</th>
             </tr>
             </thead>
             <tbody>
-            <tr bgcolor="#D3DFEE">
-                <td><font face="Arial" size="2">Thane Hooper</font></td>
-                <td><font face="Arial" size="2">lacus.Etiam.bibendum@sodales.org</font></td>
-                <td><a href="viewsupportticket.php"><font face="Arial" size="2">vehicula risus. Nulla eget metus</font><a href="viewsupportticket.php"></a></td>
-                <td align="center"><font face="Arial" size="2">4 Mar 2019</font></td>
-                <td align="right"><font face="Arial" size="2">Closed</font></td>
+            <tr>
+                <td>Thane Hooper</td>
+                <td>lacus.Etiam.bibendum@sodales.org</td>
+                <td><a href="viewsupportticket.php">vehicula risus. Nulla eget metus<a href="viewsupportticket.php"></a></td>
+                <td align="center">4 Mar 2019</td>
+                <td align="right">Closed</td>
                 <td align="center">
                     <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
                 </td>
             </tr>
-            <tr bgcolor="#B7C5D6">
-                <td><font face="Arial" size="2">Alvin Vang</font></td>
-                <td><font face="Arial" size="2">et@cubiliaCuraeDonec.com</font></td>
-                <td><a href="viewsupportticket.php"><font face="Arial" size="2">congue. In scelerisque scelerisque dui.</font></a></td>
-                <td align="center"><font face="Arial" size="2">26 Jul 2019</font></td>
-                <td align="right"><font face="Arial" size="2">Open</font></td>
+            <tr>
+                <td>Alvin Vang</td>
+                <td>et@cubiliaCuraeDonec.com</td>
+                <td><a href="viewsupportticket.php">congue. In scelerisque scelerisque dui.</a></td>
+                <td align="center">26 Jul 2019</td>
+                <td align="right">Open</td>
                 <td align="center">
                     <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
                 </td>
             </tr>
-            <tr bgcolor="#D3DFEE">
-                <td><font face="Arial" size="2">Erich Stevens</font></td>
-                <td><font face="Arial" size="2">Pellentesque@libero.com</font></td>
-                <td><a href="viewsupportticket.php"><font face="Arial" size="2">eu, placerat eget, venenatis a</font></a></td>
-                <td align="center"><font face="Arial" size="2">21 Oct 2018</font></td>
-                <td align="right"><font face="Arial" size="2">Open</font></td>
+            <tr>
+                <td>Erich Stevens</td>
+                <td>Pellentesque@libero.com</td>
+                <td><a href="viewsupportticket.php">eu, placerat eget, venenatis a</a></td>
+                <td align="center">21 Oct 2018</td>
+                <td align="right">Open</td>
                 <td align="center">
                     <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
                 </td>
             </tr>
-            <tr bgcolor="#B7C5D6">
-                <td><font face="Arial" size="2">Brent Mathis</font></td>
-                <td><font face="Arial" size="2">eu@Sedauctor.org</font></td>
-                <td><a href="viewsupportticket.php"><font face="Arial" size="2">dignissim pharetra. Nam ac nulla.</font></a></td>
-                <td align="center"><font face="Arial" size="2">28 Oct 2018</font></td>
-                <td align="right"><font face="Arial" size="2">Open</font></td>
+            <tr>
+                <td>Brent Mathis</td>
+                <td>eu@Sedauctor.org</td>
+                <td><a href="viewsupportticket.php">dignissim pharetra. Nam ac nulla.</a></td>
+                <td align="center">28 Oct 2018</td>
+                <td align="right">Open</td>
                 <td align="center">
                     <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
                 </td>
             </tr>
-            <tr bgcolor="#D3DFEE">
-                <td><font face="Arial" size="2">Ferdinand Woods</font></td>
-                <td><font face="Arial" size="2">Quisque@tempusmauriserat.ca</font></td>
-                <td><a href="viewsupportticket.php"><font face="Arial" size="2">Duis risus odio, auctor vitae</font></a></td>
-                <td align="center"><font face="Arial" size="2">9 Aug 2018</font></td>
-                <td align="right"><font face="Arial" size="2">Closed</font></td>
+            <tr>
+                <td>Ferdinand Woods</td>
+                <td>Quisque@tempusmauriserat.ca</td>
+                <td><a href="viewsupportticket.php">Duis risus odio, auctor vitae</a></td>
+                <td align="center">9 Aug 2018</td>
+                <td align="right">Closed</td>
                 <td align="center">
                     <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
                 </td>
             </tr>
-            <tr bgcolor="#B7C5D6">
-                <td><font face="Arial" size="2">Gavin Ferrell</font></td>
-                <td><font face="Arial" size="2">ut.nulla.Cras@et.org</font></td>
-                <td><a href="viewsupportticket.php"><font face="Arial" size="2">magna a tortor. Nunc commodo</font></a></td>
-                <td align="center"><font face="Arial" size="2">16 Feb 2019</font></td>
-                <td align="right"><font face="Arial" size="2">Open</font></td>
+            <tr>
+                <td>Gavin Ferrell</td>
+                <td>ut.nulla.Cras@et.org</td>
+                <td><a href="viewsupportticket.php">magna a tortor. Nunc commodo</a></td>
+                <td align="center">16 Feb 2019</td>
+                <td align="right">Open</td>
                 <td align="center">
                     <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
                 </td>
             </tr>
-            <tr bgcolor="#D3DFEE">
-                <td><font face="Arial" size="2">Joshua Raymond</font></td>
-                <td><font face="Arial" size="2">Proin@eget.net</font></td>
-                <td><a href="viewsupportticket.php"><font face="Arial" size="2">elit, pretium et, rutrum non</font></a></td>
-                <td align="center"><font face="Arial" size="2">4 Aug 2019</font></td>
-                <td align="right"><font face="Arial" size="2">Closed</font></td>
+            <tr>
+                <td>Joshua Raymond</td>
+                <td>Proin@eget.net</td>
+                <td><a href="viewsupportticket.php">elit, pretium et, rutrum non</a></td>
+                <td align="center">4 Aug 2019</td>
+                <td align="right">Closed</td>
                 <td align="center">
                     <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
                 </td>
             </tr>
-            <tr bgcolor="#B7C5D6">
-                <td><font face="Arial" size="2">Zachary Crosby</font></td>
-                <td><font face="Arial" size="2">In.at.pede@nullaDonec.co.uk</font></td>
-                <td><a href="viewsupportticket.php"><font face="Arial" size="2">Ut semper pretium neque. Morbi</font></a></td>
-                <td align="center"><font face="Arial" size="2">24 Aug 2019</font></td>
-                <td align="right"><font face="Arial" size="2">Open</font></td>
+            <tr>
+                <td>Zachary Crosby</td>
+                <td>In.at.pede@nullaDonec.co.uk</td>
+                <td><a href="viewsupportticket.php">Ut semper pretium neque. Morbi</a></td>
+                <td align="center">24 Aug 2019</td>
+                <td align="right">Open</td>
                 <td align="center">
                     <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
                 </td>
             </tr>
             </tbody>
         </table>
+        <div class="grid">
+            <div class="row">
+                <div class="column-4 ">
+                    <span class="pagination">
+                        Showing 1 to 10 of 100 entries
+                    </span>
+                </div>
+                <div class="column-8 text-right">
+                    <div class="pagination">
+                        <a href="#">Previous</a>
+                        <a href="#">1</a>
+                        <a class="active" href="#">2</a>
+                        <a href="#">3</a>
+                        <a href="#">4</a>
+                        <a href="#">5</a>
+                        <a href="#">6</a>
+                        <a href="javascript:void(0)" class="disabled">Next</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 

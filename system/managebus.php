@@ -35,167 +35,167 @@ ob_start();
         <a href="addbus.php" class="btn target blue" title="Add New Bus"><span>Add New</span></a>
     </div>
     <div class="body">
-        <table width="100%" border="1" cellpadding="5" cellspacing="0">
+        <table class="datatable">
             <thead>
-            <tr bgcolor="#A7BFDE">
-                <th><font face="Arial" size="2">Name/Model</font></th>
-                <th><font face="Arial" size="2">Company</font></th>
-                <th><font face="Arial" size="2">Registration No</font></th>
-                <th><font face="Arial" size="2">Type</font></th>
-                <th><font face="Arial" size="2">Seats</font></th>
-                <th><font face="Arial" size="2">Action</font></th>
+            <tr>
+                <th>Name/Model</th>
+                <th>Company</th>
+                <th>Registration No</th>
+                <th>Type</th>
+                <th>Seats</th>
+                <th>Action</th>
             </tr>
             </thead>
             <tbody>
-            <tr bgcolor="#D3DFEE">
-                <td><font face="Arial" size="2">Hyundai Universe - 2019</font></td>
-                <td><font face="Arial" size="2">Manik Express</font></td>
-                <td><font face="Arial" size="2">DHA-58109</font></td>
-                <td align="center"><font face="Arial" size="2">Ac</font></td>
-                <td align="right"><font face="Arial" size="2">28</font></td>
+            <tr>
+                <td>Hyundai Universe - 2019</td>
+                <td>Manik Express</td>
+                <td>DHA-58109</td>
+                <td align="center">Ac</td>
+                <td align="right">28</td>
                 <td align="center">
                     <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
                     <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
                 </td>
             </tr>
-            <tr bgcolor="#B7C5D6">
-                <td><font face="Arial" size="2">Hyundai Universe - 2018</font></td>
-                <td><font face="Arial" size="2">Manik Express</font></td>
-                <td><font face="Arial" size="2">DHA-57203</font></td>
-                <td align="center"><font face="Arial" size="2">Ac</font></td>
-                <td align="right"><font face="Arial" size="2">28</font></td>
+            <tr>
+                <td>Hyundai Universe - 2018</td>
+                <td>Manik Express</td>
+                <td>DHA-57203</td>
+                <td align="center">Ac</td>
+                <td align="right">28</td>
                 <td align="center">
                     <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
                     <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
                 </td>
             </tr>
-            <tr bgcolor="#D3DFEE">
-                <td><font face="Arial" size="2">Scania</font></td>
-                <td><font face="Arial" size="2">Nabil Paribahan</font></td>
-                <td><font face="Arial" size="2">DHA-12501</font></td>
-                <td align="center"><font face="Arial" size="2">Ac</font></td>
-                <td align="right"><font face="Arial" size="2">34</font></td>
+            <tr>
+                <td>Scania</td>
+                <td>Nabil Paribahan</td>
+                <td>DHA-12501</td>
+                <td align="center">Ac</td>
+                <td align="right">34</td>
                 <td align="center">
                     <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
                     <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
                 </td>
             </tr>
-            <tr bgcolor="#B7C5D6">
-                <td><font face="Arial" size="2">AK1J Super Plus - Hino</font></td>
-                <td><font face="Arial" size="2">Nabil Paribahan</font></td>
-                <td><font face="Arial" size="2">DHA-64808</font></td>
-                <td align="center"><font face="Arial" size="2">Non-Ac</font></td>
-                <td align="right"><font face="Arial" size="2">40</font></td>
+            <tr>
+                <td>AK1J Super Plus - Hino</td>
+                <td>Nabil Paribahan</td>
+                <td>DHA-64808</td>
+                <td align="center">Non-Ac</td>
+                <td align="right">40</td>
                 <td align="center">
                     <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
                     <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
                 </td>
             </tr>
-            <tr bgcolor="#D3DFEE">
-                <td><font face="Arial" size="2">AK1J - Hino</font></td>
-                <td><font face="Arial" size="2">Dipjol Enterprise</font></td>
-                <td><font face="Arial" size="2">DHA-14101</font></td>
-                <td align="center"><font face="Arial" size="2">Non-Ac</font></td>
-                <td align="right"><font face="Arial" size="2">40</font></td>
+            <tr>
+                <td>AK1J - Hino</td>
+                <td>Dipjol Enterprise</td>
+                <td>DHA-14101</td>
+                <td align="center">Non-Ac</td>
+                <td align="right">40</td>
                 <td align="center">
                     <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
                     <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
                 </td>
             </tr>
-            <tr bgcolor="#B7C5D6">
-                <td><font face="Arial" size="2">Hyundai Universe</font></td>
-                <td><font face="Arial" size="2">S.R Travels (Pvt) Ltd</font></td>
-                <td><font face="Arial" size="2">DHA-53725</font></td>
-                <td align="center"><font face="Arial" size="2">Ac</font></td>
-                <td align="right"><font face="Arial" size="2">28</font></td>
+            <tr>
+                <td>Hyundai Universe</td>
+                <td>S.R Travels (Pvt) Ltd</td>
+                <td>DHA-53725</td>
+                <td align="center">Ac</td>
+                <td align="right">28</td>
                 <td align="center">
                     <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
                     <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
                 </td>
             </tr>
-            <tr bgcolor="#D3DFEE">
-                <td><font face="Arial" size="2">AK1J - Hino</font></td>
-                <td><font face="Arial" size="2">S.R Travels (Pvt) Ltd</font></td>
-                <td><font face="Arial" size="2">DHA-35781</font></td>
-                <td align="center"><font face="Arial" size="2">Non-Ac</font></td>
-                <td align="right"><font face="Arial" size="2">40</font></td>
+            <tr>
+                <td>AK1J - Hino</td>
+                <td>S.R Travels (Pvt) Ltd</td>
+                <td>DHA-35781</td>
+                <td align="center">Non-Ac</td>
+                <td align="right">40</td>
                 <td align="center">
                     <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
                     <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
                 </td>
             </tr>
-            <tr bgcolor="#B7C5D6">
-                <td><font face="Arial" size="2">Hino RN</font></td>
-                <td><font face="Arial" size="2">Hanif Enterprise</font></td>
-                <td><font face="Arial" size="2">DHA-15881</font></td>
-                <td align="center"><font face="Arial" size="2">Ac</font></td>
-                <td align="right"><font face="Arial" size="2">28</font></td>
+            <tr>
+                <td>Hino RN</td>
+                <td>Hanif Enterprise</td>
+                <td>DHA-15881</td>
+                <td align="center">Ac</td>
+                <td align="right">28</td>
                 <td align="center">
                     <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
                     <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
                 </td>
             </tr>
-            <tr bgcolor="#D3DFEE">
-                <td><font face="Arial" size="2">RM-2</font></td>
-                <td><font face="Arial" size="2">Manik Express</font></td>
-                <td><font face="Arial" size="2">DHA-25545</font></td>
-                <td align="center"><font face="Arial" size="2">Ac</font></td>
-                <td align="right"><font face="Arial" size="2">28</font></td>
+            <tr>
+                <td>RM-2</td>
+                <td>Manik Express</td>
+                <td>DHA-25545</td>
+                <td align="center">Ac</td>
+                <td align="right">28</td>
                 <td align="center">
                     <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
                     <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
                 </td>
             </tr>
-            <tr bgcolor="#B7C5D6">
-                <td><font face="Arial" size="2">Hino RN</font></td>
-                <td><font face="Arial" size="2">Alhamra Paribahan</font></td>
-                <td><font face="Arial" size="2">DHA-37713</font></td>
-                <td align="center"><font face="Arial" size="2">Ac</font></td>
-                <td align="right"><font face="Arial" size="2">31</font></td>
+            <tr>
+                <td>Hino RN</td>
+                <td>Alhamra Paribahan</td>
+                <td>DHA-37713</td>
+                <td align="center">Ac</td>
+                <td align="right">31</td>
                 <td align="center">
                     <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
                     <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
                 </td>
             </tr>
-            <tr bgcolor="#D3DFEE">
-                <td><font face="Arial" size="2">Scania</font></td>
-                <td><font face="Arial" size="2">Agomony Express</font></td>
-                <td><font face="Arial" size="2">DHA-91040</font></td>
-                <td align="center"><font face="Arial" size="2">Ac</font></td>
-                <td align="right"><font face="Arial" size="2">28</font></td>
+            <tr>
+                <td>Scania</td>
+                <td>Agomony Express</td>
+                <td>DHA-91040</td>
+                <td align="center">Ac</td>
+                <td align="right">28</td>
                 <td align="center">
                     <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
                     <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
                 </td>
             </tr>
-            <tr bgcolor="#B7C5D6">
-                <td><font face="Arial" size="2">ISUZU</font></td>
-                <td><font face="Arial" size="2">S.R Travels (Pvt) Ltd</font></td>
-                <td><font face="Arial" size="2">DHA-73001</font></td>
-                <td align="center"><font face="Arial" size="2">Non-Ac</font></td>
-                <td align="right"><font face="Arial" size="2">40</font></td>
+            <tr>
+                <td>ISUZU</td>
+                <td>S.R Travels (Pvt) Ltd</td>
+                <td>DHA-73001</td>
+                <td align="center">Non-Ac</td>
+                <td align="right">40</td>
                 <td align="center">
                     <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
                     <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
                 </td>
             </tr>
-            <tr bgcolor="#D3DFEE">
-                <td><font face="Arial" size="2">VOLVO</font></td>
-                <td><font face="Arial" size="2">Hanif Enterprise</font></td>
-                <td><font face="Arial" size="2">DHA-35107</font></td>
-                <td align="center"><font face="Arial" size="2">Ac</font></td>
-                <td align="right"><font face="Arial" size="2">33</font></td>
+            <tr>
+                <td>VOLVO</td>
+                <td>Hanif Enterprise</td>
+                <td>DHA-35107</td>
+                <td align="center">Ac</td>
+                <td align="right">33</td>
                 <td align="center">
                     <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
                     <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
                 </td>
             </tr>
-            <tr bgcolor="#B7C5D6">
-                <td><font face="Arial" size="2">RM-2</font></td>
-                <td><font face="Arial" size="2">Manik Express</font></td>
-                <td><font face="Arial" size="2">DHA-17403</font></td>
-                <td align="center"><font face="Arial" size="2">Ac</font></td>
-                <td align="right"><font face="Arial" size="2">28</font></td>
+            <tr>
+                <td>RM-2</td>
+                <td>Manik Express</td>
+                <td>DHA-17403</td>
+                <td align="center">Ac</td>
+                <td align="right">28</td>
                 <td align="center">
                     <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
                     <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
@@ -203,6 +203,27 @@ ob_start();
             </tr>
             </tbody>
         </table>
+        <div class="grid">
+            <div class="row">
+                <div class="column-4 ">
+                    <span class="pagination">
+                        Showing 1 to 10 of 100 entries
+                    </span>
+                </div>
+                <div class="column-8 text-right">
+                    <div class="pagination">
+                        <a href="#">Previous</a>
+                        <a href="#">1</a>
+                        <a class="active" href="#">2</a>
+                        <a href="#">3</a>
+                        <a href="#">4</a>
+                        <a href="#">5</a>
+                        <a href="#">6</a>
+                        <a href="javascript:void(0)" class="disabled">Next</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <?php
