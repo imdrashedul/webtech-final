@@ -8,12 +8,15 @@
 
 $connection = null;
 
+/**
+ * @return mysqli|null
+ */
 function connectDatabase()
 {
     global $connection;
 
     //SERVER CONFIG
-    $host = 'localhost';
+    $host = '127.0.0.1';
     $port = '3306';
     $sock = '';
 
@@ -49,6 +52,10 @@ function execConnectionError()
 }
 
 //
+/**
+ * @param $email
+ * @return bool
+ */
 function verifyEmailAssigned($email)
 {
     global $connection;
@@ -70,6 +77,10 @@ function verifyEmailAssigned($email)
 }
 
 // Fetch User By Email
+/**
+ * @param $id
+ * @return array|null
+ */
 function getUserById($id)
 {
     global $connection;
@@ -95,6 +106,10 @@ function getUserById($id)
     return null;
 }
 
+/**
+ * @param $email
+ * @return array|null
+ */
 function getUserByEmail($email)
 {
     global $connection;
@@ -120,6 +135,10 @@ function getUserByEmail($email)
 }
 
 // Fetch Session Data
+/**
+ * @param $token
+ * @return array|null
+ */
 function getSession($token)
 {
     global $connection;
@@ -145,6 +164,11 @@ function getSession($token)
 }
 
 // Add New Session Data
+/**
+ * @param $token
+ * @param $userid
+ * @return bool|int
+ */
 function pushSession($token, $userid)
 {
     global $connection;
@@ -162,6 +186,10 @@ function pushSession($token, $userid)
 
 
 // Remove Session Data
+/**
+ * @param $token
+ * @return bool|int
+ */
 function popSession($token)
 {
     global $connection;
@@ -178,12 +206,16 @@ function popSession($token)
 }
 
 // Update Session Data
+/**
+ * @param $token
+ * @return bool|int
+ */
 function modifySessionValidity($token)
 {
     global $connection;
 
     $time = date('Y-m-d H:i:s', time()+BTRS_SESSION_ALIVE);
-    $query = "UPDATE ".BTRS_DB_PREFIX.BTRS_TB_AUTHSESSION." SET `expire` = ? WHERE `token` = ? ORDER BY `id` DESC";
+    $query = "UPDATE ".BTRS_DB_PREFIX.BTRS_TB_AUTHSESSION." SET `expire` = ? WHERE `token` = ?";
     if($stmt = mysqli_prepare($connection, $query))
     {
         mysqli_stmt_bind_param($stmt, 'ss', $time, $token);
@@ -193,6 +225,9 @@ function modifySessionValidity($token)
     return false;
 }
 
+/**
+ * @return bool|int
+ */
 function cleanExpiredSession()
 {
     global $connection;
@@ -208,4 +243,150 @@ function cleanExpiredSession()
 
     return false;
 }
+
+/**
+ * @param array $data
+ * @return bool|int|string
+ */
+function addUser(array $data)
+{
+    global $connection;
+
+    $query = "INSERT INTO ".BTRS_DB_PREFIX.BTRS_TB_USERS."( `email`, `password`, `gender`, `role`, `validate`, `registered` ) VALUES ( ?, ?, ?, ?, ?, ? )";
+    if($stmt = mysqli_prepare($connection, $query))
+    {
+        mysqli_stmt_bind_param(
+                $stmt,
+                'sssiis',
+                $data['email'],
+                $data['password'],
+                $data['gender'],
+                $data['role'],
+                $data['validate'],
+                $data['registered']
+        );
+
+        if(mysqli_stmt_execute($stmt))
+        {
+            if(mysqli_affected_rows($connection))
+            {
+                return mysqli_insert_id($connection);
+            }
+        }
+
+    }
+    return false;
+
+}
+
+/**
+ * @param array $details
+ * @return bool
+ */
+function addUserDetails(array $details)
+{
+    global $connection;
+
+    $query = "INSERT INTO ".BTRS_DB_PREFIX.BTRS_TB_USERDETAILS."(`userid`, `type`, `data`) VALUES ( ?, ?, ? )";
+    if($stmt = mysqli_prepare($connection, $query))
+    {
+        $insert = 0;
+        foreach ($details as $detail)
+        {
+            mysqli_stmt_bind_param( $stmt, 'iss', $detail[0], $detail[1], $detail[2]);
+            if(mysqli_stmt_execute($stmt))
+            {
+                if(mysqli_affected_rows($connection))
+                {
+                   $insert++;
+                }
+            }
+        }
+        return ($insert==count($details));
+    }
+    return false;
+}
+
+/**
+ * @param $id
+ * @return bool
+ */
+function isValidUser($id)
+{
+    global $connection;
+
+    $query = "SELECT * FROM ".BTRS_DB_PREFIX.BTRS_TB_USERS." WHERE `id` = ? ORDER BY `id` DESC LIMIT 0, 1";
+    if($stmt = mysqli_prepare($connection, $query))
+    {
+        mysqli_stmt_bind_param($stmt, 'i', $id);
+        if(mysqli_stmt_execute($stmt))
+        {
+            if($response = mysqli_stmt_get_result($stmt))
+            {
+                if($row = mysqli_fetch_assoc($response))
+                {
+                    if(is_array($row) && !empty($row))
+                    {
+                        return $row['validate']==1;
+                    }
+                }
+            }
+        }
+    }
+    return false;
+}
+
+/**
+ * @param $userid
+ * @param $type
+ * @param bool $flaq
+ * @return bool|mixed|string
+ */
+function getUserDetails($userid, $type, $flaq=false)
+{
+    global $connection;
+
+    $query = "SELECT * FROM ".BTRS_DB_PREFIX.BTRS_TB_USERDETAILS." WHERE `userid` = ? AND `type` = ? ORDER BY `id` DESC LIMIT 0, 1";
+    if($stmt = mysqli_prepare($connection, $query))
+    {
+        mysqli_stmt_bind_param($stmt, 'is', $userid, $type);
+        if(mysqli_stmt_execute($stmt))
+        {
+            if($response = mysqli_stmt_get_result($stmt))
+            {
+                if($row = mysqli_fetch_assoc($response))
+                {
+                    if(is_array($row) && !empty($row))
+                    {
+                        return $flaq ? true : $row['data'];
+                    }
+                }
+            }
+        }
+    }
+    return $flaq ? false : '';
+}
+
+function updateUSerDetails($userid, $type, $data)
+{
+    if(getUserDetails($userid, $type, true))
+    {
+        global $connection;
+
+        $query = "UPDATE ".BTRS_DB_PREFIX.BTRS_TB_USERDETAILS." SET `data` = ? WHERE `userid` = ? AND `type` = ?";
+
+        if($stmt = mysqli_prepare($connection, $query))
+        {
+            mysqli_stmt_bind_param($stmt, 'ss', $time, $token);
+            if(mysqli_stmt_execute($stmt))
+            {
+                return mysqli_affected_rows($connection);
+            }
+        }
+
+        return false;
+    }
+    else return addUserDetails(array($userid, $type, $data));
+}
+
 

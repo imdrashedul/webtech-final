@@ -515,6 +515,7 @@ img {
 .grid>.row>.column {
     width: auto;
     display: table-cell;
+    vertical-align: top;
 }
 
 .grid>.row>.column-1, .grid>.row>.column-2, .grid>.row>.column-3,
@@ -523,7 +524,7 @@ img {
 .grid>.row>.column-10, .grid>.row>.column-11, .grid>.row>.column-12 {
     display: table-cell;
     padding: 0 10px;
-    vertical-align: middle;
+    vertical-align: top;
 }
 .grid>.row>.column-1:first-child, .grid>.row>.column-2:first-child, .grid>.row>.column-3:first-child,
 .grid>.row>.column-4:first-child, .grid>.row>.column-5:first-child, .grid>.row>.column-6:first-child,
@@ -661,6 +662,7 @@ nav.navbar .usermenu.open .toggle {
 }
 
 nav.navbar .usermenu img.icon {
+    border: 1px solid rgba(0,0,0,0.2);
     vertical-align: middle;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
@@ -709,13 +711,16 @@ nav.navbar .usermenu.open .content {
 
 .content .userdetails .userimage {
     width: 70px;
+    height: 70px;
     display: inline-block;
     vertical-align: top;
 }
 
 .content .userdetails .userimage img {
+    border: 1px solid rgba(0, 0, 0, 0.3);
     vertical-align: middle;
     width: 100%;
+    height: 100%;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     border-radius: 5px;
@@ -731,15 +736,6 @@ nav.navbar .usermenu.open .content {
     color: #8d9ea7;
     font-size: 10pt;
     box-sizing: border-box;
-}
-
-.content .userdetails .usertext a {
-    border-radius: 60px;
-    background: #429d2e;
-    color: #fff;
-    padding: 5px 10px;
-    font-size: 12px;
-    line-height: 1.5;
 }
 
 .content .userdetails .usertext h4 {
@@ -894,6 +890,228 @@ footer.footer .right {
 
 .system .wrapper .main {
     padding: 20px;
+}
+
+.system .wrapper .main .block {
+    background: #ffffff;
+    margin-bottom: 20px;
+    font-size: 12pt;
+}
+
+.system .wrapper .main .block:last-child
+{
+    margin-bottom: 0;
+}
+
+.system .wrapper .main .block .header {
+    background: #C7CBD1;
+    padding: 10px;
+}
+
+.system .wrapper .main .block .header a,
+.system .wrapper .main .block .header.warning a {
+    vertical-align: middle;
+   float: right;
+}
+
+.system .wrapper .main .block .body {
+    padding: 10px;
+    font-size: 11pt;
+    font-weight: 400;
+}
+
+/* background: bg-color bg-image position/bg-size bg-repeat bg-origin bg-clip bg-attachment initial|inherit; */
+
+/* TARGET BUTTON COMMON ATTRIBUTES */
+a.btn.target,
+a.btn.back {
+    display: inline-block;
+    -moz-border-radius-topleft: 60px;
+    -moz-border-radius-bottomleft: 60px;
+    -webkit-border-top-left-radius: 60px;
+    -webkit-border-bottom-left-radius: 60px;
+    border-radius: 60px;
+    color: #fff;
+    padding: 0 20px 0 0;
+    font-size: 8.5pt;
+    line-height: 1.5;
+}
+
+a.btn.target {
+    background: url('../img/arrow-right.png') right 5px center/10px 10px no-repeat;
+}
+
+a.btn.back {
+    background: url('../img/arrow-left.png') right 6px center/10px 10px no-repeat;
+}
+
+a.btn.target span,
+a.btn.back span {
+    box-shadow: 1px 0px 1px rgba(0,0,0,0.13);
+    -moz-border-radius-topleft: 60px;
+    -moz-border-radius-bottomleft: 60px;
+    -webkit-border-top-left-radius: 60px;
+    -webkit-border-bottom-left-radius: 60px;
+    border-top-left-radius: 60px;
+    border-bottom-left-radius: 60px;
+    display: inline-block;
+    padding: 2px 5px 2px 10px;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
+/* TARGET BUTTON BLUE */
+a.btn.target.green,
+a.btn.back.green {
+    background-color: #3b8b29;
+}
+
+a.btn.target.green:hover,
+a.btn.target.green:focus,
+a.btn.target.green:active,
+a.btn.back.green:hover,
+a.btn.back.green:focus,
+a.btn.back.green:active {
+    background-color: #3e9a2b;
+}
+
+a.btn.target.green span,
+a.btn.back.green span {
+    background: rgba(44, 255, 0, 0.1);
+}
+
+/* TARGET BUTTON BLUE */
+a.btn.target.blue {
+    background-color: #035dbb;
+}
+
+a.btn.target.blue:hover,
+a.btn.target.blue:focus,
+a.btn.target.blue:active,
+a.btn.back.blue:hover,
+a.btn.back.blue:focus,
+a.btn.back.blue:active {
+    background-color: #0c72d5;
+}
+
+a.btn.target.blue span,
+a.btn.back.blue span {
+    background: rgba(0, 255, 255, 0.1);
+}
+
+/* TARGET BUTTON RED */
+a.btn.target.red,
+a.btn.back.red {
+    background-color: #d00400;
+}
+
+a.btn.target.red:hover,
+a.btn.target.red:focus,
+a.btn.target.red:active,
+a.btn.back.red:hover,
+a.btn.back.red:focus,
+a.btn.back.red:active {
+    background-color: #e90400;
+}
+
+a.btn.target.red span,
+a.btn.back.red span {
+    background: rgba(255, 0, 0, 0.3);
+}
+
+table.datatable {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+table.datatable thead>tr{
+    background: #b1caeb;
+}
+
+table.datatable tbody>tr:nth-child(even) {
+    background: #d1e3f5;
+}
+
+table.datatable tbody>tr:nth-child(even):hover {
+    background: #c7d8e9;
+}
+
+table.datatable tbody>tr:nth-child(odd)
+{
+    background: #dfedfc;
+}
+
+table.datatable tbody>tr:nth-child(odd):hover
+{
+    background: #d4e1f0;
+}
+
+table.datatable tr>th {
+    color: #1e1f27;
+    font-size: 10.5pt;
+    padding: 5px;
+    border: 1px solid #838f9c;
+    vertical-align: middle;
+}
+
+table.datatable tr>td {
+    font-size: 10.5pt;
+    font-weight: 400;
+    padding: 5px;
+    border: 1px solid #afbdcc;
+    vertical-align: middle;
+}
+
+table.datatable tr>td:hover {
+    color: #091e45;
+    border-bottom: 1px solid #0d3063;
+}
+
+.text-right {
+    text-align: right;
+}
+
+
+div.pagination {
+    float: right;
+    margin-top: 10px;
+}
+div.pagination a {
+    color: #035dbb;
+    margin-left: -1px;
+    float: left;
+    display: inline-block;
+    border: 1px solid rgba(0,0,0,0.1);
+    padding: 4px 8px;
+    text-decoration: none;
+    transition: background-color .2s;
+}
+
+div.pagination a.active {
+    color:#fff;
+    background: #035dbb;
+}
+
+div.pagination a.disabled {
+    color: #000;
+    background: #e0eefd;
+    cursor: not-allowed;
+}
+
+div.pagination a:hover:not(.active):not(.disabled) {
+    background-color: #e1effe;
+}
+
+span.pagination {
+    display: block;
+    margin-top: 10px;
+    padding: 4px 0px;
+    vertical-align: middle;
+}
+
+.text-middle {
+    vertical-align: middle;
 }
 
 

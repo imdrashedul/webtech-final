@@ -2,6 +2,9 @@
 
 function __visualize(array $data=array())
 {
+    $fName = htmlspecialchars(getUserDetails($data['user']['id'], 'firstName'));
+    $lName = htmlspecialchars(getUserDetails($data['user']['id'], 'lastName'));
+
     ?>
     <!DOCTYPE html>
     <html>
@@ -31,19 +34,19 @@ function __visualize(array $data=array())
                 <div class="right">
                     <div class="usermenu drop">
                         <div class="toggle">
-                            <img src="assets/img/demo_profile_pic_large.png" class="icon" alt="userimg" width="36px" height="36px">
-                            <b class="username">Rashed Islam</b>
+                            <img src="<?= getUserPhotograph($data['user']['id'], 'assets/img/default_avatar.png') ?>" class="icon" alt="userimg" width="36px" height="36px">
+                            <b class="username"><?= $fName ?></b>
                             <span class="caret"></span>
                         </div>
                         <div class="content">
                             <div class="userdetails">
                                 <div class="userimage">
-                                    <img src="assets/img/demo_profile_pic_large.png" alt="user">
+                                    <img src="<?= getUserPhotograph($data['user']['id'], 'assets/img/default_avatar.png') ?>" alt="user">
                                 </div>
                                 <div class="usertext">
-                                    <h4>Rashed Islam</h4>
-                                    <p class="text-muted"> hedmid420@gmail.com</p>
-                                    <a href="profile.php">View Profile</a>
+                                    <h4><?= $fName . ' ' . $lName ?></h4>
+                                    <p class="text-muted"><?= htmlspecialchars($data['user']['email']) ?></p>
+                                    <a href="profile.php" class="btn target green"><span>View Profile</span></a>
                                 </div>
                             </div>
                             <div class="separator"></div>
@@ -66,6 +69,7 @@ function __visualize(array $data=array())
         <div class="sidebar" role="navigation">
             <ul class="menu">
                 <?= __renderMenu('index', (isset($data['area']) ? $data['area'] : ''), 'index.php', 'Dashboard') ?>
+                <?php if(isset($data['validate']) && $data['validate']==true) : ?>
                 <li class="divider"></li>
                 <?= __renderMenu('supportstaff', (isset($data['area']) ? $data['area'] : ''), 'supportstaff.php', 'Support Staff') ?>
                 <?= __renderMenu('busmanager', (isset($data['area']) ? $data['area'] : ''), 'busmanager.php', 'Bus Manager') ?>
@@ -81,6 +85,7 @@ function __visualize(array $data=array())
                 <?= __renderMenu('paymethod', (isset($data['area']) ? $data['area'] : ''), 'paymethod.php', 'Payment Method') ?>
                 <?= __renderMenu('supportticket', (isset($data['area']) ? $data['area'] : ''), 'supportticket.php', 'Support Tickets') ?>
                 <?= __renderMenu('settings', (isset($data['area']) ? $data['area'] : ''), 'settings.php', 'General Settings') ?>
+                <?php endif; ?>
             </ul>
         </div>
 

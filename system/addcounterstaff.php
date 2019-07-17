@@ -20,6 +20,15 @@ if(!($token = getSessionCookie()) || !verifyLogin($token, true))
 
 $errors = array();
 
+$user = getUserBySession($token);
+$validate = isset($user['id']) ? isValidUser($user['id']) : false;
+
+if($validate!=true)
+{
+    header('location: index.php');
+    die();
+}
+
 ob_start();
 ?>
 
@@ -236,14 +245,14 @@ ob_start();
 
 <?php
 $content = ob_get_clean();
-$user = getUserBySession($token);
-disconnectDatabase();
+
 __visualize(array(
 	'title' => 'Add Counter Staff',
 	'area' => 'counterstaff',
     'navigate' => array(array('counterstaff.php', 'Counter Staffs')),
 	'data' => $content,
-    'fname' => '',
-    'lname' => '',
-    'email' => isset($user['email']) ? $user['email'] : '',
+    'user' => $user,
+    'validate' => $validate
 ));
+
+disconnectDatabase();

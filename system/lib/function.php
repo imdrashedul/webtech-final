@@ -58,6 +58,15 @@ function __formatDate($date, $output = "Y-m-d H:i:s", $input = 'Y-m-d H:i:s')
     return $dObject->format($output);
 }
 
+// __DIR__ to URL Converter
+function getUrlDir($dir)
+{
+    $url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://{$_SERVER['HTTP_HOST']}";
+    $dir = str_replace('\\', '/', $dir);
+    $dir = str_replace($_SERVER["DOCUMENT_ROOT"], '', $dir);
+    return rtrim($url.$dir, '/') . '/';
+}
+
 
 // Day - Month - Year Dropdown/Raw Serviece Provider
 function dmyProvider($target='day', $option=false, $selected='')
@@ -245,13 +254,6 @@ function verifyPassword($password, array $user)
 	return false;
 }
 
-// Registration Service Provider
-function registerUser(array $data)
-{
-	global $__userLib;
-	return fileHandler($__userLib, 'write', @json_encode(array_merge(getAllUsers(), $data)));
-}
-
 // Fetch All User From Lib File
 function getAllSession()
 {
@@ -316,4 +318,215 @@ function verifyLogin($token, $flaq = true)
     }
 
     return false;
+}
+
+//Clean Mobile Number
+function cleanBDMobile($number)
+{
+    $cleaned = '';
+
+    if(!empty($number))
+    {
+        //Remove all the white space from the string
+        $cleaned = str_replace(' ', '', $number);
+
+        //Remove all the - from the string
+        $cleaned = str_replace('-', '', $cleaned);
+
+        //Check for the pattern(+880)/(+88) Exists, then remove it
+        $cleaned = ($pos = strpos($cleaned, ')')) ? substr($cleaned, $pos+1) : $cleaned;
+
+        //Remove all unexpected character
+        $cleaned = str_replace('(', '', $cleaned);
+        $cleaned = str_replace(')', '', $cleaned);
+
+        //Check for the pattern +88 Exists then remove it
+        $cleaned = substr($cleaned, 0, 3) == '+88' ? substr($cleaned, 3) : $cleaned;
+
+        //Remove all + character if not removed by any chance
+        $cleaned = str_replace('+', '', $cleaned);
+
+        //Check for number is less than 11 digit and there is no 0 before string, then simply add it
+        $cleaned = strlen($cleaned)<11 && $cleaned[0]==0 ? '0'.$cleaned : $cleaned;
+    }
+
+    return $cleaned;
+}
+
+function verifyImageType($file)
+{
+    if(isset($file['tmp_name']) && !empty($file['tmp_name']))
+    {
+        $allowed = array(
+            IMAGETYPE_JPEG,
+            IMAGETYPE_PNG,
+            IMAGETYPE_GIF
+        );
+
+        if($imageDetails = getimagesize($file['tmp_name']))
+        {
+            return (isset($imageDetails[2]) && in_array($imageDetails[2], $allowed));
+        }
+    }
+
+    return false;
+}
+
+function verifyImageSize($file)
+{
+    if(isset($file['size']) && $file['size']>0)
+    {
+        return ($file['size']/1024)<BTRS_UPLOAD_LIMIT;
+    }
+    return false;
+}
+
+
+//Valid Mobile Number
+function verifyBDMobile($number)
+{
+    if(!empty($number))
+    {
+        $operators = array('017', '018', '019', '015', '016', '013');
+        $number = cleanBDMobile($number);
+        if(strlen($number)==11)
+        {
+            foreach ($operators as $operator)
+            {
+                if($operator==substr($number, 0, 3))
+                {
+                    return true;
+                }
+            }
+        }
+    }
+
+    return false;
+}
+
+function generateNewFileName($file)
+{
+    $filename = null;
+
+    if(isset($file['name']) && !empty($file['name']))
+    {
+        if($ext = pathinfo($file['name'], PATHINFO_EXTENSION))
+        {
+            $filename = md5(time().randString()) . '.' . $ext;
+        }
+    }
+
+    return $filename;
+}
+
+function uploadFile($file)
+{
+    $filename = '';
+
+    if(isset($file['tmp_name']) && !empty($file['tmp_name']))
+    {
+        if($filename = generateNewFileName($file))
+        {
+            $path = BTRS_UPLOAD_PATH .'/'. $filename;
+
+            if(is_dir(BTRS_UPLOAD_PATH) && !file_exists($path))
+            {
+                if(!move_uploaded_file($file['tmp_name'], $path))
+                {
+                    $filename = '';
+                }
+            }
+        }
+
+    }
+
+    return $filename;
+}
+
+// Company Registration Service Provider
+function registerCompany(array $data)
+{
+    //Personal Information
+    $fname = isset($data['first_name']) ? trim($data['first_name']) : '';
+    $lname = isset($data['last_name']) ? trim($data['last_name']) : '';
+    $dobDay = isset($data['dob_day']) ? $data['dob_day'] : '';
+    $dobMonth = isset($data['dob_month']) ? $data['dob_month'] : '';
+    $dobYear = isset($data['dob_year']) ? $data['dob_year'] : '';
+    $gender = isset($data['gender']) ? $data['gender'] : 'm';
+    $marital = isset($data['marital_status']) ? $data['marital_status'] : '';
+    $nidpassport = isset($data['nid_passport']) ? $data['nid_passport'] : '';
+    $photograph = isset($data['photograph']) ? uploadFile($data['photograph']) : '';
+    $dob = $dobYear . '-' . $dobMonth . '-' . $dobDay;
+
+    //Contact Information
+    $street = isset($data['street']) ? $data['street'] : '';
+    $mobile = isset($data['mobile']) ? cleanBDMobile($data['mobile']) : '';
+    $city = isset($data['city']) ? $data['city'] : '';
+    $zip = isset($data['zip']) ? $data['zip'] : '';
+    $country = isset($data['country']) ? $data['country'] : '';
+
+    //Company Information
+    $companyName = isset($data['company_name']) ? $data['company_name'] : '';
+    $companyStreet = isset($data['company_street']) ? $data['company_street'] : '';
+    $companyLicense = isset($data['business_license']) ? $data['business_license'] : '';
+    $companyCity = isset($data['company_city']) ? $data['company_city'] : '';
+    $companyZip = isset($data['company_zip']) ? $data['company_zip'] : '';
+    $companyCountry = isset($data['company_country']) ? $data['company_country'] : '';
+    $companylogo = isset($data['company_logo']) ? uploadFile($data['company_logo']) : '';
+
+
+    $email = isset($data['usermail']) ? trim($data['usermail']) : '';
+    $password = isset($data['password']) ? password_hash($data['password'], PASSWORD_DEFAULT) : '';
+
+    if($userid = addUser(array(
+        'email' => $email,
+        'password' => $password,
+        'gender' => $gender,
+        'role' => BTRS_ROLE_BUS_MANAGER,
+        'validate' => BTRS_VALIDATION,
+        'registered' => date('Y-m-d H:i:s')
+    )))
+    {
+        if(addUserDetails(array(
+            array($userid, 'firstName', $fname),
+            array($userid, 'lastName', $lname),
+            array($userid, 'birthDate', $dob),
+            array($userid, 'maritalStatus', $marital),
+            array($userid, 'nidPassport', $nidpassport),
+            array($userid, 'photograph', $photograph),
+            array($userid, 'street', $street),
+            array($userid, 'mobile', $mobile),
+            array($userid, 'city', $city),
+            array($userid, 'zip', $zip),
+            array($userid, 'country', $country),
+            array($userid, 'companyName', $companyName),
+            array($userid, 'companyStreet', $companyStreet),
+            array($userid, 'companyLicense', $companyLicense),
+            array($userid, 'companyCity', $companyCity),
+            array($userid, 'companyZip', $companyZip),
+            array($userid, 'companyCountry', $companyCountry),
+            array($userid, 'companyLogo', $companylogo)
+        )))
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+function getUserPhotograph($userid, $default)
+{
+    if(!empty($photograph = getUserDetails($userid, 'photograph')))
+    {
+        return BTRS_UPLOAD_URI . $photograph;
+    }
+
+    return $default;
+}
+
+function decodeGender($gender)
+{
+    $genders = array('m'=>'Male', 'f'=>'Female');
+    return isset($genders[$gender]) ? $genders[$gender] : '';
 }

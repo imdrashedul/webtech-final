@@ -18,32 +18,34 @@ if(!($token = getSessionCookie()) || !verifyLogin($token, true))
 	die();
 }
 
+$user = getUserBySession($token);
+$validate = isset($user['id']) ? isValidUser($user['id']) : false;
+
 ob_start();
 ?>
-
-<table width="100%" border="0" cellspacing="0" cellpadding="10">
-	<tr>
-		<td bgcolor="#C7CBD1">
-			<b>Dashboard</b>
-		</td>
-	</tr>
-	<tr>
-		<td bgcolor="#FFFFFF">
-			Wellcome Admin, Manage Everything from here. All Control is Yours
-		</td>
-	</tr>
-</table>
-
+<?php if(!$validate) : ?>
+<div class="block">
+    <div class="header warning">
+        <b>Pending Validation !!</b>
+    </div>
+    <div class="body">
+        Welcome <b><?= htmlspecialchars(getUserDetails($user['id'], 'firstName')) . ' ' .htmlspecialchars(getUserDetails($user['id'], 'lastName')) ?></b>,<br>
+        You are not validate yet.<br>
+        Please keep patient until you got validated by our authority.<br>
+        Once you got validated you can enjoy all the features of our system.<br><br>
+        -Thank you
+    </div>
+</div>
+<?php endif; ?>
 <?php
 $content = ob_get_clean();
-$user = getUserBySession($token);
-disconnectDatabase();
 __visualize(array(
 	'title' => 'Dashboard',
 	'area' => 'index',
 	'data' => $content,
-	'fname' => '',
-	'lname' => '',
-	'email' => isset($user['email']) ? $user['email'] : '',
+	'user' => $user,
+    'validate' => $validate
 ));
+
+disconnectDatabase();
 

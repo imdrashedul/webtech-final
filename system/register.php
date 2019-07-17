@@ -26,62 +26,222 @@ if($token = getSessionCookie())
 
 if(isset($_POST['submit']))
 {
-	$name = trim($_POST['name']);
-	$email = trim($_POST['email']);
-	$password = $_POST['password'];
-	$repassword = $_POST['repassword'];
-	$dobDay = $_POST['dob_day']; 
-	$dobMonth = $_POST['dob_month']; 
-	$dobYear = $_POST['dob_year']; 
-	$gender = isset($_POST['gender']) ? $_POST['gender'] : '';
+    //Personal Information
+	$fname = isset($_POST['first_name']) ? trim($_POST['first_name']) : '';
+	$lname = isset($_POST['last_name']) ? trim($_POST['last_name']) : '';
+    $dobDay = isset($_POST['dob_day']) ? $_POST['dob_day'] : '';
+    $dobMonth = isset($_POST['dob_month']) ? $_POST['dob_month'] : '';
+    $dobYear = isset($_POST['dob_year']) ? $_POST['dob_year'] : '';
+    $gender = isset($_POST['gender']) ? $_POST['gender'] : '';
+    $marital = isset($_POST['marital_status']) ? $_POST['marital_status'] : '';
+    $nidpassport = isset($_POST['nid_passport']) ? $_POST['nid_passport'] : '';
+    $photograph = isset($_FILES['photograph']) ? $_FILES['photograph'] : '';
 
-	//Validation Set Of 'Name' 
-	if(empty($name))
+    //Contact Information
+    $street = isset($_POST['street']) ? $_POST['street'] : '';
+    $mobile = isset($_POST['mobile']) ? $_POST['mobile'] : '';
+    $city = isset($_POST['city']) ? $_POST['city'] : '';
+    $zip = isset($_POST['zip']) ? $_POST['zip'] : '';
+    $country = isset($_POST['country']) ? $_POST['country'] : '';
+
+    //Company Information
+    $companyName = isset($_POST['company_name']) ? $_POST['company_name'] : '';
+    $companyStreet = isset($_POST['company_street']) ? $_POST['company_street'] : '';
+    $companyLicense = isset($_POST['business_license']) ? $_POST['business_license'] : '';
+    $companyCity = isset($_POST['company_city']) ? $_POST['company_city'] : '';
+    $companyZip = isset($_POST['company_zip']) ? $_POST['company_zip'] : '';
+    $companyCountry = isset($_POST['company_country']) ? $_POST['company_country'] : '';
+    $companyLogo = isset($_FILES['company_logo']) ? $_FILES['company_logo'] : '';
+
+
+    $email = isset($_POST['usermail']) ? trim($_POST['usermail']) : '';
+	$password = isset($_POST['password']) ? $_POST['password'] : '';
+	$repassword = isset($_POST['password']) ? $_POST['repassword'] : '';
+
+
+	//Validation Set Of 'First Name'
+	if(empty($fname))
 	{
-		$errors['name'] = 'Cannot be empty';
+		$errors['first_name'] = 'Cannot be empty';
 	}
-	else if(strlen($name)<=2)
+	else if(strlen($fname)<=2)
 	{
-		$errors['name'] = 'Contains at least two words';
+		$errors['first_name'] = 'Contains at least two words';
 	}
-	else if(!verifyCharecter($name))
+	else if(!verifyCharecter($fname))
 	{
-		$errors['name'] = 'Can contain a-z or A-Z or dot(.) or dash(-)';
+		$errors['first_name'] = 'Can contain a-z or A-Z or dot(.) or dash(-)';
 	}
-	else if(!isset($name[0]) || !ctype_alpha($name[0]))
+	else if(!isset($fname[0]) || !ctype_alpha($fname[0]))
 	{
-		$errors['name'] = 'Must start with a letter';
+		$errors['first_name'] = 'Must start with a letter';
 	}
+
+    //Validation Set Of 'Last Name'
+    if(empty($lname))
+    {
+        $errors['last_name'] = 'Cannot be empty';
+    }
+    else if(strlen($lname)<=2)
+    {
+        $errors['last_name'] = 'Contains at least two words';
+    }
+    else if(!verifyCharecter($lname))
+    {
+        $errors['last_name'] = 'Can contain a-z or A-Z or dot(.) or dash(-)';
+    }
+    else if(!isset($lname[0]) || !ctype_alpha($lname[0]))
+    {
+        $errors['last_name'] = 'Must start with a letter';
+    }
+
+    //Validation Set Of 'DOB'
+    if(empty($dobDay) || empty($dobMonth) || empty($dobYear))
+    {
+        $errors['dob'] = 'At least one of them has to be selected';
+    }
+    else if(!verifyDob($dobDay, $dobMonth, $dobYear))
+    {
+        $errors['dob'] = 'Must be a valid number (dd: 1-31, mm: 1-12, yyyy: 1900-2019)';
+    }
+
+    //Validation Set Of 'Gender'
+    if(empty($gender))
+    {
+        $errors['gender'] = 'At least one of them has to be selected';
+    }
+
+    //Validation Set Of Marital Status
+    if(empty($marital))
+    {
+        $errors['marital_status'] = 'At least one of them has to be selected';
+    }
+
+    //Validation Set Of NID/Passport
+    if(empty($nidpassport))
+    {
+        $errors['nid_passport'] = 'Cannot be empty';
+    }
+
+    //Validation Set Of Photograph
+    if(!isset($photograph['tmp_name']) || (isset($photograph['tmp_name']) && empty($photograph['tmp_name'])))
+    {
+        $errors['photograph'] = 'Cannot be empty';
+    }
+    else if (!verifyImageType($photograph))
+    {
+        $errors['photograph'] = 'Only .jpg, .png, .gif images are allowed';
+    }
+    else if (!verifyImageSize($photograph))
+    {
+        $errors['photograph'] = 'Files over 2MB isn\'t allowed';
+    }
+
+    //Validation Set Of Street Address
+    if(empty($street))
+    {
+        $errors['street'] = 'Cannot be empty';
+    }
+
+    //Validation Set Of Mobile Number
+    if(empty($mobile))
+    {
+        $errors['mobile'] = 'Cannot be empty';
+    }
+    else if(!verifyBDMobile($mobile))
+    {
+        $errors['mobile'] = 'Invalid mobile number. we allowed bd operators only';
+    }
+
+    //Validation Set Of City
+    if(empty($city))
+    {
+        $errors['city'] = 'Cannot be empty';
+    }
+
+    //Validation Set Of Zip
+    if(empty($zip))
+    {
+        $errors['zip'] = 'Cannot be empty';
+    }
+
+    //Validation Set Of Country
+    if(empty($country))
+    {
+        $errors['country'] = 'At least one of them has to be selected';
+    }
+
+    //Validation Set Of Zip
+    if(empty($companyName))
+    {
+        $errors['company_name'] = 'Cannot be empty';
+    }
+
+    //Validation Set Of Zip
+    if(empty($companyStreet))
+    {
+        $errors['company_street'] = 'Cannot be empty';
+    }
+
+    //Validation Set Of Zip
+    if(empty($companyLicense))
+    {
+        $errors['business_license'] = 'Cannot be empty';
+    }
+
+    //Validation Set Of Zip
+    if(empty($companyCity))
+    {
+        $errors['company_city'] = 'Cannot be empty';
+    }
+
+    //Validation Set Of Zip
+    if(empty($companyZip))
+    {
+        $errors['company_zip'] = 'Cannot be empty';
+    }
+
+    //Validation Set Of Company
+    if(empty($companyCountry))
+    {
+        $errors['company_country'] = 'Cannot be empty';
+    }
+
+    //Validation Set Of Company Country
+    if(empty($companyCountry))
+    {
+        $errors['company_country'] = 'At least one of them has to be selected';
+    }
+
+    //Validation Set Of Company Logo
+    if(!isset($companyLogo['tmp_name']) || (isset($companyLogo['tmp_name']) && empty($companyLogo['tmp_name'])))
+    {
+        $errors['company_logo'] = 'Cannot be empty';
+    }
+    else if (!verifyImageType($companyLogo))
+    {
+        $errors['company_logo'] = 'Only .jpg, .png, .gif images are allowed';
+    }
+    else if (!verifyImageSize($companyLogo))
+    {
+        $errors['company_logo'] = 'Files over 2MB isn\'t allowed';
+    }
+
 
 	//Validation Set Of 'Email'
 	if(empty($email))
 	{
-		$errors['email'] = 'Cannot be empty';
+		$errors['usermail'] = 'Cannot be empty';
 	}
 	else if(!filter_var(filter_var($email, FILTER_SANITIZE_EMAIL), FILTER_VALIDATE_EMAIL))
 	{
-		$errors['email'] = 'Must be a valid email address (i.e anything@example.com)';
+		$errors['usermail'] = 'Must be a valid email address (i.e anything@example.com)';
 	}
 	else if(verifyEmailAssigned($email))
 	{
-		$errors['email'] = 'Email is already used. Please provide a new one';
+		$errors['usermail'] = 'Email is already used. Please provide a new one';
 	}
 
-	//Validation Set Of 'Gender'
-	if(!isset($_POST['gender']))
-	{
-		$errors['gender'] = 'At least one of them has to be selected';
-	}
-
-	//Validation Set Of 'DOB'
-	if(empty($dobDay) || empty($dobMonth) || empty($dobYear))
-	{
-		$errors['dob'] = 'Cannot be empty';
-	}
-	else if(!verifyDob($dobDay, $dobMonth, $dobYear))
-	{
-		$errors['dob'] = 'Must be a valid number (dd: 1-31, mm: 1-12, yyyy: 1900-2019)';
-	}
 
 	//Validation Set Of 'Password'
 	if(empty($password))
@@ -109,14 +269,7 @@ if(isset($_POST['submit']))
 
 	if(empty($errors))
 	{
-		if(registerUser(array(
-			$email => array(
-				'name' => $name,
-				'dob' => $dobYear . '-' . $dobMonth . '-' . $dobDay,
-				'gender' => $gender,
-				'password' => $password
-			)
-		))) {
+		if(registerCompany(array_merge($_POST, $_FILES))) {
 			$_SESSION['register'] = $email;
 			header('location: login.php');
 			exit;
@@ -139,7 +292,7 @@ disconnectDatabase();
         <div class="container">
             <div class="header"></div>
             <div class="body">
-                <form method="POST">
+                <form method="POST" enctype="multipart/form-data">
                     <h4 class="block divider left"><span>Personal Information</span></h4>
                     <div class="grid">
                         <div class="row">
@@ -151,7 +304,7 @@ disconnectDatabase();
                                 </div>
                             </div>
                             <div class="column-6">
-                                <div class="inputset<?php __errors($errors, 'dob', true) ?>">
+                                <div class="inputset<?php __errors($errors, 'last_name', true) ?>">
                                     <label for="last_name">Last Name</label>
                                     <input type="text" name="last_name" id="last_name" placeholder="Enter Last Name" value="<?php echo isset($_POST['last_name']) ? htmlspecialchars($_POST['last_name']) : '' ?>"><br/>
                                     <?php __errors($errors, 'last_name') ?>
@@ -160,7 +313,7 @@ disconnectDatabase();
                         </div>
                         <div class="row">
                             <div class="column-6">
-                                <div class="inputset<?php __errors($errors, 'gender', true) ?>">
+                                <div class="inputset<?php __errors($errors, 'dob', true) ?>">
                                     <label for="dob_day">Date of Birth</label><br>
                                     <select name="dob_day" id="dob_day" style="width:30%">
                                         <option value=''>Day</option>
@@ -181,11 +334,11 @@ disconnectDatabase();
                                 <div class="inputset<?php __errors($errors, 'gender', true) ?>">
                                     <label for="gender_male">Gender</label><br>
                                     <label class="radio m-r-45">
-                                        <input type="radio" name="gender" id="gender_male" value="Male"<?php isset($_POST['gender']) ? __selected('Male', $_POST['gender'], 'radio') : '' ?>> Male
+                                        <input type="radio" name="gender" id="gender_male" value="m"<?php if(isset($_POST['gender'])) { __selected('m', $_POST['gender'], 'radio'); } ?>> Male
                                         <span class="check"></span>
                                     </label>
                                     <label class="radio">
-                                        <input type="radio" name="gender" id="gender_female" value="Female"<?php isset($_POST['gender']) ? __selected('Female', $_POST['gender'], 'radio') : '' ?>> Female
+                                        <input type="radio" name="gender" id="gender_female" value="f"<?php if(isset($_POST['gender'])) { __selected('f', $_POST['gender'], 'radio'); } ?>> Female
                                         <span class="check"></span>
                                     </label>
                                     <br>
@@ -208,7 +361,7 @@ disconnectDatabase();
                                 </div>
                             </div>
                             <div class="column-6">
-                                <div class="inputset<?php __errors($errors, 'last_name', true) ?>">
+                                <div class="inputset<?php __errors($errors, 'nid_passport', true) ?>">
                                     <label for="nid_passport">NID / Passport</label><br>
                                     <input type="text" name="nid_passport" id="nid_passport" placeholder="Enter NID or Passport No" value="<?php echo isset($_POST['nid_passport']) ? htmlspecialchars($_POST['nid_passport']) : '' ?>"><br/>
                                     <?php __errors($errors, 'nid_passport') ?>
@@ -233,7 +386,7 @@ disconnectDatabase();
                                                     Clear
                                                 </button>
                                                 <label class="file-input photograph">
-                                                    <input type="file" accept="image/jpeg,image/png" name="photograph" id="photograph">
+                                                    <input type="file" accept="image/jpeg,image/png,image/gif" name="photograph" id="photograph">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
                                                         <path d="M480,80h-96c-17.688,0-32,14.313-32,32H96v32h288h88.969l-43.094,215.5L384,176H0l64,256h384l64-320l0,0C512,94.313,497.688,80,480,80z"/>
                                                     </svg>
@@ -241,6 +394,14 @@ disconnectDatabase();
                                                 </label>
                                             </div>
                                         </div>
+                                        <?php if(isset($errors['photograph'])) : ?>
+                                        <div class="row">
+                                            <div class="column-3"></div>
+                                            <div class="column-9">
+                                                <?php __errors($errors, 'photograph') ?>
+                                            </div>
+                                        </div>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                             </div>
@@ -286,7 +447,7 @@ disconnectDatabase();
                                     <label for="country">Country</label><br>
                                     <select name="country" id="country" >
                                         <option value="">Select</option>
-                                        <option value="bd"<?php __selected("Bangladesh", (isset($_POST['country']) ? $_POST['country'] : '')) ?>>Bangladesh</option>
+                                        <option value="bd"<?php __selected("bd", (isset($_POST['country']) ? $_POST['country'] : '')) ?>>Bangladesh</option>
                                     </select><br>
                                     <?php __errors($errors, 'country') ?>
                                 </div>
@@ -340,7 +501,7 @@ disconnectDatabase();
                                     <label for="company_country">Country</label><br>
                                     <select name="company_country" id="company_country">
                                         <option value="">Select</option>
-                                        <option value="Bangladesh"<?php __selected("Bangladesh", (isset($_POST['company_country']) ? $_POST['company_country'] : '')) ?>>Bangladesh</option>
+                                        <option value="bd"<?php __selected("bd", (isset($_POST['company_country']) ? $_POST['company_country'] : '')) ?>>Bangladesh</option>
                                     </select><br>
                                     <?php __errors($errors, 'company_country') ?>
                                 </div>
@@ -364,7 +525,7 @@ disconnectDatabase();
                                                     Clear
                                                 </button>
                                                 <label class="file-input company_logo">
-                                                    <input type="file" accept="image/jpeg,image/png" id="company_logo" name="company_logo">
+                                                    <input type="file" accept="image/jpeg,image/png,image/gif" id="company_logo" name="company_logo">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
                                                         <path d="M480,80h-96c-17.688,0-32,14.313-32,32H96v32h288h88.969l-43.094,215.5L384,176H0l64,256h384l64-320l0,0C512,94.313,497.688,80,480,80z"/>
                                                     </svg>
@@ -372,6 +533,14 @@ disconnectDatabase();
                                                 </label>
                                             </div>
                                         </div>
+                                        <?php if(isset($errors['company_logo'])) : ?>
+                                        <div class="row">
+                                            <div class="column-3"></div>
+                                            <div class="column-9">
+                                                <?php __errors($errors, 'company_logo') ?>
+                                            </div>
+                                        </div>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                             </div>
