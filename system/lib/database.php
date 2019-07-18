@@ -16,7 +16,7 @@ function connectDatabase()
     global $connection;
 
     //SERVER CONFIG
-    $host = '127.0.0.1';
+    $host = 'localhost';
     $port = '3306';
     $sock = '';
 
@@ -367,6 +367,12 @@ function getUserDetails($userid, $type, $flaq=false)
     return $flaq ? false : '';
 }
 
+/**
+ * @param $userid
+ * @param $type
+ * @param $data
+ * @return bool|int
+ */
 function updateUSerDetails($userid, $type, $data)
 {
     if(getUserDetails($userid, $type, true))
@@ -387,6 +393,85 @@ function updateUSerDetails($userid, $type, $data)
         return false;
     }
     else return addUserDetails(array($userid, $type, $data));
+}
+
+function totalElement($table)
+{
+    global $connection;
+
+    $query = "SELECT COUNT(*) FROM ".BTRS_DB_PREFIX.$table;
+
+    if($result = mysqli_query($connection, $query))
+    {
+        if($row = mysqli_fetch_row($result))
+        {
+            return isset($row[0]) ? $row[0] : 0;
+        }
+    }
+    return 0;
+}
+
+function totalUsersByRole($role)
+{
+    global $connection;
+
+    $query = "SELECT COUNT(*) FROM ".BTRS_DB_PREFIX.BTRS_TB_USERS." WHERE `role` = ?";
+
+    if($stmt = mysqli_prepare($connection, $query))
+    {
+        mysqli_stmt_bind_param($stmt, 'i', $role);
+        if(mysqli_stmt_execute($stmt))
+        {
+            if($response = mysqli_stmt_get_result($stmt))
+            {
+                if($row = mysqli_fetch_row($response))
+                {
+                    return (isset($row[0]) && $row[0]>0);
+                }
+            }
+        }
+
+    }
+
+    return 0;
+}
+
+function getAllBusManager($offset=0, $limit=0)
+{
+    global $connection;
+
+    $query = "SELECT * FROM " . BTRS_DB_PREFIX.BTRS_TB_USERS . " WHERE `role` = ? ORDER BY `id` DESC ".( $limit>0 ? "LIMIT ?, ?" : "" );
+    $role = BTRS_ROLE_BUS_MANAGER;
+    $users = array();
+
+    if($stmt = mysqli_prepare($connection, $query))
+    {
+
+        if($limit>0)
+        {
+            mysqli_stmt_bind_param($stmt, 'iii', $role, $offset, $limit);
+        }
+        else
+        {
+            mysqli_stmt_bind_param($stmt, 'i', $role);
+        }
+
+        if(mysqli_stmt_execute($stmt))
+        {
+            if($response = mysqli_stmt_get_result($stmt))
+            {
+                if(mysqli_num_rows($response)>0)
+                {
+                    while ($row = mysqli_fetch_assoc($response))
+                    {
+                        $users[] = $row;
+                    }
+                }
+            }
+        }
+    }
+
+    return $users;
 }
 
 

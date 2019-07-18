@@ -27,6 +27,13 @@ if($validate!=true)
     die();
 }
 
+$total = totalUsersByRole(BTRS_ROLE_BUS_MANAGER);
+$page = isset($_REQUEST['page']) && !empty($_REQUEST['page']) && $_REQUEST['page']>0 ? $_REQUEST['page'] : 1;
+$__limit = 10;
+$tpage = ceil($total/$__limit);
+$page = $page>$tpage ? $tpage : $page;
+$__offset = $__limit * ($page - 1);
+$managers = getAllBusManager($__offset, $__limit);
 ob_start();
 ?>
 
@@ -48,180 +55,37 @@ ob_start();
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>Thane Hooper</td>
-                <td>lacus.Etiam.bibendum@sodales.org</td>
-                <td>Arcu PC</td>
-                <td align="center">4 Mar 2019</td>
-                <td align="right">80</td>
-                <td align="center">
-                    <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
-                    <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
-                </td>
-            </tr>
-            <tr>
-                <td>Alvin Vang</td>
-                <td>et@cubiliaCuraeDonec.com</td>
-                <td>Nullam Feugiat Placerat PC</td>
-                <td align="center">26 Jul 2019</td>
-                <td align="right">93</td>
-                <td align="center">
-                    <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
-                    <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
-                </td>
-            </tr>
-            <tr>
-                <td>Erich Stevens</td>
-                <td>Pellentesque@libero.com</td>
-                <td>Orci Quis Lectus LLC</td>
-                <td align="center">21 Oct 2018</td>
-                <td align="right">72</td>
-                <td align="center">
-                    <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
-                    <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
-                </td>
-            </tr>
-            <tr>
-                <td>Brent Mathis</td>
-                <td>eu@Sedauctor.org</td>
-                <td>Cum Sociis Natoque Corp.</td>
-                <td align="center">28 Oct 2018</td>
-                <td align="right">84</td>
-                <td align="center">
-                    <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
-                    <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
-                </td>
-            </tr>
-            <tr>
-                <td>Ferdinand Woods</td>
-                <td>Quisque@tempusmauriserat.ca</td>
-                <td>Primis In Faucibus Limited</td>
-                <td align="center">9 Aug 2018</td>
-                <td align="right">84</td>
-                <td align="center">
-                    <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
-                    <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
-                </td>
-            </tr>
-            <tr>
-                <td>Gavin Ferrell</td>
-                <td>ut.nulla.Cras@et.org</td>
-                <td>Tristique Inc.</td>
-                <td align="center">16 Feb 2019</td>
-                <td align="right">67</td>
-                <td align="center">
-                    <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
-                    <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
-                </td>
-            </tr>
-            <tr>
-                <td>Joshua Raymond</td>
-                <td>Proin@eget.net</td>
-                <td>Cras Vulputate LLP</td>
-                <td align="center">4 Aug 2019</td>
-                <td align="right">83</td>
-                <td align="center">
-                    <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
-                    <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
-                </td>
-            </tr>
-            <tr>
-                <td>Zachary Crosby</td>
-                <td>In.at.pede@nullaDonec.co.uk</td>
-                <td>Vitae Posuere Industries</td>
-                <td align="center">24 Aug 2019</td>
-                <td align="right">95</td>
-                <td align="center">
-                    <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
-                    <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
-                </td>
-            </tr>
-            <tr>
-                <td>Samuel Alston</td>
-                <td>consectetuer@apurus.net</td>
-                <td>Dictum Ultricies Limited</td>
-                <td align="center">16 Aug 2018</td>
-                <td align="right">85</td>
-                <td align="center">
-                    <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
-                    <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
-                </td>
-            </tr>
-            <tr>
-                <td>Basil Noble</td>
-                <td>elit.erat@accumsanneque.net</td>
-                <td>Egestas Blandit Nam Incorporated</td>
-                <td align="center">9 Aug 2018</td>
-                <td align="right">100</td>
-                <td align="center">
-                    <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
-                    <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
-                </td>
-            </tr>
-            <tr>
-                <td>Odysseus Macdonald</td>
-                <td>arcu@erosnectellus.net</td>
-                <td>Nunc Quis Inc.</td>
-                <td align="center">8 Sep 2018</td>
-                <td align="right">52</td>
-                <td align="center">
-                    <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
-                    <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
-                </td>
-            </tr>
-            <tr>
-                <td>Zeus Tyson</td>
-                <td>Sed.malesuada@nisiCum.com</td>
-                <td>Sem Pellentesque Associates</td>
-                <td align="center">9 Feb 2019</td>
-                <td align="right">76</td>
-                <td align="center">
-                    <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
-                    <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
-                </td>
-            </tr>
-            <tr>
-                <td>Jerry Vaughn</td>
-                <td>nulla@massaMauris.net</td>
-                <td>Sed PC</td>
-                <td align="center">20 Sep 2018</td>
-                <td align="right">62</td>
-                <td align="center">
-                    <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
-                    <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
-                </td>
-            </tr>
-            <tr>
-                <td>Declan Walter</td>
-                <td>tellus@sem.ca</td>
-                <td>Lacus Aliquam Rutrum Incorporated</td>
-                <td align="center">30 Oct 2019</td>
-                <td align="right">70</td>
-                <td align="center">
-                    <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
-                    <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
-                </td>
-            </tr>
+            <?php if(count($managers)>0)
+            {
+                foreach ($managers as $manager)
+                {
+                    echo '<tr>';
+                    echo '<td>'.htmlspecialchars(getUserDetails($manager['id'], 'firstName').' '.getUserDetails($manager['id'], 'lastName')).'</td>';
+                    echo '<td>'.htmlspecialchars($manager['email']).'</td>';
+                    echo '<td class="text-center">'.htmlspecialchars(getUserDetails($manager['id'], 'companyName')).'</td>';
+                    echo '<td class="text-center">'.__formatDate($manager['registered'], 'j M Y').'</td>';
+                    echo '<td class="text-right">0</td>';
+                    echo '<td class="text-center">';
+                    echo '<a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;';
+                    echo '<a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>';
+                    echo '</td>';
+                    echo '</tr>';
+                }
+            }
+            else
+            {
+                echo '<tr><td class="text-center" colspan="6">No Data Found</td></tr>';
+            }
+            ?>
             </tbody>
         </table>
         <div class="grid">
             <div class="row">
                 <div class="column-4 ">
-                    <span class="pagination">
-                        Showing 1 to 10 of 100 entries
-                    </span>
+                   <?= getPaginationInfo($page, $total) ?>
                 </div>
                 <div class="column-8 text-right">
-                    <div class="pagination">
-                        <a href="#">Previous</a>
-                        <a href="#">1</a>
-                        <a class="active" href="#">2</a>
-                        <a href="#">3</a>
-                        <a href="#">4</a>
-                        <a href="#">5</a>
-                        <a href="#">6</a>
-                        <a href="javascript:void(0)" class="disabled">Next</a>
-                    </div>
+                    <?= getPagination($page, $total) ?>
                 </div>
             </div>
         </div>

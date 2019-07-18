@@ -75,7 +75,7 @@
 }
 
 body {
-    padding: 0px;
+    padding: 0;
     margin: auto;
     font-family: 'Work Sans', sans-serif;
     font-weight: 300;
@@ -179,7 +179,7 @@ img {
 .register .container input[type='password'],
 .inputset select {
     width: 100%;
-    margin: 5px 0px;
+    margin: 5px 0;
     font-family: 'Work Sans', sans-serif;
     padding: 7px;
     background: #ffffff;
@@ -416,7 +416,7 @@ img {
 }
 
 .inputset .upload-preview {
-    margin: 5px 0px;
+    margin: 5px 0;
     border: 1px solid rgba(0,0,0,0.2);
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
@@ -677,8 +677,8 @@ nav.navbar .usermenu b.username {
 
 nav.navbar .usermenu .caret {
     display: inline-block;
-    width: 0px;
-    height: 0px;
+    width: 0;
+    height: 0;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
     border-top: 5px solid #fff;
@@ -753,7 +753,7 @@ nav.navbar .usermenu.open .content {
 }
 
 .usermenu .content .menu {
-    padding: 2px 0px;
+    padding: 2px 0;
 }
 
 .usermenu .content .menu a {
@@ -770,7 +770,7 @@ nav.navbar .usermenu.open .content {
 
 .sidebar {
     background: #2f323e;
-    box-shadow: 1px 0px 20px rgba(0, 0, 0, 0.08);
+    box-shadow: 1px 0 20px rgba(0, 0, 0, 0.08);
     z-index: 1001;
     position: fixed;
     width: 240px;
@@ -801,7 +801,7 @@ nav.navbar .usermenu.open .content {
 
 .sidebar ul.menu>li>a {
     color: #e6e6e6;
-    border-left: 0px solid #2f323e;
+    border-left: 0 solid #2f323e;
     padding: 15px 35px 15px 20px;
     display: block;
     width: 240px;
@@ -947,7 +947,7 @@ a.btn.back {
 
 a.btn.target span,
 a.btn.back span {
-    box-shadow: 1px 0px 1px rgba(0,0,0,0.13);
+    box-shadow: 1px 0 1px rgba(0,0,0,0.13);
     -moz-border-radius-topleft: 60px;
     -moz-border-radius-bottomleft: 60px;
     -webkit-border-top-left-radius: 60px;
@@ -1034,7 +1034,7 @@ table.datatable tbody>tr:nth-child(even) {
 }
 
 table.datatable tbody>tr:nth-child(even):hover {
-    background: #c7d8e9;
+    background: #dafcff;
 }
 
 table.datatable tbody>tr:nth-child(odd)
@@ -1044,7 +1044,7 @@ table.datatable tbody>tr:nth-child(odd)
 
 table.datatable tbody>tr:nth-child(odd):hover
 {
-    background: #d4e1f0;
+    background: #dafcff;
 }
 
 table.datatable tr>th {
@@ -1114,6 +1114,10 @@ span.pagination {
 
 .text-middle {
     vertical-align: middle;
+}
+
+.text-center {
+    text-align: center;
 }
 
 

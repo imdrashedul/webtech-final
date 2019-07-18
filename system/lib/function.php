@@ -61,10 +61,15 @@ function __formatDate($date, $output = "Y-m-d H:i:s", $input = 'Y-m-d H:i:s')
 // __DIR__ to URL Converter
 function getUrlDir($dir)
 {
-    $url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://{$_SERVER['HTTP_HOST']}";
     $dir = str_replace('\\', '/', $dir);
     $dir = str_replace($_SERVER["DOCUMENT_ROOT"], '', $dir);
-    return rtrim($url.$dir, '/') . '/';
+    return attachDomain(rtrim($dir, '/') . '/');
+}
+
+function attachDomain($path)
+{
+    $url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://{$_SERVER['HTTP_HOST']}";
+    return $url .'/'. ltrim($path, '/');
 }
 
 
@@ -146,6 +151,8 @@ function dmyProvider($target='day', $option=false, $selected='')
 
 		return !$option ? $years : array();
 	}
+
+	return '';
 }
 
 // Verify Does String Contains Allowed Characters
@@ -529,4 +536,68 @@ function decodeGender($gender)
 {
     $genders = array('m'=>'Male', 'f'=>'Female');
     return isset($genders[$gender]) ? $genders[$gender] : '';
+}
+
+function getPaginationInfo($current=1, $items=1, $perpage=10)
+{
+    $items = (int) $items;
+    $end = $perpage*$current;
+    $start = ($end-$perpage)+1;
+    $end = $end>$items || $items<$end ? $items:$end;
+    $info = '<span class="pagination">';
+    $info .= 'Showing ';
+    $info .= $end==$items && $current==1 ? $end:$start;
+    $info .= $end!=$items || $current!=1 ? ' to '.$end:'';
+    $info .= ' of '.$items.' entries';
+    $info .= '</span>';
+
+    return $info;
+}
+
+function getPagination($current=1, $items=1, $link='', $perpage=10, $limit=6 )
+{
+
+    $pagination = '<div class="pagination">';
+    $total = $perpage>0 && $items>$perpage? ceil($items/$perpage):1;
+    $current = $current>$total?$total:$current;
+    $link = (empty($link) ? attachDomain($_SERVER['PHP_SELF']) . '?page=' : $link);
+    $start = 1;
+    $end = $total;
+
+    if($total>$limit)
+    {
+        if($current>$limit)
+        {
+            $start = ceil($current/$limit)*$limit;
+            $start = $current>$start?$start:($start-$limit);
+            $end = $start+$limit;
+
+            if($end>$total)
+            {
+                $start = $total-$limit;
+                $end = $total;
+            }
+            else if ($end==$current)
+            {
+                $start++;
+                $end++;
+            }
+        }
+        else
+        {
+            $end = $limit+1;
+        }
+    }
+
+    $pagination .= '<a href="'.($current>1?$link.($current-1):'javascript:void(0)').'"'.(!($current>1) ? ' class="disabled"':'').'>Previous</a>';
+
+    foreach (range($start, $end) as $page)
+    {
+        $pagination .= '<a href="'.($current==$page?'javascript:void(0)':$link.$page).'"'.($current==$page ? ' class="active"':'').'>'.$page.'</a>';
+    }
+
+    $pagination .= '<a href="'.($current<$total?$link.($current+1):'javascript:void(0)').'"'.(!($current<$total) ? ' class="disabled"':'').'>Next</a>';
+    $pagination .= '</div>';
+
+    return $pagination;
 }
