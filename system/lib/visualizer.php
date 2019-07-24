@@ -1,4 +1,10 @@
 <?php
+/**
+ * @author MD. RASHEDUL ISLAM
+ * @package Bus Ticket Reservation System
+ * @version v2.0
+ * @see https://github.com/rashed370/webtech-final
+ */
 
 function __visualize(array $data=array())
 {
@@ -11,6 +17,7 @@ function __visualize(array $data=array())
     <head>
         <title>BTRS<?= isset($data['title']) ? ' - '.$data['title'] : '' ?> </title>
         <link rel="stylesheet" href="assets/css/styles.css">
+        <link rel="stylesheet" href="assets/css/flatpickr.min.css">
         <link rel="shortcut icon" href="assets/img/fav.png" type="image/png">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style>
@@ -115,15 +122,15 @@ function __visualize(array $data=array())
             <div class="left"> &#0169; <?= date('Y') ?> BTRS - All Rights Reserved </div>
             <div class="right"> Developed By <b>M. Rashedul Islam</b> </div>
         </footer>
-
+        <script type="text/javascript" src="assets/js/flatpickr.js"></script>
         <script type="text/javascript">
             document.addEventListener('DOMContentLoaded', () => {
                 document.querySelector('.preloader').classList.add('hidden');
-                document.querySelector('.drop .toggle').addEventListener('click', function(e){
+                document.querySelector('.drop .toggle').addEventListener('click', function (e) {
                     this.parentNode.classList.toggle("open");
                 });
 
-                window.onclick = function(e) {
+                window.onclick = function (e) {
                     var dropMenus = document.querySelectorAll('.drop.open');
                     dropMenus.forEach(function (menu) {
                         if (!menu.contains(e.target)) {
@@ -131,24 +138,29 @@ function __visualize(array $data=array())
                         }
                     });
                 };
+
                 var resizeWrapper = function () {
                     var offset = 70,
                         height = ((window.innerHeight > 0) ? window.innerHeight : this.screen.height) - 1;
                     height -= offset;
-                    height = height<1 ? 1 : height;
+                    height = height < 1 ? 1 : height;
 
-                    if(height > offset) {
-                        document.querySelector('.system .wrapper').style = 'min-height: '+height+'px;';
+                    if (height > offset) {
+                        document.querySelector('.system .wrapper').style = 'min-height: ' + height + 'px;';
                     }
                 };
 
                 resizeWrapper();
 
-                if(window.attachEvent) {
+                if (window.attachEvent) {
                     window.attachEvent('onresize', resizeWrapper);
-                } else if(window.addEventListener) {
+                } else if (window.addEventListener) {
                     window.addEventListener('resize', resizeWrapper);
                 }
+
+                flatpickr(document.querySelector('input[type="text"][name="departure"]'), {
+
+                });
             });
         </script>
     </body>
