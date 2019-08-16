@@ -121,6 +121,7 @@ function __visualize_backend(array $data=array())
             <div class="right"> Developed By <b>M. Rashedul Islam</b> </div>
         </footer>
         <script type="text/javascript" src="assets/js/flatpickr.js"></script>
+        <script type="text/javascript" src="assets/js/script.js"></script>
         <script type="text/javascript">
             document.addEventListener('DOMContentLoaded', () => {
                 document.querySelector('.preloader').classList.add('hidden');
