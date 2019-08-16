@@ -65,7 +65,7 @@ ob_start();
 <?php
 $content = ob_get_clean();
 
-__visualize(array(
+__visualize_backend(array(
 	'title' => 'General Settings',
 	'area' => 'settings',
 	'data' => $content,

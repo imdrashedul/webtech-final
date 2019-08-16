@@ -230,7 +230,7 @@ ob_start();
 <?php
 $content = ob_get_clean();
 
-__visualize(array(
+__visualize_backend(array(
 	'title' => 'Manage Support Staff',
 	'area' => 'supportstaff',
 	'data' => $content,

@@ -102,7 +102,7 @@ ob_start();
 <?php
 $content = ob_get_clean();
 
-__visualize(array(
+__visualize_backend(array(
 	'title' => 'Payment Methods',
 	'area' => 'paymethod',
 	'data' => $content,

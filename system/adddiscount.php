@@ -106,7 +106,7 @@ ob_start();
 $content = ob_get_clean();
 
 
-__visualize(array(
+__visualize_backend(array(
 	'title' => 'Add Discount',
 	'area' => 'discount',
 	'data' => $content,

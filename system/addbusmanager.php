@@ -267,7 +267,7 @@ ob_start();
 <?php
 $content = ob_get_clean();
 
-__visualize(array(
+__visualize_backend(array(
 	'title' => 'Add Bus Manager',
 	'area' => 'busmanager',
     'navigate'=> array(array('busmanager.php', 'Bus Managers')),

@@ -156,7 +156,7 @@ ob_start();
 <?php
 $content = ob_get_clean();
 
-__visualize(array(
+__visualize_backend(array(
 	'title' => 'Support Tickets',
 	'area' => 'supportticket',
 	'data' => $content,

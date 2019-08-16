@@ -411,15 +411,15 @@ function totalElement($table)
     return 0;
 }
 
-function totalUsersByRole($role)
+function totalUsersByRole($role, $valid = 1)
 {
     global $connection;
 
-    $query = "SELECT COUNT(*) FROM ".BTRS_DB_PREFIX.BTRS_TB_USERS." WHERE `role` = ?";
+    $query = "SELECT COUNT(*) FROM ".BTRS_DB_PREFIX.BTRS_TB_USERS." WHERE `role` = ? AND `validate` = ?";
 
     if($stmt = mysqli_prepare($connection, $query))
     {
-        mysqli_stmt_bind_param($stmt, 'i', $role);
+        mysqli_stmt_bind_param($stmt, 'ii', $role, $valid);
         if(mysqli_stmt_execute($stmt))
         {
             if($response = mysqli_stmt_get_result($stmt))
@@ -436,11 +436,11 @@ function totalUsersByRole($role)
     return 0;
 }
 
-function getAllBusManager($offset=0, $limit=0)
+function getAllBusManager($offset=0, $limit=0, $valid = 1)
 {
     global $connection;
 
-    $query = "SELECT * FROM " . BTRS_DB_PREFIX.BTRS_TB_USERS . " WHERE `role` = ? ORDER BY `id` DESC ".( $limit>0 ? "LIMIT ?, ?" : "" );
+    $query = "SELECT * FROM " . BTRS_DB_PREFIX.BTRS_TB_USERS . " WHERE `role` = ? AND `validate` = ? ORDER BY `id` DESC ".( $limit>0 ? "LIMIT ?, ?" : "" );
     $role = BTRS_ROLE_BUS_MANAGER;
     $users = array();
 
@@ -449,11 +449,11 @@ function getAllBusManager($offset=0, $limit=0)
 
         if($limit>0)
         {
-            mysqli_stmt_bind_param($stmt, 'iii', $role, $offset, $limit);
+            mysqli_stmt_bind_param($stmt, 'iiii', $role, $valid, $offset, $limit);
         }
         else
         {
-            mysqli_stmt_bind_param($stmt, 'i', $role);
+            mysqli_stmt_bind_param($stmt, 'ii', $role, $valid);
         }
 
         if(mysqli_stmt_execute($stmt))

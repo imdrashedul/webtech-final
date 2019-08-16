@@ -79,7 +79,7 @@ ob_start();
 <?php
 $content = ob_get_clean();
 
-__visualize(array(
+__visualize_backend(array(
 	'title' => 'Add Payment Method',
 	'area' => 'paymethod',
 	'navigate' => array(array('paymethod.php', 'Payment Methods')),

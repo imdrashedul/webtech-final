@@ -231,7 +231,7 @@ ob_start();
 <?php
 $content = ob_get_clean();
 
-__visualize(array(
+__visualize_backend(array(
 	'title' => 'Promotional Discount',
 	'area' => 'discount',
 	'data' => $content,

@@ -77,7 +77,7 @@ ob_start();
 <?php
 $content = ob_get_clean();
 
-__visualize(array(
+__visualize_backend(array(
 	'title' => 'Profile',
 	'area' => 'profile',
 	'data' => $content,

@@ -127,7 +127,6 @@ img {
     margin-top: 5px;
 }
 
-/* background: bg-color bg-image position/bg-size bg-repeat bg-origin bg-clip bg-attachment initial|inherit; */
 
 .search {
     padding-top: 70px;
@@ -581,4 +580,396 @@ div.list ul.route li:before
     font-size: 11pt;
     background: #23252e;
     color: #8d8e8f;
+}
+
+.page-area {
+    margin-top: 100px;
+    margin-bottom: 50px;
+}
+/* background: bg-color bg-image position/bg-size bg-repeat bg-origin bg-clip bg-attachment initial|inherit; */
+
+.page-area .departure {
+    background: url('../img/title-target.png') no-repeat;
+    text-indent: 40px;
+}
+
+.page-area .departure p {
+    font-weight: 400;
+    text-align: left;
+    font-size: 16px;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    padding: 5px 0px 5px 0px;
+    border-bottom: 1px dashed #E0E0E0;
+}
+
+#SearchForm {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+#SearchForm div {
+    flex-basis: 27%;
+    margin: 0 10px;
+}
+
+#SearchForm div:first-child {
+    margin-left: 0;
+}
+
+#SearchForm div:last-child {
+    flex-basis: 15%;
+    position: relative;
+    margin-right: 0;
+}
+
+#SearchForm div input[type='text'] {
+    width: 100%;
+    margin: 5px 0;
+    font-family: 'Work Sans', sans-serif;
+    padding: 7px;
+    background: #ffffff;
+    border: 1px solid rgba(0,0,0,0.1);
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    box-shadow: 1px 2px 3px 0 rgba(0,0,0,0.1);
+    color: #7c7c7c;
+    font-size: 10pt;
+}
+
+#SearchForm div input[type='text']:hover,
+#SearchForm div input[type='text']:focus,
+#SearchForm div input[type='text']:active {
+    color: #000;
+}
+
+#SearchForm div:last-child input {
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    width: 100%;
+    background: #479F3D;
+    color: #fff;
+    padding: 7px 15px;
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 400;
+    border: 1px solid rgba(0,0,0,0.1);
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 10pt;
+    box-shadow: 1px 2px 3px 0 rgba(0, 0, 0, 0.2);
+}
+
+#SearchForm div:last-child input:hover,
+#SearchForm div:last-child input:focus,
+#SearchForm div:last-child input:active {
+    background: #4cb242;
+}
+
+#SearchForm div label {
+    font-weight: 600;
+    font-size: 9pt;
+    color: #45545f;
+}
+
+.bus-lists table.list tr td:last-child {
+    position: relative;
+    vertical-align: top;
+}
+
+.bus-lists table.list tr td:last-child span {
+    font-size: 12pt;
+    font-weight: 600;
+}
+
+.bus-lists table.list tr td:last-child button {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: #479F3D;
+    color: #fff;
+    padding: 4px 15px;
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 400;
+    border: 1px solid rgba(0,0,0,0.1);
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 10pt;
+}
+
+.bus-lists table.list tr td:last-child button:hover,
+.bus-lists table.list tr td:last-child button:focus,
+.bus-lists table.list tr td:last-child button:active {
+    background: #4cb242;
+}
+
+.bus-lists table.list {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    border: 1px solid rgba(0,0,0,0.1);
+    font-size: 10pt;
+    box-shadow: 1px 2px 3px 0 rgba(0,0,0,0.1);
+}
+
+.bus-lists table.list>thead tr th {
+    background: #f7f7f7;
+    padding: 10px;
+}
+
+.bus-lists table.list tr {
+    border-top: 1px solid rgba(0,0,0,0.1);
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.bus-lists table.list>tbody>tr>td {
+    padding: 10px;
+    border-left: 1px dashed #dbdbdb;
+    text-align: center;
+    font-weight: 400;
+}
+
+.bus-lists table.list tr td:first-child {
+    text-align: left;
+    width: 45%;
+}
+
+.bus-lists table.list tr td:last-child {
+    text-align: right;
+    width: 15%;
+}
+
+.bus-lists span.operator {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.booking-area {
+    display: flex;
+}
+
+.booking-area>div {
+    flex-basis: 55%;
+}
+
+.booking-area>div:last-child {
+    padding: 0 20px;
+}
+
+.booking-area>div:first-child {
+    flex-basis: 45%;
+    text-align: center;
+    border-right: 1px dashed rgba(0,0,0,0.1);
+}
+
+.bus-layout {
+    border: 1px solid rgba(0,0,0,0.1);
+    width: 180px;
+    padding: 10px 20px 5px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.booking-area .seats {
+    display: flex;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+}
+
+.booking-area .seats>div {
+    flex-basis: 50%;
+}
+
+
+.booking-area .seats span {
+    display: inline-block;
+    width: 18px;
+    height: 20px;
+    margin-bottom: 5px;
+    background: transparent url('../img/seats.png') no-repeat;
+    image-rendering: pixelated;
+    cursor: pointer;
+}
+
+.booking-area .seats span:hover,
+.booking-area .seats span.selected {
+    background-position: 0 -44px;
+}
+
+.booking-area .seats span.booked {
+    background-position: 0 -22px;
+}
+
+
+.bus-layout .stearing {
+    height: 17px;
+    margin-bottom: 10px;
+    background: url('../img/stearing.png') right no-repeat;
+}
+
+.booking-area .seats>div:first-child {
+    text-align: left;
+}
+
+.booking-area .seats>div:last-child {
+    text-align: right;
+}
+
+.booking-area .seats>div:first-child span{
+    margin-right: 5px;
+}
+
+.booking-area .seats>div:last-child span{
+    margin-left: 5px;
+}
+
+.booking-area-title {
+    text-align: left;
+    font-size: 12pt;
+    color: #357d25;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #e5e5e5;
+    margin-bottom: 10px;
+}
+
+.booking-area>div:first-child>div:first-child {
+    padding-bottom: 10px;
+}
+
+
+.seats-notation {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.seats-notation div {
+    flex-basis: 33.5%;
+}
+
+.seats-notation div:first-child {
+    text-align: left;
+    flex-basis: 34%;
+}
+
+.seats-notation div:last-child {
+    text-align: right;
+}
+
+.seats-notation .seat,
+.seats-notation .seat.available
+{
+    display: inline-block;
+    width: 18px;
+    height: 20px;
+    image-rendering: pixelated;
+    cursor: pointer;
+    background: transparent url('../img/seats.png') no-repeat;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.seats-notation .seat.booked {
+    background-position: 0 -22px;
+}
+
+.seats-notation .seat.selected {
+    background-position: 0 -44px;
+}
+
+div.selected-seats {
+    position: relative;
+    height: 183px;
+    overflow: hidden;
+}
+
+div.selected-seats div {
+    overflow: hidden;
+    position: absolute;
+    left: 0;
+    right: -17px;
+    bottom: 0;
+    top: 0;
+    background: #fff;
+    overflow-y: auto;
+    z-index: 1;
+}
+
+div.selected-seats table {
+    width: 98.6%;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+div.selected-seats table tr>th,
+div.selected-seats table tr>td {
+    padding: 10px 20px;
+}
+
+div.selected-seats table tr>th {
+    background: #f7f7f7;
+}
+
+div.selected-seats table tbody>tr {
+    border: 0!important;
+}
+
+
+div.selected-seats table tr>th:first-child {
+    text-align: left;
+}
+
+.selected-total {
+    padding: 10px 20px;
+    border-top: 1px solid rgba(0,0,0,0.1);
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    font-weight: 600;
+    background: #f7f7f7;
+}
+
+.checkout-confirm {
+    padding: 20px 0;
+}
+
+.checkout-confirm input[type="submit"],
+.checkout-confirm input[type="button"] {
+
+    padding: 4px 15px;
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 400;
+    border: 1px solid rgba(0,0,0,0.1);
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 10pt;
+}
+
+.checkout-confirm input[type="submit"] {
+    background: #479F3D;
+    color: #fff;
+}
+
+.checkout-confirm input[type="submit"]:hover,
+.checkout-confirm input[type="submit"]:focus,
+.checkout-confirm input[type="submit"]:active {
+    background: #4cb242;
+}
+
+.checkout-confirm input[type="button"] {
+    background: #F2433D;
+    color: #fff;
+}
+
+.checkout-confirm input[type="button"]:hover,
+.checkout-confirm input[type="button"]:focus,
+.checkout-confirm input[type="button"]:active {
+    background: #ff4741;
 }

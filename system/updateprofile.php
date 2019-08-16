@@ -122,7 +122,7 @@ ob_start();
 $content = ob_get_clean();
 
 
-__visualize(array(
+__visualize_backend(array(
 	'title' => 'Update Profile',
 	'area' => 'profile',
 	'data' => $content,

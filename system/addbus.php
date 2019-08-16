@@ -121,7 +121,7 @@ ob_start();
 $content = ob_get_clean();
 
 
-__visualize(array(
+__visualize_backend(array(
 	'title' => 'Add New Bus',
 	'area' => 'managebus',
 	'data' => $content,

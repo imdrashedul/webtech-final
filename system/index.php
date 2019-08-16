@@ -39,7 +39,7 @@ ob_start();
 <?php endif; ?>
 <?php
 $content = ob_get_clean();
-__visualize(array(
+__visualize_backend(array(
 	'title' => 'Dashboard',
 	'area' => 'index',
 	'data' => $content,

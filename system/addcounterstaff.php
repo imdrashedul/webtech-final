@@ -246,7 +246,7 @@ ob_start();
 <?php
 $content = ob_get_clean();
 
-__visualize(array(
+__visualize_backend(array(
 	'title' => 'Add Counter Staff',
 	'area' => 'counterstaff',
     'navigate' => array(array('counterstaff.php', 'Counter Staffs')),

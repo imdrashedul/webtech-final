@@ -6,11 +6,11 @@
  * @see https://github.com/rashed370/webtech-final
  */
 
-function __visualize(array $data=array())
+function __visualize_backend(array $data=array())
 {
     $fName = htmlspecialchars(getUserDetails($data['user']['id'], 'firstName'));
     $lName = htmlspecialchars(getUserDetails($data['user']['id'], 'lastName'));
-
+    $total = totalUsersByRole(BTRS_ROLE_BUS_MANAGER, 0);
     ?>
     <!DOCTYPE html>
     <html>
@@ -58,13 +58,11 @@ function __visualize(array $data=array())
                             </div>
                             <div class="separator"></div>
                             <div class="menu">
-                                <a href="#home">Home</a>
-                                <a href="#about">About</a>
-                                <a href="#contact">Contact</a>
+                                <a href="validbusmanager.php"><img src="assets/img/validation.png"> Validation<?= $total>0?' <span class="label-validation">'.$total.'</span>' : '' ?></a>
                             </div>
                             <div class="separator"></div>
                             <div class="menu">
-                                <a href="logout.php">Logout</a>
+                                <a href="logout.php"><img src="assets/img/logout.png"> Logout</a>
                             </div>
                         </div>
                     </div>
@@ -163,6 +161,84 @@ function __visualize(array $data=array())
                 });
             });
         </script>
+    </body>
+    </html>
+    <?php
+}
+
+function __visualize_fontend(array $data=array())
+{
+    ?>
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title><?= isset($data['title']) ? ' - '.$data['title'] : 'Bus Ticket Reservation System' ?></title>
+        <link rel="stylesheet" href="assets/css/styles.css">
+        <link rel="stylesheet" href="assets/css/flatpickr.min.css">
+        <link rel="stylesheet" href="assets/css/autocomplete.css">
+        <link rel="shortcut icon" href="assets/img/fav.png" type="image/png">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+    <div class="general">
+        <div class="header">
+            <div class="block">
+                <img class="logo" src="assets/img/logo-white-v2.png" alt="home" height="47px" width="200px">
+                <a href="#">Print/Verify</a>
+                <a href="#">Cancel Ticket</a>
+                <a href="#">Help</a>
+            </div>
+        </div>
+        <div class="wrapper">
+            <?= isset($data['data']) ? $data['data'] : '' ?>
+            <div class="payment-methods">
+                <div class="block">
+                    <h1> WE ACCEPT </h1>
+                    <img src="assets/img/method-logo.jpg">
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="block">
+                <div>
+                    <img src="assets/img/logo-white-v2.png" alt="logo" width="160px" height="38px">
+                    <p>BTRS is a premium booking portal which allows you to purchase tickets for various bus services across the country.</p>
+                </div>
+                <div>
+                    <h4>Company Info</h4>
+                    <ul>
+                        <li>
+                            <a href="javascript:void(0)">Terms &amp; Conditions</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)">FAQ</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)">Privacy Policy</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)">How To Buy Tickets</a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white mb-4">About BTRS</h4>
+                    <ul class="pl-0">
+                        <li>
+                            <a href="javascript:void(0)">About Us</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)">Contact Us</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <footer>&#0169; <?= date('Y') ?> BTRS. All Rights Reserved</footer>
+    </div>
+    <script type="text/javascript" src="assets/js/flatpickr.js"></script>
+    <script type="text/javascript" src="assets/js/autocomplete.js"></script>
+    <?= isset($data['javascript']) ? $data['javascript'] : '' ?>
     </body>
     </html>
     <?php

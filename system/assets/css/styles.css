@@ -646,7 +646,6 @@ nav.navbar .usermenu .toggle {
     min-height: 70px;
     user-select: none;
     -webkit-user-select: none;
-    -khtml-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
 }
@@ -1118,6 +1117,43 @@ span.pagination {
 
 .text-center {
     text-align: center;
+}
+
+span.label-validation {
+    display: inline-block;
+    background: #ff0000;
+    color: #ffffff;
+    font-size: 7.5pt;
+    padding: 2px 6px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+}
+
+.alert {
+    font-weight: 400;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    background: #ffffff;
+    border-left: 5px solid #000;
+}
+
+.alert.success {
+    border-left: 5px solid #3d922b;
+    background: #f2fff3;
+    color: #225418;
+}
+
+.alert.warning {
+    border-left: 5px solid #e8b700;
+    background: #ffffe3;
+    color: #6e5300;
+}
+
+.alert.danger {
+    border-left: 5px solid #cd0e00;
+    background: #fff3ec;
+    color: #8a0000;
 }
 
 
