@@ -162,6 +162,7 @@ function __visualize_backend(array $data=array())
                 });
             });
         </script>
+        <?= isset($data['javascript']) ? $data['javascript'] : '' ?>
     </body>
     </html>
     <?php
