@@ -277,14 +277,46 @@ ob_start();
 </div>
 <?php
 $content = ob_get_clean();
+ob_start();
+?>
+<script type="text/javascript">
+        var fileInput = null,
+            imagePreview = null,
+            namePreview = null,
+            clearInput = null,
+            browseBtn = null;
 
+        document.querySelectorAll('.file-input>input[type="file"]').forEach(function (inputField) {
+
+            document.querySelector('img.upload-preview.'+inputField.id).addEventListener('click', function (e) {
+                inputField.click();
+            });
+
+            inputField.addEventListener('click', function (e) {
+                fileInput = this;
+                imagePreview = document.querySelector('img.upload-preview.'+this.id);
+                namePreview = document.querySelector('input.upload-name.'+this.id);
+                clearInput = document.querySelector('button.file-clear.'+this.id);
+                browseBtn = document.querySelector('label.file-input.'+this.id);
+            });
+
+            inputField.addEventListener('change', function (e) {
+                fileHandler(this);
+            });
+
+        });
+
+    </script>
+<?php
+$script = ob_get_clean();
 __visualize_backend(array(
 	'title' => 'Add Counter Staff',
 	'area' => 'counterstaff',
     'navigate' => array(array('counterstaff.php', 'Counter Staffs')),
 	'data' => $content,
     'user' => $user,
-    'validate' => $validate
+    'validate' => $validate,
+	'javascript' => $script
 ));
 
 disconnectDatabase();
