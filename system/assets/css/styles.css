@@ -396,14 +396,14 @@ img {
     background: #db2e3e;
 }
 
-.register .inputset .file-clear svg {
+.inputset .file-clear svg {
     vertical-align: middle;
     fill: currentColor;
     width: 10px;
     height: 10px;
 }
 
-.register .container label.file-input {
+.container label.file-input {
     font-weight: 400;
 }
 
