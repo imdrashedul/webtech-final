@@ -177,6 +177,9 @@ img {
 .register .container input[type='email'],
 .register .container input[type='text'],
 .register .container input[type='password'],
+.inputset input[type='email'],
+.inputset input[type='text'],
+.inputset input[type='password'],
 .inputset select {
     width: 100%;
     margin: 5px 0;
@@ -205,7 +208,13 @@ img {
 .register .container input[type='password']:focus,
 .register .container input[type='password']:active,
 .inputset select:focus,
-.inputset select:active {
+.inputset select:active,
+.inputset input[type='email']:focus,
+.inputset input[type='email']:active,
+.inputset input[type='text']:focus,
+.inputset input[type='text']:active,
+.inputset input[type='password']:focus,
+.inputset input[type='password']:active {
     color: #000;
 }
 
@@ -354,21 +363,18 @@ img {
     cursor: pointer;
 }
 
-.register .inputset .file-input:hover,
-.register .inputset .file-input:hover,
-.register .inputset .file-input:focus,
-.register .inputset .file-input:focus,
-.register .inputset .file-input:active,
-.register .inputset .file-input:active {
+.inputset .file-input:hover,
+.inputset .file-input:focus,
+.inputset .file-input:active {
     background: #0d79e2;
 }
 
-.register .inputset .file-input {
+.inputset .file-input {
     width: 100%;
     margin-top: 5px;
 }
 
-.register .inputset .file-clear {
+.inputset .file-clear {
     display: none;
     width: 38%;
     border: 1px solid rgba(0,0,0,0.1);
@@ -384,12 +390,9 @@ img {
     cursor: pointer;
 }
 
-.register .inputset .file-clear:hover,
-.register .inputset .file-clear:hover,
-.register .inputset .file-clear:focus,
-.register .inputset .file-clear:focus,
-.register .inputset .file-clear:active,
-.register .inputset .file-clear:active {
+.inputset .file-clear:hover,
+.inputset .file-clear:focus,
+.inputset .file-clear:active {
     background: #db2e3e;
 }
 
