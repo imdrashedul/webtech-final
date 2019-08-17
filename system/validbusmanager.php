@@ -29,23 +29,67 @@ if($validate!=true)
     die();
 }
 
+if(isset($_REQUEST['valid']))
+{
+    $vUser = urldecode($_REQUEST['valid']);
+    if(is_numeric($vUser))
+    {
+        if(getUserById($vUser, 0))
+        {
+            if(validateUser($vUser))
+            {
+                $fName = htmlspecialchars(getUserDetails($vUser, 'firstName'));
+                $lName = htmlspecialchars(getUserDetails($vUser, 'lastName'));
+                addAlert([
+                    't' => 'success',
+                    'm' => $fName . ' ' . $lName . ' Validated Successfully',
+                    'a' => 6000
+                ], 'validbusmanager');
+            }
+            else
+            {
+                addAlert([
+                    't' => 'danger',
+                    'm' => 'System Error Validation Unsuccessful',
+                    'a' => 6000
+                ], 'validbusmanager');
+            }
+        }
+        else
+        {
+            addAlert([
+                't' => 'warning',
+                'm' => 'User not exists or Already Validated',
+                'a' => 6000
+            ], 'validbusmanager');
+        }
+    }
+    else
+    {
+        addAlert([
+            't' => 'danger',
+            'm' => 'Invalid User ID',
+            'a' => 6000
+        ], 'validbusmanager');
+    }
+
+    header('Location: validbusmanager.php');
+    exit;
+}
+
 $total = totalUsersByRole(BTRS_ROLE_BUS_MANAGER, 0);
+//echo getPaginationInfo(1, $total);
+//die();
 $page = isset($_REQUEST['page']) && !empty($_REQUEST['page']) && $_REQUEST['page']>0 ? $_REQUEST['page'] : 1;
 $__limit = 10;
 $tpage = ceil($total/$__limit);
 $page = $page>$tpage ? $tpage : $page;
 $__offset = $__limit * ($page - 1);
-$managers = getAllBusManager($__offset, $__limit, 0);
-ob_start();
+$managers = getUsersByRole($__offset, $__limit, 0);
 
 ob_start();
 ?>
-    <div class="alert success" id="ashdkjTEjkd">
-        M. Monirul Islam Validated Successfully
-        <script>
-            setTimeout(function(){ document.getElementById('ashdkjTEjkd').remove() }, 6000);
-        </script>
-    </div>
+    <?php flushAlert('validbusmanager') ?>
     <div class="block">
         <div class="header">
             <b>Bus Managers List</b>
@@ -93,7 +137,7 @@ ob_start();
                         <?= getPaginationInfo($page, $total) ?>
                     </div>
                     <div class="column-8 text-right">
-                        <?= getPagination($page, $total) ?>
+                        <?= getPagination($page, $total, 'supportstaff.php?page=') ?>
                     </div>
                 </div>
             </div>

@@ -8,7 +8,6 @@
 
 require_once 'lib/function.php';
 
-session_start();
 connectDatabase();
 $regEmail = '';
 

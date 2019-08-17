@@ -123,7 +123,7 @@ function __visualize_backend(array $data=array())
         <script type="text/javascript" src="assets/js/flatpickr.js"></script>
         <script type="text/javascript" src="assets/js/script.js"></script>
         <script type="text/javascript">
-            document.addEventListener('DOMContentLoaded', () => {
+            document.addEventListener('DOMContentLoaded', function () {
                 document.querySelector('.preloader').classList.add('hidden');
                 document.querySelector('.drop .toggle').addEventListener('click', function (e) {
                     this.parentNode.classList.toggle("open");
@@ -156,10 +156,6 @@ function __visualize_backend(array $data=array())
                 } else if (window.addEventListener) {
                     window.addEventListener('resize', resizeWrapper);
                 }
-
-                flatpickr(document.querySelector('input[type="text"][name="departure"]'), {
-
-                });
             });
         </script>
         <?= isset($data['javascript']) ? $data['javascript'] : '' ?>

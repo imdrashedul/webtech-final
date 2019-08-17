@@ -10,6 +10,10 @@ require_once 'config.php';
 require_once 'visualizer.php';
 require_once 'database.php';
 
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
 // HTML Select/Radio/Checkbox Selection Provider
 function __selected($fixed, $variable, $type='select', $print=true, $strict=false)
 {
@@ -546,7 +550,7 @@ function getPaginationInfo($current=1, $items=1, $perpage=10)
     $end = $end>$items || $items<$end ? $items:$end;
     $info = '<span class="pagination">';
     $info .= 'Showing ';
-    $info .= $end==$items && $current==1 ? $end:$start;
+    $info .= $items>0 ? ( $end==$items && $current==1 ? $end:$start ) : 0;
     $info .= $end!=$items || $current!=1 ? ' to '.$end:'';
     $info .= ' of '.$items.' entries';
     $info .= '</span>';
@@ -564,7 +568,7 @@ function getPagination($current=1, $items=1, $link='', $perpage=10, $limit=6 )
     $start = 1;
     $end = $total;
 
-    if($total>$limit)
+    if($total>$limit && $items>0)
     {
         if($current>$limit)
         {
@@ -589,15 +593,100 @@ function getPagination($current=1, $items=1, $link='', $perpage=10, $limit=6 )
         }
     }
 
-    $pagination .= '<a href="'.($current>1?$link.($current-1):'javascript:void(0)').'"'.(!($current>1) ? ' class="disabled"':'').'>Previous</a>';
+    $pagination .= '<a href="'.($current>1?$link.($current-1):'javascript:void(0)').'"'.(!($current>1) || !($items>0) ? ' class="disabled"':'').'>Previous</a>';
 
-    foreach (range($start, $end) as $page)
+    if($items>0)
     {
-        $pagination .= '<a href="'.($current==$page?'javascript:void(0)':$link.$page).'"'.($current==$page ? ' class="active"':'').'>'.$page.'</a>';
+        foreach (range($start, $end) as $page)
+        {
+            $pagination .= '<a href="'.($current==$page?'javascript:void(0)':$link.$page).'"'.($current==$page ? ' class="active"':'').'>'.$page.'</a>';
+        }
     }
 
-    $pagination .= '<a href="'.($current<$total?$link.($current+1):'javascript:void(0)').'"'.(!($current<$total) ? ' class="disabled"':'').'>Next</a>';
+
+    $pagination .= '<a href="'.($current<$total && $items>0 ?$link.($current+1):'javascript:void(0)').'"'.(!($current<$total) || !($items>0) ? ' class="disabled"':'').'>Next</a>';
     $pagination .= '</div>';
 
     return $pagination;
+}
+
+function addAlert(array $alert, $key = "")
+{
+    if(!isset($_SESSION[SESSION_ALERT]))
+    {
+        $_SESSION[SESSION_ALERT] = array();
+    }
+
+    if(!empty($key))
+    {
+        if(!isset($_SESSION[SESSION_ALERT][$key]))
+        {
+            $_SESSION[SESSION_ALERT][$key] = array();
+        }
+
+        $_SESSION[SESSION_ALERT][$key][] = $alert;
+    }
+    else
+    {
+        if(!isset($_SESSION[SESSION_ALERT]['__GLOBAL__']))
+        {
+            $_SESSION[SESSION_ALERT]['__GLOBAL__'] = array();
+        }
+
+        $_SESSION[SESSION_ALERT]['__GLOBAL__'][] = $alert;
+    }
+
+}
+
+function flushAlert($key = "")
+{
+    if(isset($_SESSION[SESSION_ALERT]) && is_array($_SESSION[SESSION_ALERT]) && !empty($_SESSION[SESSION_ALERT]))
+    {
+        if( isset($_SESSION[SESSION_ALERT]['__GLOBAL__']) && is_array($_SESSION[SESSION_ALERT]['__GLOBAL__']))
+        {
+            foreach ($_SESSION[SESSION_ALERT]['__GLOBAL__'] as $alert)
+            {
+                if(is_array($alert))
+                {
+                    renderAlert($alert);
+                }
+            }
+            unset($_SESSION[SESSION_ALERT]['__GLOBAL__']);
+        }
+
+        if(!empty($key))
+        {
+            if( isset($_SESSION[SESSION_ALERT][$key]) && is_array($_SESSION[SESSION_ALERT][$key]))
+            {
+                foreach ($_SESSION[SESSION_ALERT][$key] as $alert)
+                {
+                    if(is_array($alert))
+                    {
+                        renderAlert($alert);
+                    }
+                }
+                unset($_SESSION[SESSION_ALERT][$key]);
+            }
+        }
+
+        if(isset($_SESSION[SESSION_ALERT]) && empty($_SESSION[SESSION_ALERT])) unset($_SESSION[SESSION_ALERT]);
+    }
+}
+
+function renderAlert(array $alert)
+{
+    if(isset($alert['m']) && isset($alert['t']))
+    {
+        $id = '__acl' . md5(time());
+        ?>
+        <div class="alert <?= $alert['t'] ?>" id="<?= $id ?>">
+            <?= htmlspecialchars($alert['m']) ?>
+            <?php if(isset($alert['a'])) : ?>
+            <script>
+                setTimeout(function(){ document.getElementById('<?= $id ?>').remove() }, 6000);
+            </script>
+            <?php endif; ?>
+        </div>
+        <?php
+    }
 }

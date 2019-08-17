@@ -8,12 +8,15 @@
 
 // Cookie Name
 if(!defined('SESSION_COOKIE')) define('SESSION_COOKIE', 'BTRSSID');
+if(!defined('SESSION_ALERT')) define('SESSION_ALERT', 'BTRSSID_ALERT');
 
 // Database Config
 if(!defined('BTRS_DB_PREFIX')) define('BTRS_DB_PREFIX', 'webtech_');
 if(!defined('BTRS_TB_USERS')) define('BTRS_TB_USERS', 'users');
 if(!defined('BTRS_TB_USERDETAILS')) define('BTRS_TB_USERDETAILS', 'userdetails');
 if(!defined('BTRS_TB_AUTHSESSION')) define('BTRS_TB_AUTHSESSION', 'authsession');
+if(!defined('BTRS_TB_BUSCOUNTERS')) define('BTRS_TB_BUSCOUNTERS', 'buscounters');
+if(!defined('BTRS_TB_BUSES')) define('BTRS_TB_BUSES', 'buses');
 
 // Session Alive For Next * Minutes
 if(!defined('BTRS_SESSION_ALIVE')) define('BTRS_SESSION_ALIVE', 21600);

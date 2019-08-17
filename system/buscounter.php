@@ -27,6 +27,14 @@ if($validate!=true)
     die();
 }
 
+$total = totalBusCounters();
+$page = isset($_REQUEST['page']) && !empty($_REQUEST['page']) && $_REQUEST['page']>0 ? $_REQUEST['page'] : 1;
+$__limit = 10;
+$tpage = ceil($total/$__limit);
+$page = $page>$tpage ? $tpage : $page;
+$__offset = $__limit * ($page - 1);
+$counters = getBusCounters($__offset, $__limit);
+
 ob_start();
 ?>
 <div class="block">
@@ -46,166 +54,36 @@ ob_start();
             </tr>
             </thead>
             <tbody>
-            <tr >
-                <td>Kallayanpur Counter</td>
-                <td>Kallyanpur Foot Over Bridge, Dhaka</td>
-                <td>S.R Travels (Pvt) Ltd</td>
-                <td align="center">Plus Counter</td>
-                <td align="center">
-                    <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
-                    <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
-                </td>
-            </tr>
-            <tr>
-                <td>Gabtoli Counter</td>
-                <td>Gabtali Bus Terminal</td>
-                <td>S.R Travels (Pvt) Ltd</td>
-                <td align="center">Common Counter</td>
-                <td align="center">
-                    <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
-                    <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
-                </td>
-            </tr>
-            <tr >
-                <td>Mohakhali Counter</td>
-                <td>Mohakhali Bus Terminal</td>
-                <td>S.R Travels (Pvt) Ltd</td>
-                <td align="center">Common Counter</td>
-                <td align="center">
-                    <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
-                    <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
-                </td>
-            </tr>
-            <tr >
-                <td>Gazipur Counter</td>
-                <td>Gazipur Bypass (Delwar Hossain Market)</td>
-                <td>S.R Travels (Pvt) Ltd</td>
-                <td align="center">Sub Counter</td>
-                <td align="center">
-                    <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
-                    <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
-                </td>
-            </tr>
-            <tr >
-                <td>Technical More Counter</td>
-                <td>Shahnaz CNG Filling Station (west of technical curve)</td>
-                <td>S.R Travels (Pvt) Ltd</td>
-                <td align="center">Sub Counter</td>
-                <td align="center">
-                    <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
-                    <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
-                </td>
-            </tr>
-            <tr >
-                <td>Savar Counter</td>
-                <td>Savar Kacha Bazar</td>
-                <td>S.R Travels (Pvt) Ltd</td>
-                <td align="center">Sub Counter</td>
-                <td align="center">
-                    <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
-                    <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
-                </td>
-            </tr>
-            <tr >
-                <td>Kallayanpur Counter</td>
-                <td>Kallyanpur Foot Over Bridge, Dhaka</td>
-                <td>Manik Express</td>
-                <td align="center">Plus Counter</td>
-                <td align="center">
-                    <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
-                    <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
-                </td>
-            </tr>
-            <tr >
-                <td>Gabtoli Counter</td>
-                <td>Gabtali Bus Terminal</td>
-                <td>Manik Express</td>
-                <td align="center">Common Counter</td>
-                <td align="center">
-                    <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
-                    <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
-                </td>
-            </tr>
-            <tr >
-                <td>Mohakhali Counter</td>
-                <td>Mohakhali Bus Terminal</td>
-                <td>Manik Express</td>
-                <td align="center">Common Counter</td>
-                <td align="center">
-                    <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
-                    <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
-                </td>
-            </tr>
-            <tr >
-                <td>Gazipur Counter</td>
-                <td>Gazipur Bypass (Delwar Hossain Market)</td>
-                <td>Manik Express</td>
-                <td align="center">Sub Counter</td>
-                <td align="center">
-                    <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
-                    <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
-                </td>
-            </tr>
-            <tr >
-                <td>Technical More Counter</td>
-                <td>Shahnaz CNG Filling Station (west of technical curve)</td>
-                <td>Manik Express</td>
-                <td align="center">Sub Counter</td>
-                <td align="center">
-                    <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
-                    <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
-                </td>
-            </tr>
-            <tr >
-                <td>Savar Counter</td>
-                <td>Savar Kacha Bazar</td>
-                <td>Manik Express</td>
-                <td align="center">Sub Counter</td>
-                <td align="center">
-                    <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
-                    <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
-                </td>
-            </tr>
-            <tr >
-                <td>Kallayanpur Counter</td>
-                <td>Kallyanpur Foot Over Bridge, Dhaka</td>
-                <td>Hanif Enterprise</td>
-                <td align="center">Plus Counter</td>
-                <td align="center">
-                    <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
-                    <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
-                </td>
-            </tr>
-            <tr >
-                <td>Gabtoli Counter</td>
-                <td>Gabtali Bus Terminal</td>
-                <td>Hanif Enterprise</td>
-                <td align="center">Common Counter</td>
-                <td align="center">
-                    <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
-                    <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
-                </td>
-            </tr>
+            <?php if(count($counters)>0)
+            {
+                foreach ($counters as $counter)
+                {
+                    echo '<tr>';
+                    echo '<td>'.htmlspecialchars($counter['name']).'</td>';
+                    echo '<td>'.htmlspecialchars($counter['location']).'</td>';
+                    echo '<td>'.htmlspecialchars(getUserDetails($counter['manager'], 'companyName')).'</td>';
+                    echo '<td class="text-center">'.htmlspecialchars($counter['type']).'</td>';
+                    echo '<td class="text-center">';
+                    echo '<a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;';
+                    echo '<a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>';
+                    echo '</td>';
+                    echo '</tr>';
+                }
+            }
+            else
+            {
+                echo '<tr><td class="text-center" colspan="5">No Data Found</td></tr>';
+            }
+            ?>
             </tbody>
         </table>
         <div class="grid">
             <div class="row">
                 <div class="column-4 ">
-                    <span class="pagination">
-                        Showing 1 to 10 of 100 entries
-                    </span>
+                    <?= getPaginationInfo($page, $total) ?>
                 </div>
                 <div class="column-8 text-right">
-                    <div class="pagination">
-                        <a href="#">Previous</a>
-                        <a href="#">1</a>
-                        <a class="active" href="#">2</a>
-                        <a href="#">3</a>
-                        <a href="#">4</a>
-                        <a href="#">5</a>
-                        <a href="#">6</a>
-                        <a href="javascript:void(0)" class="disabled">Next</a>
-                    </div>
+                    <?= getPagination($page, $total, 'buscounter.php?page=') ?>
                 </div>
             </div>
         </div>

@@ -79,17 +79,26 @@ function verifyEmailAssigned($email)
 // Fetch User By Email
 /**
  * @param $id
+ * @param int $valid
  * @return array|null
  */
-function getUserById($id)
+function getUserById($id, $valid = -1)
 {
     global $connection;
 
-    $query = "SELECT * FROM ".BTRS_DB_PREFIX.BTRS_TB_USERS." WHERE `id` = ? ORDER BY `id` DESC";
+    $query = $valid>=0 ? "SELECT * FROM ".BTRS_DB_PREFIX.BTRS_TB_USERS." WHERE `id` = ? AND `validate` = ? ORDER BY `id` DESC":"SELECT * FROM ".BTRS_DB_PREFIX.BTRS_TB_USERS." WHERE `id` = ? ORDER BY `id` DESC";
 
     if($stmt = mysqli_prepare($connection, $query))
     {
-        mysqli_stmt_bind_param($stmt, 'i', $id);
+        if($valid>=0)
+        {
+            mysqli_stmt_bind_param($stmt, 'ii', $id, $valid);
+        }
+        else
+        {
+            mysqli_stmt_bind_param($stmt, 'i', $id);
+        }
+
         mysqli_stmt_execute($stmt);
         if($response = mysqli_stmt_get_result($stmt))
         {
@@ -426,7 +435,7 @@ function totalUsersByRole($role, $valid = 1)
             {
                 if($row = mysqli_fetch_row($response))
                 {
-                    return (isset($row[0]) && $row[0]>0);
+                    return (isset($row[0]) && $row[0]>0) ? $row[0] : 0;
                 }
             }
         }
@@ -436,12 +445,12 @@ function totalUsersByRole($role, $valid = 1)
     return 0;
 }
 
-function getAllBusManager($offset=0, $limit=0, $valid = 1)
+function getUsersByRole($role, $offset=0, $limit=0, $valid = 1)
 {
     global $connection;
 
     $query = "SELECT * FROM " . BTRS_DB_PREFIX.BTRS_TB_USERS . " WHERE `role` = ? AND `validate` = ? ORDER BY `id` DESC ".( $limit>0 ? "LIMIT ?, ?" : "" );
-    $role = BTRS_ROLE_BUS_MANAGER;
+
     $users = array();
 
     if($stmt = mysqli_prepare($connection, $query))
@@ -454,6 +463,180 @@ function getAllBusManager($offset=0, $limit=0, $valid = 1)
         else
         {
             mysqli_stmt_bind_param($stmt, 'ii', $role, $valid);
+        }
+
+        if(mysqli_stmt_execute($stmt))
+        {
+            if($response = mysqli_stmt_get_result($stmt))
+            {
+                if(mysqli_num_rows($response)>0)
+                {
+                    while ($row = mysqli_fetch_assoc($response))
+                    {
+                        $users[] = $row;
+                    }
+                }
+            }
+        }
+    }
+
+    return $users;
+}
+
+function validateUser($userid)
+{
+    global $connection;
+
+    $query = "UPDATE ".BTRS_DB_PREFIX.BTRS_TB_USERS." SET `validate` = 1 WHERE `id` = ?";
+
+    if($stmt = mysqli_prepare($connection, $query))
+    {
+        mysqli_stmt_bind_param($stmt, 'i', $userid);
+        if(mysqli_stmt_execute($stmt))
+        {
+            return mysqli_affected_rows($connection);
+        }
+    }
+
+    return false;
+}
+
+function totalBusCounters($manager=null)
+{
+    global $connection;
+
+    $query = $manager!=null ? "SELECT COUNT(*) FROM ".BTRS_DB_PREFIX.BTRS_TB_BUSCOUNTERS." WHERE `manager` = ?" : "SELECT COUNT(*) FROM ".BTRS_DB_PREFIX.BTRS_TB_BUSCOUNTERS;
+
+    if($stmt = mysqli_prepare($connection, $query))
+    {
+        if($manager!=null)
+        {
+            mysqli_stmt_bind_param($stmt, 'i', $manager);
+        }
+
+        if(mysqli_stmt_execute($stmt))
+        {
+            if($response = mysqli_stmt_get_result($stmt))
+            {
+                if($row = mysqli_fetch_row($response))
+                {
+                    return (isset($row[0]) && $row[0]>0) ? $row[0] : 0;
+                }
+            }
+        }
+
+    }
+
+    return 0;
+}
+
+function getBusCounters($offset=0, $limit=0, $manager=null)
+{
+    global $connection;
+
+    $query = "SELECT * FROM ".BTRS_DB_PREFIX.BTRS_TB_BUSCOUNTERS.($manager!=null ? " WHERE `manager` = ? ":"")." ORDER BY `id` DESC ".( $limit>0 ? " LIMIT ?, ?" : "" );
+    $users = array();
+
+    if($stmt = mysqli_prepare($connection, $query))
+    {
+
+        if($limit>0)
+        {
+            if($manager!=null)
+            {
+                mysqli_stmt_bind_param($stmt, 'iii', $manager, $offset, $limit);
+            }
+            else
+            {
+                mysqli_stmt_bind_param($stmt, 'ii', $offset, $limit);
+            }
+
+        }
+        else
+        {
+            if($manager!=null)
+            {
+                mysqli_stmt_bind_param($stmt, 'i', $manager);
+            }
+
+        }
+
+        if(mysqli_stmt_execute($stmt))
+        {
+            if($response = mysqli_stmt_get_result($stmt))
+            {
+                if(mysqli_num_rows($response)>0)
+                {
+                    while ($row = mysqli_fetch_assoc($response))
+                    {
+                        $users[] = $row;
+                    }
+                }
+            }
+        }
+    }
+
+    return $users;
+}
+
+function totalBuses($manager=null)
+{
+    global $connection;
+
+    $query = $manager!=null ? "SELECT COUNT(*) FROM ".BTRS_DB_PREFIX.BTRS_TB_BUSES." WHERE `manager` = ?" : "SELECT COUNT(*) FROM ".BTRS_DB_PREFIX.BTRS_TB_BUSCOUNTERS;
+
+    if($stmt = mysqli_prepare($connection, $query))
+    {
+        if($manager!=null)
+        {
+            mysqli_stmt_bind_param($stmt, 'i', $manager);
+        }
+
+        if(mysqli_stmt_execute($stmt))
+        {
+            if($response = mysqli_stmt_get_result($stmt))
+            {
+                if($row = mysqli_fetch_row($response))
+                {
+                    return (isset($row[0]) && $row[0]>0) ? $row[0] : 0;
+                }
+            }
+        }
+
+    }
+
+    return 0;
+}
+
+function getBuses($offset=0, $limit=0, $manager=null)
+{
+    global $connection;
+
+    $query = "SELECT * FROM ".BTRS_DB_PREFIX.BTRS_TB_BUSES.($manager!=null ? " WHERE `manager` = ? ":"")." ORDER BY `id` DESC ".( $limit>0 ? " LIMIT ?, ?" : "" );
+    $users = array();
+
+    if($stmt = mysqli_prepare($connection, $query))
+    {
+
+        if($limit>0)
+        {
+            if($manager!=null)
+            {
+                mysqli_stmt_bind_param($stmt, 'iii', $manager, $offset, $limit);
+            }
+            else
+            {
+                mysqli_stmt_bind_param($stmt, 'ii', $offset, $limit);
+            }
+
+        }
+        else
+        {
+            if($manager!=null)
+            {
+                mysqli_stmt_bind_param($stmt, 'i', $manager);
+            }
+
         }
 
         if(mysqli_stmt_execute($stmt))

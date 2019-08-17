@@ -44,7 +44,7 @@ ob_start();
                 <th>Routes</th>
                 <th>Departure</th>
                 <th>Arrival</th>
-                <th>Price Per Seat</th>
+                <th>Fare</th>
                 <th>Action</th>
             </tr>
             </thead>

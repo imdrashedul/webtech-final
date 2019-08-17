@@ -33,7 +33,8 @@ $__limit = 10;
 $tpage = ceil($total/$__limit);
 $page = $page>$tpage ? $tpage : $page;
 $__offset = $__limit * ($page - 1);
-$managers = getAllBusManager($__offset, $__limit);
+$users = getUsersByRole(BTRS_ROLE_BUS_MANAGER, $__offset, $__limit);
+
 ob_start();
 ?>
 
@@ -55,9 +56,9 @@ ob_start();
             </tr>
             </thead>
             <tbody>
-            <?php if(count($managers)>0)
+            <?php if(count($users)>0)
             {
-                foreach ($managers as $manager)
+                foreach ($users as $manager)
                 {
                     echo '<tr>';
                     echo '<td>'.htmlspecialchars(getUserDetails($manager['id'], 'firstName').' '.getUserDetails($manager['id'], 'lastName')).'</td>';
@@ -82,10 +83,10 @@ ob_start();
         <div class="grid">
             <div class="row">
                 <div class="column-4 ">
-                   <?= getPaginationInfo($page, $total) ?>
+                    <?= getPaginationInfo($page, $total) ?>
                 </div>
                 <div class="column-8 text-right">
-                    <?= getPagination($page, $total) ?>
+                    <?= getPagination($page, $total, 'busmanager.php?page=') ?>
                 </div>
             </div>
         </div>
