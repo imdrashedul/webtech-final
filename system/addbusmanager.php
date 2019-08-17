@@ -331,13 +331,12 @@ $content = ob_get_clean();
 ob_start();
 ?>
 <script type="text/javascript">
+var fileInput = null,
+    imagePreview = null,
+    namePreview = null,
+    clearInput = null,
+    browseBtn = null;
 document.addEventListener('DOMContentLoaded', function() {
-	var fileInput = null,
-            imagePreview = null,
-            namePreview = null,
-            clearInput = null,
-            browseBtn = null;
-
         document.querySelectorAll('.file-input>input[type="file"]').forEach(function (inputField) {
 
             document.querySelector('img.upload-preview.'+inputField.id).addEventListener('click', function (e) {
