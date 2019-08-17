@@ -151,88 +151,81 @@ ob_start();
                 </div>
             </div>
         </div>
-        <br>
-        <font face="Arial" size="2"><b>Contact Information</b></font><hr>
-        <table border="0" cellpadding="5" cellspacing="0">
-            <tr>
-                <td valign="top" align="right">
-                    <label for="mobile"><font face="Arial" size="2"><b>Mobile Number</b></font></label>
-                </td>
-                <td valign="top">
-                    <input type="text" name="mobile" id="mobile" placeholder="(+88) 0XXXX-XXXXXX" value="<?php echo isset($_POST['mobile']) ? htmlspecialchars($_POST['mobile']) : '' ?>" size="24"><br/>
-                    <?php __errors($errors, 'mobile') ?>
-                </td>
-            </tr>
-            <tr>
-                <td valign="top" align="right">
-                    <label for="street"><font face="Arial" size="2"><b>Street Address</b></font></label>
-                </td>
-                <td valign="top">
-                    <input type="text" name="street" id="street" placeholder="Enter Street Address" value="<?php echo isset($_POST['street']) ? htmlspecialchars($_POST['street']) : '' ?>" size="24"><br/>
-                    <?php __errors($errors, 'street') ?>
-                </td>
-            </tr>
-            <tr>
-                <td valign="top" align="right">
-                    <label for="city"><font face="Arial" size="2"><b>City</b></font></label>
-                </td>
-                <td valign="top">
-                    <input type="text" name="city" id="city" placeholder="Enter City Name" value="<?php echo isset($_POST['city']) ? htmlspecialchars($_POST['city']) : '' ?>" size="24"><br/>
-                    <?php __errors($errors, 'city') ?>
-                </td>
-            </tr>
-            <tr>
-                <td valign="top" align="right">
-                    <label for="country"><font face="Arial" size="2"><b>Country</b></font></label>
-                </td>
-                <td valign="top">
-                    <select name="country" id="country">
-                        <option value="">Select</option>
-                        <option value="Bangladesh"<?php __selected("Bangladesh", (isset($_POST['country']) ? $_POST['country'] : '')) ?>>Bangladesh</option>
-                    </select><br>
-                    <?php __errors($errors, 'country') ?>
-                </td>
-            </tr>
-            <tr>
-                <td valign="top" align="right">
-                    <label for="zip"><font face="Arial" size="2"><b>Zip Code</b></font></label>
-                </td>
-                <td valign="top">
-                    <input type="text" name="zip" id="zip" placeholder="Enter Zip/Postal Code" value="<?php echo isset($_POST['zip']) ? htmlspecialchars($_POST['zip']) : '' ?>" size="24"><br/>
-                    <?php __errors($errors, 'zip') ?>
-                </td>
-            </tr>
-        </table>
-        <br>
-        <font face="Arial" size="2"><b>Official Information</b></font><hr>
-        <table border="0" cellpadding="5" cellspacing="0">
-            <tr>
-                <td valign="top" align="right">
-                    <label for="bus_manager"><font face="Arial" size="2"><b>Bus Manager</b></font></label>
-                </td>
-                <td valign="top">
-                    <select name="bus_manager" id="bus_manager">
-                        <option value="">Select</option>
-                        <option value="1"<?php __selected("1", (isset($_POST['bus_manager']) ? $_POST['bus_manager'] : '')) ?>>Thane Hooper</option>
-                        <option value="2"<?php __selected("2", (isset($_POST['bus_manager']) ? $_POST['bus_manager'] : '')) ?>>Alvin Vang</option>
-                        <option value="3"<?php __selected("3", (isset($_POST['bus_manager']) ? $_POST['bus_manager'] : '')) ?>>Erich Stevens</option>
-                        <option value="4"<?php __selected("4", (isset($_POST['bus_manager']) ? $_POST['bus_manager'] : '')) ?>>Brent Mathis</option>
-                        <option value="5"<?php __selected("4", (isset($_POST['bus_manager']) ? $_POST['bus_manager'] : '')) ?>>Ferdinand Woods</option>
-                        <option value="6"<?php __selected("4", (isset($_POST['bus_manager']) ? $_POST['bus_manager'] : '')) ?>>Gavin Ferrell</option>
-                        <option value="7"<?php __selected("4", (isset($_POST['bus_manager']) ? $_POST['bus_manager'] : '')) ?>>Joshua Raymond</option>
-                        <option value="8"<?php __selected("4", (isset($_POST['bus_manager']) ? $_POST['bus_manager'] : '')) ?>>Zachary Crosby</option>
-                        <option value="9"<?php __selected("4", (isset($_POST['bus_manager']) ? $_POST['bus_manager'] : '')) ?>>Samuel Alston</option>
-                        <option value="10"<?php __selected("4", (isset($_POST['bus_manager']) ? $_POST['bus_manager'] : '')) ?>>Basil Noble</option>
-                    </select><br>
-                    <?php __errors($errors, 'bus_manager') ?>
-                </td>
-            </tr>
-            <tr>
-                <td valign="top" align="right">
-                    <label for="bus_counter"><font face="Arial" size="2"><b>Counter</b></font></label>
-                </td>
-                <td valign="top">
-                    <select name="bus_counter" id="bus_counter">
+        <h4 class="block divider left"><span>Contact Information</span></h4>
+                    <div class="grid">
+                        <div class="row">
+                            <div class="column-6">
+                                <div class="inputset<?php __errors($errors, 'street', true) ?>">
+                                    <label for="street">Street Address</label><br>
+                                    <input type="text" name="street" id="street" placeholder="Enter Street Address" value="<?php echo isset($_POST['street']) ? htmlspecialchars($_POST['street']) : '' ?>"><br/>
+                                    <?php __errors($errors, 'street') ?>
+                                </div>
+                            </div>
+                            <div class="column-6">
+                                <div class="inputset<?php __errors($errors, 'mobile', true) ?>">
+                                    <label for="mobile">Mobile Number</label><br>
+                                    <input type="text" name="mobile" id="mobile" placeholder="(+88) 0XXXX-XXXXXX" value="<?php echo isset($_POST['mobile']) ? htmlspecialchars($_POST['mobile']) : '' ?>"><br/>
+                                    <?php __errors($errors, 'mobile') ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="column-6">
+                                <div class="inputset<?php __errors($errors, 'city', true) ?>">
+                                    <label for="city">City</label><br>
+                                    <input type="text" name="city" id="city" placeholder="Enter City Name" value="<?php echo isset($_POST['city']) ? htmlspecialchars($_POST['city']) : '' ?>"><br/>
+                                    <?php __errors($errors, 'city') ?>
+                                </div>
+                            </div>
+                            <div class="column-6">
+                                <div class="inputset<?php __errors($errors, 'zip', true) ?>">
+                                    <label for="zip">Zip Code</label><br>
+                                    <input type="text" name="zip" id="zip" placeholder="Enter Zip/Postal Code" value="<?php echo isset($_POST['zip']) ? htmlspecialchars($_POST['zip']) : '' ?>"><br/>
+                                    <?php __errors($errors, 'zip') ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="column-6">
+                                <div class="inputset<?php __errors($errors, 'country', true) ?>" style="padding-right: 10px">
+                                    <label for="country">Country</label><br>
+                                    <select name="country" id="country" >
+                                        <option value="">Select</option>
+                                        <option value="bd"<?php __selected("bd", (isset($_POST['country']) ? $_POST['country'] : '')) ?>>Bangladesh</option>
+                                    </select><br>
+                                    <?php __errors($errors, 'country') ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        
+        <h4 class="block divider left"><span>Official Information</span></h4>
+            <div class="grid">
+			    <div class="row">
+				    <div class="column-6">
+					    <div class="inputset<?php __errors($errors,'bus_manager',true) ?>">
+                        <label for="bus_manager">Bus Manager</label><br>
+                        <select name="bus_manager" id="bus_manager">
+                            <option value="">Select</option>
+                            <option value="1"<?php __selected("1", (isset($_POST['bus_manager']) ? $_POST['bus_manager'] : '')) ?>>Thane Hooper</option>
+                            <option value="2"<?php __selected("2", (isset($_POST['bus_manager']) ? $_POST['bus_manager'] : '')) ?>>Alvin Vang</option>
+                            <option value="3"<?php __selected("3", (isset($_POST['bus_manager']) ? $_POST['bus_manager'] : '')) ?>>Erich Stevens</option>
+                            <option value="4"<?php __selected("4", (isset($_POST['bus_manager']) ? $_POST['bus_manager'] : '')) ?>>Brent Mathis</option>
+                            <option value="5"<?php __selected("4", (isset($_POST['bus_manager']) ? $_POST['bus_manager'] : '')) ?>>Ferdinand Woods</option>
+                            <option value="6"<?php __selected("4", (isset($_POST['bus_manager']) ? $_POST['bus_manager'] : '')) ?>>Gavin Ferrell</option>
+                            <option value="7"<?php __selected("4", (isset($_POST['bus_manager']) ? $_POST['bus_manager'] : '')) ?>>Joshua Raymond</option>
+                            <option value="8"<?php __selected("4", (isset($_POST['bus_manager']) ? $_POST['bus_manager'] : '')) ?>>Zachary Crosby</option>
+                            <option value="9"<?php __selected("4", (isset($_POST['bus_manager']) ? $_POST['bus_manager'] : '')) ?>>Samuel Alston</option>
+                            <option value="10"<?php __selected("4", (isset($_POST['bus_manager']) ? $_POST['bus_manager'] : '')) ?>>Basil Noble</option>
+                            </select><br>
+                            <?php __errors($errors, 'bus_manager') ?>
+                        </div>
+                    </div>
+					<div class="column-6">
+					    <div class="inputset<?php __errors($errors,'bus_counter',true) ?>">
+                        <label for="bus_counter">Counter</label><br>
+            
+                        <select name="bus_counter" id="bus_counter">
                         <option value="">Select</option>
                         <option value="">Kallayanpur Counter</option>
                         <option value="">Gabtoli Counter</option>
@@ -240,39 +233,43 @@ ob_start();
                         <option value="">Gazipur Counter</option>
                         <option value="">Technical More Counter</option>
                         <option value="">Savar Counter</option>
-                    </select><br>
-                    <?php __errors($errors, 'bus_counter') ?>
-                </td>
-            </tr>
-        </table>
-        <br>
-        <font face="Arial" size="2"><b>Login Information</b></font><hr>
-        <table border="0" cellpadding="5" cellspacing="0">
-            <tr>
-                <td valign="top" align="right">
-                    <label for="email"><font face="Arial" size="2"><b>Email Address</b></font></label>
-                </td>
-                <td valign="top">
-                    <input type="email" name="email" id="email" placeholder="Enter email address" value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : '' ?>" size="24"><br/>
-                    <?php __errors($errors, 'email') ?>
-                </td>
-            </tr>
-            <tr>
-                <td valign="top" align="right">
-                    <label for="password"><font face="Arial" size="2"><b>Password</b></font></label>
-                </td>
-                <td valign="top">
-                    <input type="password" name="password" id="password" size="24"><br/>
-                    <?php __errors($errors, 'password') ?>
-                </td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>
-                    <input type="submit" name="submit" value="Add Staff">
-                </td>
-            </tr>
-        </table>
+                        </select><br>
+                        <?php __errors($errors, 'bus_counter') ?>
+						</div>
+                    </div>
+			    </div>
+			</div>
+        <h4 class="block divider left"><span>Login Information</span></h4>
+                    <div class="grid">
+                        <div class="row">
+                            <div class="column-12">
+                                <div class="inputset<?php __errors($errors, 'usermail', true) ?>">
+                                    <label for="usermail">Email Address</label><br>
+                                    <input type="email" name="usermail" id="usermail" placeholder="Enter email address" value="<?php echo isset($_POST['usermail']) ? htmlspecialchars($_POST['usermail']) : '' ?>"><br/>
+                                    <?php __errors($errors, 'usermail') ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid">
+                        <div class="row">
+                            <div class="column-6">
+                                <div class="inputset<?php __errors($errors, 'password', true) ?>">
+                                    <label for="password">Password</label><br>
+                                    <input type="password" name="password" id="password"><br/>
+                                    <?php __errors($errors, 'password') ?>
+                                </div>
+                            </div>
+                            <div class="column-6">
+                                <div class="inputset<?php __errors($errors, 'repassword', true) ?>">
+                                    <label for="repassword">Confirm Password</label><br>
+                                    <input type="password" name="repassword" id="repassword"><br/>
+                                    <?php __errors($errors, 'repassword') ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="submit" name="submit" value="Add Staff"> 
     </div>
 </div>
 <?php
