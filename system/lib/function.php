@@ -455,7 +455,7 @@ function uploadFile($file)
 }
 
 // Company Registration Service Provider
-function registerCompany(array $data)
+function registerCompany(array $data, $force=false)
 {
     //Personal Information
     $fname = isset($data['first_name']) ? trim($data['first_name']) : '';
@@ -494,7 +494,7 @@ function registerCompany(array $data)
         'password' => $password,
         'gender' => $gender,
         'role' => BTRS_ROLE_BUS_MANAGER,
-        'validate' => BTRS_VALIDATION,
+        'validate' => $force ? 1 : BTRS_VALIDATION,
         'registered' => date('Y-m-d H:i:s')
     )))
     {
@@ -517,6 +517,68 @@ function registerCompany(array $data)
             array($userid, 'companyZip', $companyZip),
             array($userid, 'companyCountry', $companyCountry),
             array($userid, 'companyLogo', $companylogo)
+        )))
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+// Support Staff Registration Service Provider
+function registerSupportStaff(array $data)
+{
+    //Personal Information
+    $fname = isset($data['first_name']) ? trim($data['first_name']) : '';
+    $lname = isset($data['last_name']) ? trim($data['last_name']) : '';
+    $dobDay = isset($data['dob_day']) ? $data['dob_day'] : '';
+    $dobMonth = isset($data['dob_month']) ? $data['dob_month'] : '';
+    $dobYear = isset($data['dob_year']) ? $data['dob_year'] : '';
+    $gender = isset($data['gender']) ? $data['gender'] : 'm';
+    $marital = isset($data['marital_status']) ? $data['marital_status'] : '';
+    $nidpassport = isset($data['nid_passport']) ? $data['nid_passport'] : '';
+    $photograph = isset($data['photograph']) ? uploadFile($data['photograph']) : '';
+    $dob = $dobYear . '-' . $dobMonth . '-' . $dobDay;
+
+    //Contact Information
+    $street = isset($data['street']) ? $data['street'] : '';
+    $mobile = isset($data['mobile']) ? cleanBDMobile($data['mobile']) : '';
+    $city = isset($data['city']) ? $data['city'] : '';
+    $zip = isset($data['zip']) ? $data['zip'] : '';
+    $country = isset($data['country']) ? $data['country'] : '';
+
+    //Official Information
+    $hourlyRate = isset($data['hourlyrate']) ? $data['hourlyrate'] : 0;
+    $activeHours = isset($data['activehours']) ? $data['activehours'] : 0;
+
+    // Login Information
+    $email = isset($data['usermail']) ? trim($data['usermail']) : '';
+    $password = isset($data['password']) ? password_hash($data['password'], PASSWORD_DEFAULT) : '';
+
+    if($userid = addUser(array(
+        'email' => $email,
+        'password' => $password,
+        'gender' => $gender,
+        'role' => BTRS_ROLE_SUPPORT_STAFF,
+        'validate' => 1,
+        'registered' => date('Y-m-d H:i:s')
+    )))
+    {
+        if(addUserDetails(array(
+            array($userid, 'firstName', $fname),
+            array($userid, 'lastName', $lname),
+            array($userid, 'birthDate', $dob),
+            array($userid, 'maritalStatus', $marital),
+            array($userid, 'nidPassport', $nidpassport),
+            array($userid, 'photograph', $photograph),
+            array($userid, 'street', $street),
+            array($userid, 'mobile', $mobile),
+            array($userid, 'city', $city),
+            array($userid, 'zip', $zip),
+            array($userid, 'country', $country),
+            array($userid, 'hourlyRate', $hourlyRate),
+            array($userid, 'activeHours', $activeHours),
         )))
         {
             return true;
@@ -689,4 +751,37 @@ function renderAlert(array $alert)
         </div>
         <?php
     }
+}
+
+function listBusCompany($selected="")
+{
+    $users = getUsersByRole(BTRS_ROLE_BUS_MANAGER, 0, totalUsersByRole(BTRS_ROLE_BUS_MANAGER));
+
+    $list = "";
+
+    foreach ($users as $user)
+    {
+        $list .= '<option value="'.$user['id'].'"'.(__selected($user['id'], $selected, 'select', false)?' selected':'').'>'.htmlspecialchars(getUserDetails($user['id'], 'companyName') ) . '</option>';
+    }
+
+    return $list;
+}
+
+function listBusCounters($manager, $selected="")
+{
+    $counters = getBusCounters(0, totalBusCounters($manager), $manager);
+
+    $list = "";
+
+    foreach ($counters as $counter)
+    {
+        $list .= '<option value="'.$counter['id'].'"'.(__selected($counter['id'], $selected, 'select', false)?' selected':'').'>'.htmlspecialchars( $counter['name'] ) . '</option>';
+    }
+
+    return $list;
+}
+
+function accessController($role, ...$allowed)
+{
+    return in_array($role, $allowed);
 }

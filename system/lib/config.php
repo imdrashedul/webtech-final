@@ -6,6 +6,8 @@
  * @see https://github.com/rashed370/webtech-final
  */
 
+date_default_timezone_set('Asia/Dhaka');
+
 // Cookie Name
 if(!defined('SESSION_COOKIE')) define('SESSION_COOKIE', 'BTRSSID');
 if(!defined('SESSION_ALERT')) define('SESSION_ALERT', 'BTRSSID_ALERT');
@@ -17,6 +19,7 @@ if(!defined('BTRS_TB_USERDETAILS')) define('BTRS_TB_USERDETAILS', 'userdetails')
 if(!defined('BTRS_TB_AUTHSESSION')) define('BTRS_TB_AUTHSESSION', 'authsession');
 if(!defined('BTRS_TB_BUSCOUNTERS')) define('BTRS_TB_BUSCOUNTERS', 'buscounters');
 if(!defined('BTRS_TB_BUSES')) define('BTRS_TB_BUSES', 'buses');
+if(!defined('BTRS_TB_SCHEDULE')) define('BTRS_TB_SCHEDULE', 'schedule');
 
 // Session Alive For Next * Minutes
 if(!defined('BTRS_SESSION_ALIVE')) define('BTRS_SESSION_ALIVE', 21600);

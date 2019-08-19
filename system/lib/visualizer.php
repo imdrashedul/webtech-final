@@ -121,6 +121,7 @@ function __visualize_backend(array $data=array())
             <div class="right"> Developed By <b>M. Rashedul Islam</b> </div>
         </footer>
         <script type="text/javascript" src="assets/js/flatpickr.js"></script>
+        <script type="text/javascript" src="assets/js/ajax.js"></script>
         <script type="text/javascript" src="assets/js/script.js"></script>
         <script type="text/javascript">
             document.addEventListener('DOMContentLoaded', function () {
@@ -236,6 +237,7 @@ function __visualize_fontend(array $data=array())
     </div>
     <script type="text/javascript" src="assets/js/flatpickr.js"></script>
     <script type="text/javascript" src="assets/js/autocomplete.js"></script>
+    <script type="text/javascript" src="assets/js/ajax.js"></script>
     <?= isset($data['javascript']) ? $data['javascript'] : '' ?>
     </body>
     </html>

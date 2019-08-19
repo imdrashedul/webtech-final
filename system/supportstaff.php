@@ -37,6 +37,7 @@ $users = getUsersByRole(BTRS_ROLE_SUPPORT_STAFF, $__offset, $__limit);
 
 ob_start();
 ?>
+<?php flushAlert('supportstaff') ?>
 <div class="block">
     <div class="header">
         <b>Support Staffs List</b>
@@ -46,6 +47,7 @@ ob_start();
         <table class="datatable">
             <thead>
             <tr>
+                <th style="width: 60px">Photo</th>
                 <th>Name</th>
                 <th>Email</th>
                 <th>Salary</th>
@@ -59,8 +61,10 @@ ob_start();
             {
                 foreach ($users as $supportstaff)
                 {
+                    $name = htmlspecialchars(getUserDetails($supportstaff['id'], 'firstName').' '.getUserDetails($supportstaff['id'], 'lastName'));
                     echo '<tr>';
-                    echo '<td>'.htmlspecialchars(getUserDetails($supportstaff['id'], 'firstName').' '.getUserDetails($supportstaff['id'], 'lastName')).'</td>';
+                    echo '<td><img class="rounded" src="uploads/'.getUserDetails($supportstaff['id'], 'photograph').'" alt="'.$name.'" title="'.$name.'" width="50px" height="50px"></td>';
+                    echo '<td>'.$name.'</td>';
                     echo '<td>'.htmlspecialchars($supportstaff['email']).'</td>';
                     echo '<td class="text-right">0 BDT</td>';
                     echo '<td class="text-center">'.__formatDate($supportstaff['registered'], 'j M Y').'</td>';
@@ -74,7 +78,7 @@ ob_start();
             }
             else
             {
-                echo '<tr><td class="text-center" colspan="6">No Data Found</td></tr>';
+                echo '<tr><td class="text-center" colspan="7">No Data Found</td></tr>';
             }
             ?>
             </tbody>

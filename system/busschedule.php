@@ -27,6 +27,14 @@ if($validate!=true)
     die();
 }
 
+$total = totalBusSchedules();
+$page = isset($_REQUEST['page']) && !empty($_REQUEST['page']) && $_REQUEST['page']>0 ? $_REQUEST['page'] : 1;
+$__limit = 10;
+$tpage = ceil($total/$__limit);
+$page = $page>$tpage ? $tpage : $page;
+$__offset = $__limit * ($page - 1);
+$schedules = getBusSchedules($__offset, $__limit);
+
 ob_start();
 ?>
 
@@ -49,74 +57,38 @@ ob_start();
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>Hyundai Universe - 2019 [DHA-58109]</td>
-                <td>Manik Express</td>
-                <td>Dhaka - Bogura</td>
-                <td>07/07/2019 10:00 AM</td>
-                <td>07/07/2019 04:00 PM</td>
-                <td align="right">1000 BDT</td>
-                <td align="center">
-                    <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
-                    <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
-                </td>
-            </tr>
-            <tr bgcolor="#B7C5D6">
-                <td>Hyundai Universe - 2018 [DHA-57203]</td>
-                <td>Manik Express</td>
-                <td>Dhaka - Bogura</td>
-                <td>07/07/2019 12:00 AM</td>
-                <td>07/07/2019 06:00 PM</td>
-                <td align="right">1000 BDT</td>
-                <td align="center">
-                    <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
-                    <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
-                </td>
-            </tr>
-            <tr>
-                <td>Scania [DHA-12501]</td>
-                <td>Nabil Paribahan</td>
-                <td>Dhaka - Bogura</td>
-                <td>07/07/2019 10:00 AM</td>
-                <td>07/07/2019 04:00 PM</td>
-                <td align="right">1000 BDT</td>
-                <td align="center">
-                    <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
-                    <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
-                </td>
-            </tr>
-            <tr bgcolor="#B7C5D6">
-                <td>AK1J Super Plus - Hino [DHA-64808]</td>
-                <td>Nabil Paribahan</td>
-                <td>Dhaka - Bogura</td>
-                <td>07/07/2019 12:00 AM</td>
-                <td>07/07/2019 06:00 PM</td>
-                <td align="right">350 BDT</td>
-                <td align="center">
-                    <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
-                    <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
-                </td>
-            </tr>
+            <?php if(count($schedules)>0)
+            {
+                foreach ($schedules as $schedule)
+                {
+                    echo '<tr>';
+                    echo '<td>'.htmlspecialchars($schedule['name'] . " [".$schedule['registration']."]").'</td>';
+                    echo '<td>'.htmlspecialchars(getUserDetails($schedule['manager'], 'companyName')).'</td>';
+                    echo '<td>'.htmlspecialchars($schedule['route']).'</td>';
+                    echo '<td>'.__formatDate($schedule['departure'], "d/m/Y h:i a").'</td>';
+                    echo '<td>'.__formatDate($schedule['arrival'], "d/m/Y h:i a").'</td>';
+                    echo '<td class="text-right">'.htmlspecialchars($schedule['fare'] . " BDT").'</td>';
+                    echo '<td class="text-center">';
+                    echo '<a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;';
+                    echo '<a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>';
+                    echo '</td>';
+                    echo '</tr>';
+                }
+            }
+            else
+            {
+                echo '<tr><td class="text-center" colspan="7">No Data Found</td></tr>';
+            }
+            ?>
             </tbody>
         </table>
         <div class="grid">
             <div class="row">
                 <div class="column-4 ">
-                    <span class="pagination">
-                        Showing 1 to 10 of 100 entries
-                    </span>
+                    <?= getPaginationInfo($page, $total) ?>
                 </div>
                 <div class="column-8 text-right">
-                    <div class="pagination">
-                        <a href="#">Previous</a>
-                        <a href="#">1</a>
-                        <a class="active" href="#">2</a>
-                        <a href="#">3</a>
-                        <a href="#">4</a>
-                        <a href="#">5</a>
-                        <a href="#">6</a>
-                        <a href="javascript:void(0)" class="disabled">Next</a>
-                    </div>
+                    <?= getPagination($page, $total, 'busschedule.php?page=') ?>
                 </div>
             </div>
         </div>

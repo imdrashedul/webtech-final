@@ -37,6 +37,7 @@ $counters = getBusCounters($__offset, $__limit);
 
 ob_start();
 ?>
+<?php flushAlert('buscounter') ?>
 <div class="block">
     <div class="header">
         <b>Manage Bus Counters</b>

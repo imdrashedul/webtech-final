@@ -119,12 +119,12 @@ ob_start();
 				<div class="column-12">
 					<div class="inputset<?php __errors($errors,'description',true) ?>">
                         <label for="description">Description</label><br>
-                        <textarea name="description" rows="4" cols="25"></textarea>
+                        <textarea name="description" rows="5"></textarea>
                     </div>
 				</div>
 			</div>
 		</div>
-                            <input type="submit" name="submit" value="Add Schedule">
+        <input type="submit" name="submit" class="btn submit" value="Add Schedule">
 	</div>
 </div>
 

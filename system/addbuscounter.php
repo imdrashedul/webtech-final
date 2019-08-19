@@ -29,6 +29,60 @@ if($validate!=true)
     die();
 }
 
+if(isset($_POST['submit']))
+{
+    $operator = isset($_POST['bus_operator']) ? trim($_POST['bus_operator']) : '';
+    $counter = isset($_POST['name']) ? trim($_POST['name']) : '';
+    $location = isset($_POST['counter_location']) ? trim($_POST['counter_location']) : '';
+    $type = isset($_POST['counter_type']) ? trim($_POST['counter_type']) : '';
+    $description = isset($_POST['description']) ? $_POST['description'] : '';
+
+    //Validation Set Of 'Bus Operator'
+    if(empty($operator))
+    {
+        $errors['bus_operator'] = 'Cannot be empty';
+    }
+    else if(!getUserById($operator, 1))
+    {
+        $errors['bus_operator'] = 'Operator not found';
+    }
+
+    //Validation Set Of 'Counter Name'
+    if(empty($counter))
+    {
+        $errors['name'] = 'Cannot be empty';
+    }
+    else if(strlen($counter)<=2)
+    {
+        $errors['name'] = 'Contains at least two words';
+    }
+
+    //Validation Set Of 'Counter Location'
+    if(empty($location))
+    {
+        $errors['counter_location'] = 'Cannot be empty';
+    }
+
+    if(empty($errors))
+    {
+        if(addBusCounter(array(
+                'manager' => $operator,
+                'name' => $counter,
+                'location' => $location,
+                'type' => $type,
+                'description' => $description
+        ))) {
+            addAlert([
+                't' => 'success',
+                'm' => $counter . ' Counter Added Successfully',
+                'a' => 6000
+            ], 'buscounter');
+            header('location: buscounter.php');
+            exit;
+        }
+    }
+}
+
 ob_start();
 ?>
 
@@ -38,71 +92,63 @@ ob_start();
         <a href="buscounter.php" class="btn back red" title="Cancel"><span>Cancel</span></a>
     </div>
     <div class="body">
+        <form action="addbuscounter.php" method="POST">
             <div class="grid">
                 <div class="row">
-				    <div class="column-12">
-					    <div class="inputset<?php __errors($errors,'bus_manager',true) ?>">
-						    <label for="bus_manager">Bus Manager</label><br>
-					        <select name="bus_manager" id="bus_manager">
+                    <div class="column-12">
+                        <div class="inputset<?php __errors($errors,'bus_operator',true) ?>">
+                            <label for="bus_operator">Bus Operator</label><br>
+                            <select name="bus_operator" id="bus_operator">
                                 <option value="">Select</option>
-                                <option value="1"<?php __selected("1", (isset($_POST['bus_manager']) ? $_POST['bus_manager'] : '')) ?>>Thane Hooper</option>
-                                <option value="2"<?php __selected("2", (isset($_POST['bus_manager']) ? $_POST['bus_manager'] : '')) ?>>Alvin Vang</option>
-                                <option value="3"<?php __selected("3", (isset($_POST['bus_manager']) ? $_POST['bus_manager'] : '')) ?>>Erich Stevens</option>
-                                <option value="4"<?php __selected("4", (isset($_POST['bus_manager']) ? $_POST['bus_manager'] : '')) ?>>Brent Mathis</option>
-                                <option value="5"<?php __selected("4", (isset($_POST['bus_manager']) ? $_POST['bus_manager'] : '')) ?>>Ferdinand Woods</option>
-                                <option value="6"<?php __selected("4", (isset($_POST['bus_manager']) ? $_POST['bus_manager'] : '')) ?>>Gavin Ferrell</option>
-                                <option value="7"<?php __selected("4", (isset($_POST['bus_manager']) ? $_POST['bus_manager'] : '')) ?>>Joshua Raymond</option>
-                                <option value="8"<?php __selected("4", (isset($_POST['bus_manager']) ? $_POST['bus_manager'] : '')) ?>>Zachary Crosby</option>
-                                <option value="9"<?php __selected("4", (isset($_POST['bus_manager']) ? $_POST['bus_manager'] : '')) ?>>Samuel Alston</option>
-                                <option value="10"<?php __selected("4", (isset($_POST['bus_manager']) ? $_POST['bus_manager'] : '')) ?>>Basil Noble</option>
+                                <?= listBusCompany((isset($_POST['bus_operator']) ? $_POST['bus_operator'] : '')) ?>
                             </select><br>
-                            <?php __errors($errors, 'bus_manager') ?>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="grid">
-				<div class="row">
-					<div class="column-6">
-                        <div class="inputset<?php __errors($errors,'name',true) ?>">					
-                            <label for="name">Counter Name</label>         
+                            <?php __errors($errors, 'bus_operator') ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="grid">
+                <div class="row">
+                    <div class="column-6">
+                        <div class="inputset<?php __errors($errors,'name',true) ?>">
+                            <label for="name">Counter Name</label>
                             <input type="text" name="name" id="name" placeholder="Enter Counter Name" value="<?php echo isset($_POST['name']) ? htmlspecialchars($_POST['name']) : '' ?>" size="24"><br/>
                             <?php __errors($errors, 'name') ?>
                         </div>
                     </div>
-					<div class="column-6">
-					    <div class="inputset<?php __errors($errors,'counter_location',true) ?>">
+                    <div class="column-6">
+                        <div class="inputset<?php __errors($errors,'counter_location',true) ?>">
                             <label for="counter_location">Counter Location</label>
                             <input type="text" name="counter_location" id="counter_location" placeholder="Enter full location" value="<?php echo isset($_POST['counter_location']) ? htmlspecialchars($_POST['counter_location']) : '' ?>" size="24"><br/>
                             <?php __errors($errors, 'counter_location') ?>
                         </div>
-					</div>
-				</div>
-			</div>
-			<div class="grid">
-				<div class="row">
-				    <div class="column-6">
-					    <div class="inputset<?php __errors($errors,'counter_type',true) ?>">
+                    </div>
+                </div>
+            </div>
+            <div class="grid">
+                <div class="row">
+                    <div class="column-6">
+                        <div class="inputset<?php __errors($errors,'counter_type',true) ?>">
                             <label for="counter_type">Counter Type</label>
                             <input type="text" name="counter_type" id="counter_type" placeholder="Enter Cunter Type" value="<?php echo isset($_POST['counter_type']) ? htmlspecialchars($_POST['counter_type']) : '' ?>" size="24"><br/>
                             <?php __errors($errors, 'counter_type') ?>
                         </div>
-				    </div>
-				</div>
-			</div>
-			<div class="grid">
-				<div class="row">
-				    <div class="column-12">	
-                        <div class="inputset<?php __errors($errors,'description',true) ?>">					
-                            <label for="description">Description</label><br>
-                            <textarea name="description" rows="4" cols="20"></textarea>
-						    <?php __errors($errors, 'description') ?>
-						</div>
                     </div>
-				</div>
-			</div>
-                            <input type="submit" name="submit" value="Add Bus Counter">
-			</div>
+                </div>
+            </div>
+            <div class="grid">
+                <div class="row">
+                    <div class="column-12">
+                        <div class="inputset<?php __errors($errors,'description',true) ?>">
+                            <label for="description">Description</label><br>
+                            <textarea name="description" id="description" rows="4" cols="20"></textarea>
+                            <?php __errors($errors, 'description') ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <input type="submit" name="submit" class="btn submit" value="Add Counter">
+        </form>
     </div>
 </div>
 
