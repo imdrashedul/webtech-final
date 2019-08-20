@@ -37,6 +37,7 @@ $buses = getBuses($__offset, $__limit);
 
 ob_start();
 ?>
+<?php flushAlert('managebus') ?>
 <div class="block">
     <div class="header">
         <b>Lis of All Buses</b>

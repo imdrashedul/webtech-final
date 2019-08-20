@@ -36,3 +36,73 @@ function clearHandler(e) {
     }
 
 }
+
+function getCounters(select, data)
+{
+    data = data || {};
+    data['context'] = 'getCounters';
+
+    sendXhr(data, function(response){
+        if(response.status==true) {
+            if(response.message && response.message!=null) {
+                select.innerHTML = response.message;
+            } else {
+                alert('Couldn\'t Fetch Response')
+            }
+        } else if(response.message && response.message!=null) {
+            alert(response.message);
+        } else {
+            alert('Couldn\'t Fetch Response')
+        }
+
+        if(select.hasAttribute('loadingLocker')) {
+            select.removeAttribute('loadingLocker');
+        }
+
+    }, function (data) {
+        if(!data.elem.hasAttribute('loadingLocker')) {
+            data.elem.innerHTML = '<option value="">Loading...</option>';
+            data.elem.setAttribute('loadingLocker', '');
+        }
+    }, function (data) {
+        if(data.elem.hasAttribute('loadingLocker')) {
+            data.elem.removeAttribute('loadingLocker');
+            data.elem.innerHTML = data.innerHTML;
+        }
+    }, {elem:select}, {elem: select, innerHTML: select.innerHTML});
+}
+
+function getBuses(select, data)
+{
+    data = data || {};
+    data['context'] = 'getBuses';
+
+    sendXhr(data, function(response){
+        if(response.status==true) {
+            if(response.message && response.message!=null) {
+                select.innerHTML = response.message;
+            } else {
+                alert('Couldn\'t Fetch Response')
+            }
+        } else if(response.message && response.message!=null) {
+            alert(response.message);
+        } else {
+            alert('Couldn\'t Fetch Response')
+        }
+
+        if(select.hasAttribute('loadingLocker')) {
+            select.removeAttribute('loadingLocker');
+        }
+
+    }, function (data) {
+        if(!data.elem.hasAttribute('loadingLocker')) {
+            data.elem.innerHTML = '<option value="">Loading...</option>';
+            data.elem.setAttribute('loadingLocker', '');
+        }
+    }, function (data) {
+        if(data.elem.hasAttribute('loadingLocker')) {
+            data.elem.removeAttribute('loadingLocker');
+            data.elem.innerHTML = data.innerHTML;
+        }
+    }, {elem:select}, {elem: select, innerHTML: select.innerHTML});
+}

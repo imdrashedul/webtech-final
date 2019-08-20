@@ -37,7 +37,7 @@ $schedules = getBusSchedules($__offset, $__limit);
 
 ob_start();
 ?>
-
+<?php flushAlert('busschedule') ?>
 <div class="block">
     <div class="header">
         <b>Bus Schedules List</b>

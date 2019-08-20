@@ -7,8 +7,7 @@
 
 function sendXhr(data, success, load, release, ldata, rdata) {
 
-    if(path!==null)
-    {
+    if(data!==null) {
         var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
         var params = '';
         var dataPair = [];
@@ -18,24 +17,26 @@ function sendXhr(data, success, load, release, ldata, rdata) {
         ldata = ldata || [];
         rdata = rdata || [];
 
-        for(var index in data)
-        {
+        for(var index in data) {
             dataPair.push(encodeURIComponent(index) + '=' + encodeURIComponent(data[index]));
         }
 
         params =  dataPair.join('&').replace(/%20/g, '+');
 
         xhr.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                success(JSON.parse(this.response));
+            if (this.readyState == 4 ) {
+                if(this.status == 200) {
+                    success(JSON.parse(this.response));
+                }
+                if(release!=null) release(rdata);
             }
         };
 
         if(load!=null) load(ldata);
         xhr.open('POST', 'ajax.php', true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.setRequestHeader("X-Requested-With", "xmlhttprequest");
         xhr.send(params);
-        if(release!=null) release(rdata);
 
         return xhr;
     }

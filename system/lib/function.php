@@ -62,6 +62,47 @@ function __formatDate($date, $output = "Y-m-d H:i:s", $input = 'Y-m-d H:i:s')
     return $dObject->format($output);
 }
 
+function __validDate($date, $format="Y-m-d H:i:s")
+{
+    $dObject = DateTime::createFromFormat($format, $date);
+    return $dObject && $dObject->format($format) === $date;
+}
+
+function __getRoutesSuggesion()
+{
+    $default = array(
+        'Dhaka', 'Bogura', 'Rangpur', 'Dinajpur', 'Thakurgaon', 'Satkhira', 'Hili', 'Bandarban', 'Rangamati', 'Kushtia', 'Panchagor',
+        'Cox\'s Bazar', 'Chittagong', 'Teknaf', 'Gaibandha', 'Nilphamari', 'Khulna', 'Noagaon', 'Feni', 'Khagrachari', 'Rajshahi',
+        'Jhenaidah', 'Kurigram', 'Darshana', 'Chapai Nawabganj', 'Sylhet', 'Moulvibazar', 'Nazir Hat', 'Brahmanbaria', 'Joypurhat', 'Gopalganj',
+        'Barisal', 'Sreemangal', 'Jessore'
+    );
+
+    $routes = getBusRoutes();
+
+    foreach ($routes as $route)
+    {
+        $r = explode('-', $route);
+
+        if(isset($r[0]))
+        {
+            $f = ltrim($r[0]);
+            $f = rtrim($f);
+            $f = ucwords($f);
+            if(!in_array($f, $default)) $default[] = $f;
+        }
+
+        if(isset($r[1]))
+        {
+            $t = ltrim($r[1]);
+            $t = rtrim($t);
+            $t = ucwords($t);
+            if(!in_array($t, $default)) $default[] = $t;
+        }
+    }
+
+    return $default;
+}
+
 // __DIR__ to URL Converter
 function getUrlDir($dir)
 {
@@ -526,6 +567,66 @@ function registerCompany(array $data, $force=false)
     return false;
 }
 
+// Counter Staff Registration Service Provider
+function registerCounterStaff(array $data)
+{
+    //Personal Information
+    $fname = isset($data['first_name']) ? trim($data['first_name']) : '';
+    $lname = isset($data['last_name']) ? trim($data['last_name']) : '';
+    $dobDay = isset($data['dob_day']) ? $data['dob_day'] : '';
+    $dobMonth = isset($data['dob_month']) ? $data['dob_month'] : '';
+    $dobYear = isset($data['dob_year']) ? $data['dob_year'] : '';
+    $gender = isset($data['gender']) ? $data['gender'] : 'm';
+    $marital = isset($data['marital_status']) ? $data['marital_status'] : '';
+    $nidpassport = isset($data['nid_passport']) ? $data['nid_passport'] : '';
+    $photograph = isset($data['photograph']) ? uploadFile($data['photograph']) : '';
+    $dob = $dobYear . '-' . $dobMonth . '-' . $dobDay;
+
+    //Contact Information
+    $street = isset($data['street']) ? $data['street'] : '';
+    $mobile = isset($data['mobile']) ? cleanBDMobile($data['mobile']) : '';
+    $city = isset($data['city']) ? $data['city'] : '';
+    $zip = isset($data['zip']) ? $data['zip'] : '';
+    $country = isset($data['country']) ? $data['country'] : '';
+
+    //Official Information
+    $counter = isset($data['bus_counter']) ? $data['bus_counter'] : 0;
+
+    // Login Information
+    $email = isset($data['usermail']) ? trim($data['usermail']) : '';
+    $password = isset($data['password']) ? password_hash($data['password'], PASSWORD_DEFAULT) : '';
+
+    if($userid = addUser(array(
+        'email' => $email,
+        'password' => $password,
+        'gender' => $gender,
+        'role' => BTRS_ROLE_COUNTER_STAFF,
+        'validate' => 1,
+        'registered' => date('Y-m-d H:i:s')
+    )))
+    {
+        if(addUserDetails(array(
+            array($userid, 'firstName', $fname),
+            array($userid, 'lastName', $lname),
+            array($userid, 'birthDate', $dob),
+            array($userid, 'maritalStatus', $marital),
+            array($userid, 'nidPassport', $nidpassport),
+            array($userid, 'photograph', $photograph),
+            array($userid, 'street', $street),
+            array($userid, 'mobile', $mobile),
+            array($userid, 'city', $city),
+            array($userid, 'zip', $zip),
+            array($userid, 'country', $country),
+            array($userid, 'busCounter', $counter)
+        )))
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 // Support Staff Registration Service Provider
 function registerSupportStaff(array $data)
 {
@@ -781,7 +882,183 @@ function listBusCounters($manager, $selected="")
     return $list;
 }
 
+function listBuses($manager, $selected="")
+{
+    $buses = getBuses(0, totalBuses($manager), $manager);
+
+    $list = "";
+
+    foreach ($buses as $bus)
+    {
+        $list .= '<option value="'.$bus['id'].'"'.(__selected($bus['id'], $selected, 'select', false)?' selected':'').'>'.htmlspecialchars( $bus['name'] .' ['.$bus['registration'].']') . '</option>';
+    }
+
+    return $list;
+}
+
 function accessController($role, ...$allowed)
 {
     return in_array($role, $allowed);
+}
+
+function validScheduleSlot($departure, $arrival)
+{
+    if($departure<$arrival)
+    {
+        $departure = new DateTime($departure);
+        $arrival = new DateTime($arrival);
+        $interval = $departure->diff($arrival);
+        return $interval->h >= 1 || $interval->d >= 1;
+    }
+
+    return false;
+}
+
+function seatsAvailable($schedule, array $bus)
+{
+    $booked = getBookedSeatsBySchedule($schedule);
+    $total = $bus['seats_row']*$bus['seats_column']+$bus['fill_last_row'];
+
+    return $total - count($booked);
+}
+
+
+function generateBusLayout(array $bus, array $booked)
+{
+    $col = $bus['seats_column'];
+    $row = $bus['seats_row'];
+    $lastfill = $bus['fill_last_row'];
+    $nCol = $col + $lastfill;
+    $pattern = "ABCDE";
+    $seats = array();
+
+    for ($i=0; $i<$nCol; $i++)
+    {
+        $letCol = $pattern[$i];
+        $colSeats = array();
+        $range = range(1, $row);
+
+        foreach ($range as $curr)
+        {
+            $data = array();
+            switch ($col) {
+                case 3 :
+                    if($i==1 && $lastfill==1 && $curr!=$row)
+                    {
+                        $data['t'] = '';
+                        $data['b'] = true;
+                        $data['d'] = false;
+                    }
+                    else
+                    {
+                        $data['t'] = $letCol.$curr;
+                        $data['b'] = in_array($letCol.$curr, $booked) ? true : false;
+                        $data['d'] = true;
+                    }
+                    break;
+                case 4 :
+                    if($i==2 && $lastfill==1 && $curr!=$row)
+                    {
+                        $data['t'] = '';
+                        $data['b'] = true;
+                        $data['d'] = false;
+                    }
+                    else
+                    {
+                        $data['t'] = $letCol.$curr;
+                        $data['b'] = in_array($letCol.$curr, $booked) ? true : false;
+                        $data['d'] = true;
+                    }
+                    break;
+            }
+            if(!empty($data))
+            {
+                $colSeats[] = $data;
+            }
+        }
+        if(!empty($colSeats))
+        {
+            $seats[$letCol] = $colSeats;
+        }
+    }
+
+    $totalcol = count($seats);
+    $blocks = array();
+
+    if($totalcol==3)
+    {
+        for ($i=0; $i<$row; $i++)
+        {
+            $blocks[$pattern[0]][$i] = $seats[$pattern[0]][$i];
+            $blocks[$pattern[1].$pattern[2]][$i] = $seats[$pattern[1]][$i];
+            $blocks[$pattern[1].$pattern[2]][$i] = $seats[$pattern[2]][$i];
+        }
+    }
+    else if($totalcol>3)
+    {
+        for ($i=0; $i<$row; $i++)
+        {
+            $blocks[$pattern[0].$pattern[1]][$i][] = $seats[$pattern[0]][$i];
+            $blocks[$pattern[0].$pattern[1]][$i][] = $seats[$pattern[1]][$i];
+
+            $nOther = "";
+
+            for ($k=2; $k<$totalcol; $k++)
+            {
+                $nOther .= $pattern[$k];
+            }
+
+            if(!empty($nOther))
+            {
+                for ($k=2; $k<$totalcol; $k++)
+                {
+                    $blocks[$nOther][$i][] = $seats[$pattern[$k]][$i];
+                }
+            }
+        }
+    }
+
+    ob_start();
+    $totalBlocks = count($blocks);
+    $currBlock = 1;
+    ?>
+    <div class="bus-layout">
+        <div class="stearing"></div>
+        <div class="seats">
+            <?php ?>
+            <div>
+            <?php foreach ($blocks as $block) :?>
+                <?php foreach ($block as $bRow) : ?>
+                    <?php $totalSeatinBlock = count($bRow); $currSeatinBlock = 1; ?>
+                    <?php foreach($bRow as $bSeat) :?>
+                    <span title="<?= !empty($bSeat['t']) ? $bSeat['t']:'' ?>"<?= !$bSeat['d'] ? ' style="visibility:hidden"':'' ?><?= $bSeat['b'] ? ' class="booked"':'' ?>></span>
+                    <?php if($currSeatinBlock++==$totalSeatinBlock) : ?>
+                    <br>
+                    <?php endif; ?>
+                    <?php endforeach; ?>
+                <?php endforeach; ?>
+            <?php if($currBlock++<$totalBlocks) : ?>
+            </div>
+            <div<?= $lastfill!=1 && $col<5 ? ' style="margin-left:30px"':'' ?>>
+            <?php endif; ?>
+            <?php endforeach; ?>
+            </div>
+        </div>
+    </div>
+    <?php
+    return ob_get_clean();
+}
+
+function listPaymentMethod($selected="")
+{
+    $methods = getPayMethod( 0, totalPayMethod());
+
+    $list = "";
+
+    foreach ($methods as $method)
+    {
+        $list .= '<option value="'.$method['id'].'"'.(__selected($method['id'], $selected, 'select', false)?' selected':'').'>'.htmlspecialchars( $method['method'] ) . '</option>';
+    }
+
+    return $list;
 }

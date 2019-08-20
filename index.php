@@ -18,7 +18,7 @@ ob_start();
             <h2>No. 1 online Ticketing Network</h2>
         </div>
         <div class="oval">
-            <form method="post" action="search.php">
+            <form method="get" action="search.php">
                 <div class="inputset" style="width: 27%">
                     <label for="from">From</label>
                     <input type="text" name="from" id="from">
@@ -32,7 +32,7 @@ ob_start();
                     <input type="text" name="departure" id="departure">
                 </div>
                 <div class="inputset" style="width: 14.9%">
-                    <input type="submit" name="submit" value="Search">
+                    <input type="submit" value="Search">
                 </div>
             </form>
         </div>
@@ -44,7 +44,7 @@ ob_start();
         </div>
         <div class="number">
             <img src="assets/img/call.png" alt="icon">
-            <h2 >10210</h2>
+            <h2>10210</h2>
         </div>
     </div>
     </div>
@@ -150,10 +150,12 @@ ob_start();
 
 <?php
 $content = ob_get_clean();
+connectDatabase();
 ob_start();
 ?>
     <!-- CUSTOM JS GOES HERE -->
     <script type="text/javascript">
+        var __routes = <?= json_encode(__getRoutesSuggesion()) ?>;
         document.addEventListener('DOMContentLoaded', () => {
             flatpickr(document.querySelector('input[type="text"][name="departure"]'), {
                 altInput: true,
@@ -162,17 +164,14 @@ ob_start();
                 minDate: "today"
             });
 
-            __autocomplete(document.querySelector('input[type="text"][name="from"]'), [
-                'Bogura', 'Dhaka', 'Dhaka (Kallayanpur)', 'Tangail', 'Sirajganj', 'Rangpur', 'Dinajpur'
-            ]);
+            __autocomplete(document.querySelector('input[type="text"][name="from"]'), __routes);
 
-            __autocomplete(document.querySelector('input[type="text"][name="to"]'), [
-                'Bogura', 'Dhaka', 'Dhaka (Kallayanpur)', 'Tangail', 'Sirajganj', 'Rangpur', 'Dinajpur'
-            ]);
+            __autocomplete(document.querySelector('input[type="text"][name="to"]'), __routes);
         });
     </script>
 <?php
 $javascript = ob_get_clean();
+disconnectDatabase();
 __visualize_fontend(array(
     'data' => $content,
     'javascript' => $javascript

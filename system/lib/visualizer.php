@@ -17,7 +17,8 @@ function __visualize_backend(array $data=array())
     <head>
         <title>BTRS<?= isset($data['title']) ? ' - '.$data['title'] : '' ?> </title>
         <link rel="stylesheet" href="assets/css/styles.css">
-        <link rel="stylesheet" href="assets/css/flatpickr.min.css">
+        <link rel="stylesheet" href="../assets/css/flatpickr.min.css">
+        <link rel="stylesheet" href="../assets/css/autocomplete.css">
         <link rel="shortcut icon" href="assets/img/fav.png" type="image/png">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style>
@@ -120,9 +121,10 @@ function __visualize_backend(array $data=array())
             <div class="left"> &#0169; <?= date('Y') ?> BTRS - All Rights Reserved </div>
             <div class="right"> Developed By <b>M. Rashedul Islam</b> </div>
         </footer>
-        <script type="text/javascript" src="assets/js/flatpickr.js"></script>
-        <script type="text/javascript" src="assets/js/ajax.js"></script>
+        <script type="text/javascript" src="../assets/js/flatpickr.js"></script>
+        <script type="text/javascript" src="../assets/js/ajax.js"></script>
         <script type="text/javascript" src="assets/js/script.js"></script>
+        <script type="text/javascript" src="../assets/js/autocomplete.js"></script>
         <script type="text/javascript">
             document.addEventListener('DOMContentLoaded', function () {
                 document.querySelector('.preloader').classList.add('hidden');
@@ -238,6 +240,7 @@ function __visualize_fontend(array $data=array())
     <script type="text/javascript" src="assets/js/flatpickr.js"></script>
     <script type="text/javascript" src="assets/js/autocomplete.js"></script>
     <script type="text/javascript" src="assets/js/ajax.js"></script>
+    <script type="text/javascript" src="assets/js/script.js"></script>
     <?= isset($data['javascript']) ? $data['javascript'] : '' ?>
     </body>
     </html>

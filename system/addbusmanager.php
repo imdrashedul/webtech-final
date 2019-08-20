@@ -58,7 +58,7 @@ if(isset($_POST['submit']))
     $companyCountry = isset($_POST['company_country']) ? $_POST['company_country'] : '';
     $companyLogo = isset($_FILES['company_logo']) ? $_FILES['company_logo'] : '';
 
-
+    // Login Information
     $email = isset($_POST['usermail']) ? trim($_POST['usermail']) : '';
     $password = isset($_POST['password']) ? $_POST['password'] : '';
     $repassword = isset($_POST['password']) ? $_POST['repassword'] : '';

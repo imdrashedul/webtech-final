@@ -27,9 +27,17 @@ if($validate!=true)
     die();
 }
 
+$total = totalPayMethod();
+$page = isset($_REQUEST['page']) && !empty($_REQUEST['page']) && $_REQUEST['page']>0 ? $_REQUEST['page'] : 1;
+$__limit = 10;
+$tpage = ceil($total/$__limit);
+$page = $page>$tpage ? $tpage : $page;
+$__offset = $__limit * ($page - 1);
+$paymethods = getPayMethod($__offset, $__limit);
+
 ob_start();
 ?>
-
+<?php flushAlert('paymethod') ?>
 <div class="block">
     <div class="header">
         <b>Payment Methods List</b>
@@ -40,62 +48,35 @@ ob_start();
             <thead>
             <tr>
                 <th>Method</th>
-                <th>Gateway</th>
-                <th>Status</th>
+                <th>Description</th>
+                <th>Added</th>
                 <th>Action</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>bKash</td>
-                <td>https://www.bkash.com</td>
-                <td>Active</td>
-                <td align="center">
-                    <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
-                    <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
-                </td>
-            </tr>
-            <tr bgcolor="#B7C5D6">
-                <td>Rocket</td>
-                <td>https://www.dutchbanglabank.com/rocket</td>
-                <td>Active</td>
-                <td align="center">
-                    <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
-                    <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
-                </td>
-            </tr>
-            <tr>
-                <td>Bank Transfer</td>
-                <td>N/A</td>
-                <td>Suspend</td>
-                <td align="center">
-                    <a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;
-                    <a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>
-                </td>
-            </tr>
+            <?php if(count($paymethods)>0)
+            {
+                foreach ($paymethods as $paymethod)
+                {
+                    echo '<tr>';
+                    echo '<td>'.htmlspecialchars($paymethod['method']).'</td>';
+                    echo '<td>'.htmlspecialchars($paymethod['description']).'</td>';
+                    echo '<td class="text-center">'.__formatDate($paymethod['created'], "d/m/Y h:i a").'</td>';
+                    echo '<td class="text-center">';
+                    echo '<a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;';
+                    echo '<a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>';
+                    echo '</td>';
+                    echo '</tr>';
+                }
+            }
+            else
+            {
+                echo '<tr><td class="text-center" colspan="4">No Data Found</td></tr>';
+            }
+            ?>
             </tbody>
         </table>
-        <div class="grid">
-            <div class="row">
-                <div class="column-4 ">
-                    <span class="pagination">
-                        Showing 1 to 10 of 100 entries
-                    </span>
-                </div>
-                <div class="column-8 text-right">
-                    <div class="pagination">
-                        <a href="#">Previous</a>
-                        <a href="#">1</a>
-                        <a class="active" href="#">2</a>
-                        <a href="#">3</a>
-                        <a href="#">4</a>
-                        <a href="#">5</a>
-                        <a href="#">6</a>
-                        <a href="javascript:void(0)" class="disabled">Next</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+
     </div>
 </div>
 

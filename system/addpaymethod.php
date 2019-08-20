@@ -29,53 +29,76 @@ if($validate!=true)
     die();
 }
 
+if(isset($_POST['submit']))
+{
+    $method = isset($_POST['method']) ? trim($_POST['method']) : '';
+    $description = isset($_POST['description']) ? $_POST['description'] : '';
+
+    if(empty($method))
+    {
+        $errors['method'] = 'Cannot be empty';
+    }
+    else if(strlen($method)<=2)
+    {
+        $errors['method'] = 'Contains at least two words';
+    }
+
+    if (empty($error))
+    {
+        if(empty($errors))
+        {
+            if(addPaymentMethod(array(
+                'method' => $method,
+                'description' => $description,
+                'created' => date('Y-m-d H:i:s')
+            ))) {
+                addAlert([
+                    't' => 'success',
+                    'm' => 'Method '.$method.' Added Successfully',
+                    'a' => 6000
+                ], 'paymethod');
+                header('location: paymethod.php');
+                exit;
+            }
+        }
+    }
+}
+
+
 ob_start();
 ?>
-
-    <div class="block">
+<div class="block">
         <div class="header">
             <b>Add Payment Method</b>
             <a href="paymethod.php" class="btn back red" title="Cancel"><span>Cancel</span></a>
         </div>
         <div class="body">
-            <table border="0" cellpadding="5" cellspacing="0">
-                <tr>
-                    <td valign="top" align="right">
-                        <label for="method"><font face="Arial" size="2"><b>Method Name</b></font></label>
-                    </td>
-                    <td valign="top">
-                        <input type="text" name="method" id="method" placeholder="Enter Method Name" value="<?php echo isset($_POST['method']) ? htmlspecialchars($_POST['method']) : '' ?>" size="24"><br/>
-                        <?php __errors($errors, 'method') ?>
-                    </td>
-                </tr>
-                <tr>
-                    <td valign="top" align="right">
-                        <label for="gateway"><font face="Arial" size="2"><b>Gateway</b></font></label>
-                    </td>
-                    <td valign="top">
-                        <input type="text" name="gateway" id="gateway" placeholder="Enter Method Gateway" value="<?php echo isset($_POST['gateway']) ? htmlspecialchars($_POST['gateway']) : '' ?>" size="24"><br/>
-                        <?php __errors($errors, 'gateway') ?>
-                    </td>
-                </tr>
-                <tr>
-                    <td valign="top" align="right">
-                        <label for="description"><font face="Arial" size="2"><b>Description</b></font></label>
-                    </td>
-                    <td valign="top">
-                        <textarea name="description" rows="4" cols="25"></textarea>
-                    </td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>
-                        <input type="submit" name="submit" value="Add Method">
-                    </td>
-                </tr>
-            </table>
+            <form action="addpaymethod.php" method="POST">
+                <div class="grid">
+                    <div class="row">
+                        <div class="column-12">
+                            <div class="inputset<?php __errors($errors,'method',true) ?>">
+                                <label for="method">Method Name</label><br>
+                                <input type="text" name="method" id="method" placeholder="Enter Method Name" value="<?php echo isset($_POST['method']) ? htmlspecialchars($_POST['method']) : '' ?>">
+                                <?php __errors($errors, 'method') ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid">
+                    <div class="row">
+                        <div class="column-12">
+                            <div class="inputset">
+                                <label for="description">Description</label><br>
+                                <textarea name="description" id="description" rows="4" cols="25"><?= htmlspecialchars(isset($_POST['description']) ? htmlspecialchars($_POST['description']) : '') ?></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <input type="submit" name="submit" class="btn submit" value="Add Method">
+            </form>
         </div>
     </div>
-
-
 <?php
 $content = ob_get_clean();
 

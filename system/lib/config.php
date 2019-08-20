@@ -20,6 +20,10 @@ if(!defined('BTRS_TB_AUTHSESSION')) define('BTRS_TB_AUTHSESSION', 'authsession')
 if(!defined('BTRS_TB_BUSCOUNTERS')) define('BTRS_TB_BUSCOUNTERS', 'buscounters');
 if(!defined('BTRS_TB_BUSES')) define('BTRS_TB_BUSES', 'buses');
 if(!defined('BTRS_TB_SCHEDULE')) define('BTRS_TB_SCHEDULE', 'schedule');
+if(!defined('BTRS_TB_BOOKINGS')) define('BTRS_TB_BOOKINGS', 'bookings');
+if(!defined('BTRS_TB_BOOKEDSEATS')) define('BTRS_TB_BOOKEDSEATS', 'bookedseats');
+if(!defined('BTRS_TB_DISCOUNT')) define('BTRS_TB_DISCOUNT', 'discount');
+if(!defined('BTRS_TB_PAYMETHOD')) define('BTRS_TB_PAYMETHOD', 'paymentmethod');
 
 // Session Alive For Next * Minutes
 if(!defined('BTRS_SESSION_ALIVE')) define('BTRS_SESSION_ALIVE', 21600);

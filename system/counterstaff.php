@@ -37,6 +37,7 @@ $users = getUsersByRole(BTRS_ROLE_COUNTER_STAFF, $__offset, $__limit);
 
 ob_start();
 ?>
+<?php flushAlert('counterstaff') ?>
 <div class="block">
     <div class="header">
         <b>Manage Counter Staffs</b>
@@ -46,6 +47,7 @@ ob_start();
         <table class="datatable">
             <thead>
             <tr>
+                <th style="width: 60px">Photo</th>
                 <th>Name</th>
                 <th>Email</th>
                 <th>Hire Date</th>
@@ -59,12 +61,17 @@ ob_start();
             {
                 foreach ($users as $counterstaff)
                 {
+                    $name = htmlspecialchars(getUserDetails($counterstaff['id'], 'firstName').' '.getUserDetails($counterstaff['id'], 'lastName'));
+                    $counter = getCounterById(getUserDetails($counterstaff['id'], 'busCounter'));
+                    $manager = $counter['manager'];
+
                     echo '<tr>';
-                    echo '<td>'.htmlspecialchars(getUserDetails($counterstaff['id'], 'firstName').' '.getUserDetails($counterstaff['id'], 'lastName')).'</td>';
+                    echo '<td><img class="rounded" src="uploads/'.getUserDetails($counterstaff['id'], 'photograph').'" alt="'.$name.'" title="'.$name.'" width="50px" height="50px"></td>';
+                    echo '<td>'.$name.'</td>';
                     echo '<td>'.htmlspecialchars($counterstaff['email']).'</td>';
                     echo '<td class="text-center">'.__formatDate($counterstaff['registered'], 'j M Y').'</td>';
-                    echo '<td class="text-center">'.htmlspecialchars(getUserDetails(getUserDetails($counterstaff['id'], 'busManager'), 'companyName')).'</td>';
-                    echo '<td class="text-center"> - </td>';
+                    echo '<td class="text-center">'.htmlspecialchars(getUserDetails($manager, 'companyName')).'</td>';
+                    echo '<td class="text-center">'.htmlspecialchars($counter['name']).'</td>';
                     echo '<td class="text-center">';
                     echo '<a href="#"><img src="assets/img/edit_user.png" width="18px" height="18px" alt="[+]" title="Edit Information" /></a> &#183;';
                     echo '<a href="#"><img src="assets/img/sq_remove.png" width="18px" height="18px" title="Remove Information"/></a>';
@@ -74,7 +81,7 @@ ob_start();
             }
             else
             {
-                echo '<tr><td class="text-center" colspan="6">No Data Found</td></tr>';
+                echo '<tr><td class="text-center" colspan="7">No Data Found</td></tr>';
             }
             ?>
             </tbody>

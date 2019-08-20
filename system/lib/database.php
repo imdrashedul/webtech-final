@@ -763,3 +763,513 @@ function addBusCounter(array $data)
 
     return false;
 }
+
+function getCounterById($counter)
+{
+    global $connection;
+
+    $query = "SELECT * FROM ".BTRS_DB_PREFIX.BTRS_TB_BUSCOUNTERS." WHERE `id` = ? ORDER BY `id` DESC";
+
+    if($stmt = mysqli_prepare($connection, $query))
+    {
+
+        mysqli_stmt_bind_param($stmt, 'i', $counter);
+
+        mysqli_stmt_execute($stmt);
+        if($response = mysqli_stmt_get_result($stmt))
+        {
+            if($row = mysqli_fetch_assoc($response))
+            {
+                if(is_array($row) && !empty($row))
+                {
+                    return $row;
+                }
+            }
+        }
+    }
+
+    return null;
+}
+
+
+function addBus(array $data)
+{
+    global $connection;
+
+    $query = "INSERT INTO ".BTRS_DB_PREFIX.BTRS_TB_BUSES."( `manager`, `name`, `registration`, `type`, `seats_row`, `seats_column`, `fill_last_row`, `description` ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ? )";
+
+    if($stmt = mysqli_prepare($connection, $query))
+    {
+        mysqli_stmt_bind_param(
+            $stmt,
+            'isssiiss',
+            $data['manager'],
+            $data['name'],
+            $data['registration'],
+            $data['type'],
+            $data['seats_row'],
+            $data['seats_column'],
+            $data['fill_last_row'],
+            $data['description']
+        );
+
+        if(mysqli_stmt_execute($stmt))
+        {
+            if(mysqli_affected_rows($connection))
+            {
+                return mysqli_insert_id($connection);
+            }
+        }
+
+    }
+
+    return false;
+}
+
+function getBusById($bus)
+{
+    global $connection;
+
+    $query = "SELECT * FROM ".BTRS_DB_PREFIX.BTRS_TB_BUSES." WHERE `id` = ? ORDER BY `id` DESC";
+
+    if($stmt = mysqli_prepare($connection, $query))
+    {
+
+        mysqli_stmt_bind_param($stmt, 'i', $bus);
+
+        mysqli_stmt_execute($stmt);
+        if($response = mysqli_stmt_get_result($stmt))
+        {
+            if($row = mysqli_fetch_assoc($response))
+            {
+                if(is_array($row) && !empty($row))
+                {
+                    return $row;
+                }
+            }
+        }
+    }
+
+    return null;
+}
+
+function getBusByReg($reg)
+{
+    global $connection;
+
+    $query = "SELECT * FROM ".BTRS_DB_PREFIX.BTRS_TB_BUSES." WHERE `registration` = ? ORDER BY `id` DESC";
+
+    if($stmt = mysqli_prepare($connection, $query))
+    {
+
+        mysqli_stmt_bind_param($stmt, 's', $reg);
+
+        mysqli_stmt_execute($stmt);
+        if($response = mysqli_stmt_get_result($stmt))
+        {
+            if($row = mysqli_fetch_assoc($response))
+            {
+                if(is_array($row) && !empty($row))
+                {
+                    return $row;
+                }
+            }
+        }
+    }
+
+    return null;
+}
+
+function getBusRoutes()
+{
+    global $connection;
+
+    $query = "SELECT DISTINCT `route` FROM ".BTRS_DB_PREFIX.BTRS_TB_SCHEDULE;
+
+    $routes = array();
+
+    if($stmt = mysqli_prepare($connection, $query))
+    {
+        mysqli_stmt_execute($stmt);
+        if($response = mysqli_stmt_get_result($stmt))
+        {
+            while($row = mysqli_fetch_assoc($response))
+            {
+                if(is_array($row) && !empty($row))
+                {
+                    $routes[] = $row['route'];
+                }
+            }
+        }
+    }
+
+    return $routes;
+}
+
+function isConflictSchedule($bus, $departure, $route)
+{
+    global $connection;
+
+    $query = "SELECT COUNT(*) FROM " . BTRS_DB_PREFIX.BTRS_TB_SCHEDULE . " WHERE `busid` = ? AND `route` = ? (`departure` = ? OR ( `departure` < ? AND `arrival` >= ? ))";
+
+    if($stmt = mysqli_prepare($connection, $query))
+    {
+        mysqli_stmt_bind_param($stmt, 'issss', $bus, $route, $departure, $departure, $departure);
+
+        if(mysqli_stmt_execute($stmt))
+        {
+            if($response = mysqli_stmt_get_result($stmt))
+            {
+                if($row = mysqli_fetch_row($response))
+                {
+                    return isset($row[0]) && $row[0]>0;
+                }
+            }
+        }
+
+    }
+
+    return false;
+}
+
+function addSchedule(array $data)
+{
+    global $connection;
+
+    $query = "INSERT INTO ".BTRS_DB_PREFIX.BTRS_TB_SCHEDULE."( `busid`, `departure`, `arrival`, `route`, `fare`, `boarding`, `created`, `description` ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ? )";
+
+    if($stmt = mysqli_prepare($connection, $query))
+    {
+        mysqli_stmt_bind_param(
+            $stmt,
+            'isssdiss',
+            $data['busid'],
+            $data['departure'],
+            $data['arrival'],
+            $data['route'],
+            $data['fare'],
+            $data['boarding'],
+            $data['created'],
+            $data['description']
+        );
+
+        if(mysqli_stmt_execute($stmt))
+        {
+            if(mysqli_affected_rows($connection))
+            {
+                return mysqli_insert_id($connection);
+            }
+        }
+
+    }
+
+    return false;
+}
+
+function getScheduleById($schedule)
+{
+    global $connection;
+
+    $query = "SELECT * FROM ".BTRS_DB_PREFIX.BTRS_TB_SCHEDULE." WHERE `id` = ? ORDER BY `id` DESC";
+
+    if($stmt = mysqli_prepare($connection, $query))
+    {
+
+        mysqli_stmt_bind_param($stmt, 'i', $schedule);
+
+        mysqli_stmt_execute($stmt);
+        if($response = mysqli_stmt_get_result($stmt))
+        {
+            if($row = mysqli_fetch_assoc($response))
+            {
+                if(is_array($row) && !empty($row))
+                {
+                    return $row;
+                }
+            }
+        }
+    }
+
+    return null;
+}
+
+function getSchedule($from, $to, $departure, $manager=null)
+{
+    global $connection;
+
+    $route = $from.' - '.$to;
+    $departureFrom = $departure . " 00:00:00";
+    $departureTo = $departure . " 23:59:59";
+    $schedules = array();
+
+    $query = "SELECT * FROM ".BTRS_DB_PREFIX.BTRS_TB_SCHEDULE." WHERE `route` = ?".($manager!=null?' AND `busid` IN (SELECT id FROM '.BTRS_DB_PREFIX.BTRS_TB_BUSES.' WHERE `manager` = ? )':'')." AND `departure` BETWEEN ? AND ? ORDER BY `departure` ASC";
+
+    if($stmt = mysqli_prepare($connection, $query))
+    {
+        if($manager!=null)
+        {
+            mysqli_stmt_bind_param($stmt, 'siss', $route, $manager, $departureFrom, $departureTo);
+        }
+        else
+        {
+            mysqli_stmt_bind_param($stmt, 'sss', $route, $departureFrom, $departureTo);
+        }
+
+        mysqli_stmt_execute($stmt);
+        if($response = mysqli_stmt_get_result($stmt))
+        {
+
+            while($row = mysqli_fetch_assoc($response))
+            {
+                if(is_array($row) && !empty($row))
+                {
+                    $schedules[] = $row;
+                }
+            }
+        }
+    }
+
+    return $schedules;
+}
+
+function getBookedSeatsBySchedule($schedule)
+{
+    global $connection;
+
+    $seats = array();
+
+    $query = "SELECT a.* FROM ".BTRS_DB_PREFIX.BTRS_TB_BOOKEDSEATS." a INNER JOIN " .BTRS_DB_PREFIX.BTRS_TB_BOOKINGS." b ON a.booking = b.id ".
+             "INNER JOIN ".BTRS_DB_PREFIX.BTRS_TB_SCHEDULE." c ON b.schedule = c.id ".
+             "WHERE c.id = ? ORDER BY a.seat ASC";
+
+    if($stmt = mysqli_prepare($connection, $query))
+    {
+
+        mysqli_stmt_bind_param($stmt, 'i', $schedule);
+
+
+        mysqli_stmt_execute($stmt);
+        if($response = mysqli_stmt_get_result($stmt))
+        {
+
+            while($row = mysqli_fetch_assoc($response))
+            {
+                if(is_array($row) && !empty($row))
+                {
+                    $seats[] = $row['seat'];
+                }
+            }
+        }
+    }
+
+    echo mysqli_error($connection);
+
+    return $seats;
+}
+
+
+function getValidCupon($code)
+{
+    global $connection;
+
+    $date = date('Y-m-d H:i:s');
+
+    $query = "SELECT * FROM ".BTRS_DB_PREFIX.BTRS_TB_DISCOUNT." WHERE `code` = ? AND `valid_from` < ? AND `valid_to` > ?";
+
+    if($stmt = mysqli_prepare($connection, $query))
+    {
+        mysqli_stmt_bind_param($stmt, 'sss', $code, $date, $date);
+
+        mysqli_stmt_execute($stmt);
+
+        if($response = mysqli_stmt_get_result($stmt))
+        {
+            if($row = mysqli_fetch_assoc($response))
+            {
+                if(is_array($row) && !empty($row))
+                {
+                    return $row;
+                }
+            }
+        }
+    }
+
+    return null;
+}
+
+function addDiscount(array $data)
+{
+    global $connection;
+
+    $query = "INSERT INTO ".BTRS_DB_PREFIX.BTRS_TB_DISCOUNT."( `code`, `discount`, `max`, `valid_from`, `valid_to`, `created` ) VALUES ( ?, ?, ?, ?, ?, ? )";
+
+    if($stmt = mysqli_prepare($connection, $query))
+    {
+        mysqli_stmt_bind_param(
+            $stmt,
+            'ssdsss',
+            $data['code'],
+            $data['discount'],
+            $data['max'],
+            $data['valid_from'],
+            $data['valid_to'],
+            $data['created']
+        );
+
+        if(mysqli_stmt_execute($stmt))
+        {
+            if(mysqli_affected_rows($connection))
+            {
+                return mysqli_insert_id($connection);
+            }
+        }
+
+    }
+
+    return false;
+}
+
+function totalDiscount()
+{
+    global $connection;
+
+    $query = "SELECT COUNT(*) FROM ".BTRS_DB_PREFIX.BTRS_TB_DISCOUNT;
+
+    if($stmt = mysqli_prepare($connection, $query))
+    {
+        if(mysqli_stmt_execute($stmt))
+        {
+            if($response = mysqli_stmt_get_result($stmt))
+            {
+                if($row = mysqli_fetch_row($response))
+                {
+                    return (isset($row[0]) && $row[0]>0) ? $row[0] : 0;
+                }
+            }
+        }
+
+    }
+
+    return 0;
+}
+
+function getDiscount($offset=0, $limit=0)
+{
+    global $connection;
+
+    $query = "SELECT * FROM ".BTRS_DB_PREFIX.BTRS_TB_DISCOUNT." ORDER BY `id` DESC ".( $limit>0 ? " LIMIT ?, ?" : "" );
+    $users = array();
+
+    if($stmt = mysqli_prepare($connection, $query))
+    {
+
+        if($limit>0)
+        {
+            mysqli_stmt_bind_param($stmt, 'ii', $offset, $limit);
+        }
+
+        if(mysqli_stmt_execute($stmt))
+        {
+            if($response = mysqli_stmt_get_result($stmt))
+            {
+                if(mysqli_num_rows($response)>0)
+                {
+                    while ($row = mysqli_fetch_assoc($response))
+                    {
+                        $users[] = $row;
+                    }
+                }
+            }
+        }
+    }
+
+    return $users;
+}
+
+function addPaymentMethod(array $data)
+{
+
+        global $connection;
+
+        $query = "INSERT INTO ".BTRS_DB_PREFIX.BTRS_TB_PAYMETHOD."( `method`, `description`, `created` ) VALUES ( ?, ?, ? )";
+
+        if($stmt = mysqli_prepare($connection, $query))
+        {
+            mysqli_stmt_bind_param(
+                $stmt,
+                'sss',
+                $data['method'],
+                $data['description'],
+                $data['created']
+            );
+
+            if(mysqli_stmt_execute($stmt))
+            {
+                if(mysqli_affected_rows($connection))
+                {
+                    return mysqli_insert_id($connection);
+                }
+            }
+
+        }
+
+        return false;
+
+}
+
+function totalPayMethod()
+{
+    global $connection;
+
+    $query = "SELECT COUNT(*) FROM ".BTRS_DB_PREFIX.BTRS_TB_PAYMETHOD;
+
+    if($stmt = mysqli_prepare($connection, $query))
+    {
+        if(mysqli_stmt_execute($stmt))
+        {
+            if($response = mysqli_stmt_get_result($stmt))
+            {
+                if($row = mysqli_fetch_row($response))
+                {
+                    return (isset($row[0]) && $row[0]>0) ? $row[0] : 0;
+                }
+            }
+        }
+
+    }
+
+    return 0;
+}
+
+function getPayMethod($offset=0, $limit=0)
+{
+    global $connection;
+
+    $query = "SELECT * FROM ".BTRS_DB_PREFIX.BTRS_TB_PAYMETHOD." ORDER BY `id` DESC ".( $limit>0 ? " LIMIT ?, ?" : "" );
+    $users = array();
+
+    if($stmt = mysqli_prepare($connection, $query))
+    {
+
+        if($limit>0)
+        {
+            mysqli_stmt_bind_param($stmt, 'ii', $offset, $limit);
+        }
+
+        if(mysqli_stmt_execute($stmt))
+        {
+            if($response = mysqli_stmt_get_result($stmt))
+            {
+                if(mysqli_num_rows($response)>0)
+                {
+                    while ($row = mysqli_fetch_assoc($response))
+                    {
+                        $users[] = $row;
+                    }
+                }
+            }
+        }
+    }
+
+    return $users;
+}
