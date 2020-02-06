@@ -27,13 +27,13 @@ if($validate!=true)
     die();
 }
 
-$total = totalUsersByRole(BTRS_ROLE_COUNTER_STAFF);
+$total = accessController($user['role'], BTRS_ROLE_ADMIN, BTRS_ROLE_SUPPORT_STAFF) ? totalUsersByRole(BTRS_ROLE_COUNTER_STAFF) : totalCounterStaff($user['id']);
 $page = isset($_REQUEST['page']) && !empty($_REQUEST['page']) && $_REQUEST['page']>0 ? $_REQUEST['page'] : 1;
 $__limit = 10;
 $tpage = ceil($total/$__limit);
 $page = $page>$tpage ? $tpage : $page;
 $__offset = $__limit * ($page - 1);
-$users = getUsersByRole(BTRS_ROLE_COUNTER_STAFF, $__offset, $__limit);
+$users = accessController($user['role'], BTRS_ROLE_ADMIN, BTRS_ROLE_SUPPORT_STAFF) ? getUsersByRole(BTRS_ROLE_COUNTER_STAFF, $__offset, $__limit) : getCounterStaff($user['id'], $__offset, $__limit);
 
 ob_start();
 ?>

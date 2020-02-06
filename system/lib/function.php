@@ -922,9 +922,52 @@ function seatsAvailable($schedule, array $bus)
     return $total - count($booked);
 }
 
+function getAvailableSeats(array $schedule, $all = false)
+{
+    removeExpiredBooking();
+
+    $available = array();
+
+    $bus = getBusById($schedule['busid']);
+    $booked = getBookedSeatsBySchedule($schedule['id']);
+
+    $col = $bus['seats_column'];
+    $row = $bus['seats_row'];
+    $lastfill = $bus['fill_last_row'];
+    $nCol = $col + $lastfill;
+    $pattern = "ABCDE";
+
+
+    for ($i=0; $i<$nCol; $i++)
+    {
+        $letCol = $pattern[$i];
+        $range = range(1, $row);
+
+        foreach ($range as $curr)
+        {
+            switch ($col) {
+                case 3 :
+                    if(!($i==1 && $lastfill==1 && $curr!=$row) && ($all || !in_array($letCol.$curr, $booked)) && !in_array($letCol.$curr, $available))
+                    {
+                        $available[] = $letCol.$curr;
+                    }
+                    break;
+                case 4 :
+                    if(!($i==2 && $lastfill==1 && $curr!=$row) && ($all || !in_array($letCol.$curr, $booked)) && !in_array($letCol.$curr, $available))
+                    {
+                        $available[] = $letCol.$curr;
+                    }
+                    break;
+            }
+        }
+    }
+
+    return $available;
+}
 
 function generateBusLayout(array $bus, array $booked)
 {
+    removeExpiredBooking();
     $col = $bus['seats_column'];
     $row = $bus['seats_row'];
     $lastfill = $bus['fill_last_row'];
@@ -1061,4 +1104,69 @@ function listPaymentMethod($selected="")
     }
 
     return $list;
+}
+
+function verifyAvailableSeats(array $seats, array $schedule)
+{
+    $return = array();
+    $available = getAvailableSeats($schedule);
+
+    foreach ($seats as $seat) {
+        if(!in_array($seat, $available))
+        {
+            $return[$seat] = false;
+
+        }
+    }
+    return empty($return);
+}
+
+function bookTemporaryTicket(array $seats, array $schedule)
+{
+    $fare = count($seats)*$schedule['fare'];
+    $temporary = date('Y-m-d H:i:s', time()+1800);
+    if($booking = addBooking(array(
+        'schedule' => $schedule['id'],
+        'total_fare' => $fare,
+        'status' => 'temporary',
+        'temp' => $temporary,
+        'booked' => date('Y-m-d H:i:s')
+    )))
+    {
+        $seatBooked = 0;
+
+        foreach ($seats as $seat) {
+            if(addSeatBooking($booking, $seat)) $seatBooked++;
+        }
+
+        if($seatBooked==count($seats))
+        {
+            return $booking;
+        }
+    }
+
+    return false;
+}
+
+function setTemporaryBooking($booking)
+{
+    $_SESSION[SESSION_TEMP_BOOKING] = $booking;
+}
+
+function clearTemporaryBooking()
+{
+    if(isset($_SESSION[SESSION_TEMP_BOOKING]))
+    {
+        unset($_SESSION[SESSION_TEMP_BOOKING]);
+    }
+}
+
+function getTemporaryBooking()
+{
+    if(isset($_SESSION[SESSION_TEMP_BOOKING]))
+    {
+        return $_SESSION[SESSION_TEMP_BOOKING];
+    }
+
+    return null;
 }

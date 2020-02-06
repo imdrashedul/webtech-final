@@ -29,6 +29,12 @@ if($validate!=true)
     die();
 }
 
+if(!accessController($user['role'], BTRS_ROLE_ADMIN, BTRS_ROLE_SUPPORT_STAFF)) 
+{
+    header('location: index.php');
+    die(); 
+}
+
 if(isset($_REQUEST['valid']))
 {
     $vUser = urldecode($_REQUEST['valid']);
@@ -155,4 +161,5 @@ __visualize_backend(array(
     'user' => $user,
     'validate' => $validate
 ));
+
 disconnectDatabase();

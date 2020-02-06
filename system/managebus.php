@@ -27,13 +27,13 @@ if($validate!=true)
     die();
 }
 
-$total = totalBuses();
+$total = accessController($user['role'], BTRS_ROLE_ADMIN, BTRS_ROLE_SUPPORT_STAFF) ? totalBuses() : totalBuses($user['id']);
 $page = isset($_REQUEST['page']) && !empty($_REQUEST['page']) && $_REQUEST['page']>0 ? $_REQUEST['page'] : 1;
 $__limit = 10;
 $tpage = ceil($total/$__limit);
 $page = $page>$tpage ? $tpage : $page;
 $__offset = $__limit * ($page - 1);
-$buses = getBuses($__offset, $__limit);
+$buses = accessController($user['role'], BTRS_ROLE_ADMIN, BTRS_ROLE_SUPPORT_STAFF) ? getBuses($__offset, $__limit) : getBuses($__offset, $__limit, $user['id']);
 
 ob_start();
 ?>

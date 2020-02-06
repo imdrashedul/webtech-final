@@ -58,10 +58,12 @@ function __visualize_backend(array $data=array())
                                 </div>
                             </div>
                             <div class="separator"></div>
+                            <?php if(accessController($data['user']['role'], BTRS_ROLE_ADMIN, BTRS_ROLE_SUPPORT_STAFF)) : ?>
                             <div class="menu">
                                 <a href="validbusmanager.php"><img src="assets/img/validation.png"> Validation<?= $total>0?' <span class="label-validation">'.$total.'</span>' : '' ?></a>
                             </div>
                             <div class="separator"></div>
+                        <?php endif; ?>
                             <div class="menu">
                                 <a href="logout.php"><img src="assets/img/logout.png"> Logout</a>
                             </div>
@@ -77,20 +79,47 @@ function __visualize_backend(array $data=array())
                 <?= __renderMenu('index', (isset($data['area']) ? $data['area'] : ''), 'index.php', 'Dashboard') ?>
                 <?php if(isset($data['validate']) && $data['validate']==true) : ?>
                 <li class="divider"></li>
+                <?php if(accessController($data['user']['role'], BTRS_ROLE_ADMIN)) : ?>
                 <?= __renderMenu('supportstaff', (isset($data['area']) ? $data['area'] : ''), 'supportstaff.php', 'Support Staff') ?>
+                <?php endif; ?>
+                <?php if(accessController($data['user']['role'], BTRS_ROLE_ADMIN, BTRS_ROLE_SUPPORT_STAFF)) : ?>
                 <?= __renderMenu('busmanager', (isset($data['area']) ? $data['area'] : ''), 'busmanager.php', 'Bus Manager') ?>
+                <?php endif; ?>
+                <?php if(accessController($data['user']['role'], BTRS_ROLE_ADMIN, BTRS_ROLE_SUPPORT_STAFF, BTRS_ROLE_BUS_MANAGER)) : ?>
                 <?= __renderMenu('buscounter', (isset($data['area']) ? $data['area'] : ''), 'buscounter.php', 'Bus Counter') ?>
+                <?php endif; ?>
+                <?php if(accessController($data['user']['role'], BTRS_ROLE_ADMIN, BTRS_ROLE_SUPPORT_STAFF, BTRS_ROLE_BUS_MANAGER)) : ?>
                 <?= __renderMenu('counterstaff', (isset($data['area']) ? $data['area'] : ''), 'counterstaff.php', 'Counter Staff') ?>
+                <?php endif; ?>
                 <li class="divider"></li>
+                <?php if(accessController($data['user']['role'], BTRS_ROLE_ADMIN, BTRS_ROLE_SUPPORT_STAFF, BTRS_ROLE_BUS_MANAGER)) : ?>
                 <?= __renderMenu('managebus', (isset($data['area']) ? $data['area'] : ''), 'managebus.php', 'Manage Bus') ?>
+                <?php endif; ?>
+                <?php if(accessController($data['user']['role'], BTRS_ROLE_ADMIN, BTRS_ROLE_SUPPORT_STAFF, BTRS_ROLE_BUS_MANAGER)) : ?>
                 <?= __renderMenu('busschedule', (isset($data['area']) ? $data['area'] : ''), 'busschedule.php', 'Bus Schedule') ?>
+                <?php endif; ?>
+                <?php if(accessController($data['user']['role'], BTRS_ROLE_ADMIN, BTRS_ROLE_SUPPORT_STAFF, BTRS_ROLE_BUS_MANAGER, BTRS_ROLE_COUNTER_STAFF)) : ?>
                 <?= __renderMenu('tickets', (isset($data['area']) ? $data['area'] : ''), 'tickets.php', 'Tickets') ?>
+                <?php endif; ?>
+                <?php if(accessController($data['user']['role'], BTRS_ROLE_ADMIN, BTRS_ROLE_SUPPORT_STAFF, BTRS_ROLE_BUS_MANAGER, BTRS_ROLE_COUNTER_STAFF)) : ?>
+                <?= __renderMenu('booktickets', (isset($data['area']) ? $data['area'] : ''), 'booktickets.php', 'Book Tickets') ?>
+                <?php endif; ?>
                 <li class="divider"></li>
+                <?php if(accessController($data['user']['role'], BTRS_ROLE_ADMIN)) : ?>
                 <?= __renderMenu('discount', (isset($data['area']) ? $data['area'] : ''), 'discount.php', 'Discount') ?>
+                <?php endif; ?>
+                <?php if(accessController($data['user']['role'], BTRS_ROLE_ADMIN, BTRS_ROLE_SUPPORT_STAFF)) : ?>
                 <?= __renderMenu('transaction', (isset($data['area']) ? $data['area'] : ''), 'transaction.php', 'Transactions') ?>
+                <?php endif; ?>
+                <?php if(accessController($data['user']['role'], BTRS_ROLE_ADMIN)) : ?>
                 <?= __renderMenu('paymethod', (isset($data['area']) ? $data['area'] : ''), 'paymethod.php', 'Payment Method') ?>
+                <?php endif; ?>
+                <?php if(accessController($data['user']['role'], BTRS_ROLE_ADMIN, BTRS_ROLE_SUPPORT_STAFF)) : ?>
                 <?= __renderMenu('supportticket', (isset($data['area']) ? $data['area'] : ''), 'supportticket.php', 'Support Tickets') ?>
+                <?php endif; ?>
+                <?php if(accessController($data['user']['role'], BTRS_ROLE_ADMIN)) : ?>
                 <?= __renderMenu('settings', (isset($data['area']) ? $data['area'] : ''), 'settings.php', 'General Settings') ?>
+                <?php endif; ?>
                 <?php endif; ?>
             </ul>
         </div>

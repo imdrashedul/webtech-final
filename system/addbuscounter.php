@@ -31,7 +31,7 @@ if($validate!=true)
 
 if(isset($_POST['submit']))
 {
-    $operator = isset($_POST['bus_operator']) ? trim($_POST['bus_operator']) : '';
+    $operator = accessController($user['role'], BTRS_ROLE_ADMIN, BTRS_ROLE_SUPPORT_STAFF) ? ( isset($_POST['bus_operator']) ? trim($_POST['bus_operator']) : '') : (accessController($user['role'], BTRS_ROLE_BUS_MANAGER)?$user['id']:'');
     $counter = isset($_POST['name']) ? trim($_POST['name']) : '';
     $location = isset($_POST['counter_location']) ? trim($_POST['counter_location']) : '';
     $type = isset($_POST['counter_type']) ? trim($_POST['counter_type']) : '';
@@ -93,6 +93,7 @@ ob_start();
     </div>
     <div class="body">
         <form action="addbuscounter.php" method="POST">
+            <?php if(accessController($user['role'], BTRS_ROLE_ADMIN, BTRS_ROLE_SUPPORT_STAFF)): ?>
             <div class="grid">
                 <div class="row">
                     <div class="column-12">
@@ -107,6 +108,7 @@ ob_start();
                     </div>
                 </div>
             </div>
+            <?php endif; ?>
             <div class="grid">
                 <div class="row">
                     <div class="column-6">

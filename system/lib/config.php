@@ -11,6 +11,7 @@ date_default_timezone_set('Asia/Dhaka');
 // Cookie Name
 if(!defined('SESSION_COOKIE')) define('SESSION_COOKIE', 'BTRSSID');
 if(!defined('SESSION_ALERT')) define('SESSION_ALERT', 'BTRSSID_ALERT');
+if(!defined('SESSION_TEMP_BOOKING')) define('SESSION_TEMP_BOOKING', 'BTRSSID_TEMP_BOOKING');
 
 // Database Config
 if(!defined('BTRS_DB_PREFIX')) define('BTRS_DB_PREFIX', 'webtech_');
@@ -24,6 +25,7 @@ if(!defined('BTRS_TB_BOOKINGS')) define('BTRS_TB_BOOKINGS', 'bookings');
 if(!defined('BTRS_TB_BOOKEDSEATS')) define('BTRS_TB_BOOKEDSEATS', 'bookedseats');
 if(!defined('BTRS_TB_DISCOUNT')) define('BTRS_TB_DISCOUNT', 'discount');
 if(!defined('BTRS_TB_PAYMETHOD')) define('BTRS_TB_PAYMETHOD', 'paymentmethod');
+if(!defined('BTRS_TB_TRANSACTIONS')) define('BTRS_TB_TRANSACTIONS', 'transactions');
 
 // Session Alive For Next * Minutes
 if(!defined('BTRS_SESSION_ALIVE')) define('BTRS_SESSION_ALIVE', 21600);
