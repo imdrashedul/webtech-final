@@ -1032,9 +1032,9 @@ function generateBusLayout(array $bus, array $booked)
     {
         for ($i=0; $i<$row; $i++)
         {
-            $blocks[$pattern[0]][$i] = $seats[$pattern[0]][$i];
-            $blocks[$pattern[1].$pattern[2]][$i] = $seats[$pattern[1]][$i];
-            $blocks[$pattern[1].$pattern[2]][$i] = $seats[$pattern[2]][$i];
+            $blocks[$pattern[0]][$i][] = $seats[$pattern[0]][$i];
+            $blocks[$pattern[1].$pattern[2]][$i][] = $seats[$pattern[1]][$i];
+            $blocks[$pattern[1].$pattern[2]][$i][] = $seats[$pattern[2]][$i];
         }
     }
     else if($totalcol>3)
